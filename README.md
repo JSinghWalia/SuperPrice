@@ -5,18 +5,20 @@
 
 # Group Information
 
-## Group-PX-XX
+## Group-P07-07
 
 ## Members
-* Student Name 1 (sXXXXX)
-* Student Name 2 (sXXXXX)
-* Student Name 3 (sXXXXX)
-* Student Name 4 (sXXXXX)
+* Ashley Mullin (s3937907)
+* Ramon Aguila (s3840883)
+* Clarence O'Toole (s3943755)
+* Jaspal Singh-Walia (s3899925)
+* Sri Kalyan Rohan (s3958905)
+* Manik Thapliyal (s3953664)
 
 ## Records
 
-* Github repository: https://github.com/xxx
-* Github Project Board : https://xxxx
+* Github repository: https://github.com/cosc2299-sept-2023/team-project-group-p07-07
+* Github Project Board : https://github.com/orgs/cosc2299-sept-2023/projects/67
 
 	
 ## Code documentation - Release 0.1.0 - date
