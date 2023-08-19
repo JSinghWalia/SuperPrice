@@ -17,8 +17,8 @@
 
 ## Records
 
-* Github repository: https://github.com/cosc2299-sept-2023/team-project-group-p07-07
-* Github Project Board : https://github.com/orgs/cosc2299-sept-2023/projects/67
+* Github repository: [https://github.com/cosc2299-sept-2023/team-project-group-p07-07](https://github.com/cosc2299-sept-2023/team-project-group-p07-07)
+* Github Project Board : [https://github.com/orgs/cosc2299-sept-2023/projects/67](https://github.com/orgs/cosc2299-sept-2023/projects/93/views/1)
 
 	
 ## Code documentation - Release 0.1.0 - date
