@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'; // Import the Link component
 
-export default function Home() {
+export default function profile() {
     return (
         <main className="flex min-h-screen flex-col">
             <nav className="navbar">
@@ -15,7 +15,7 @@ export default function Home() {
                 </ul>
             </nav>
             <div className="welcome-text">
-                <h1>Welcome to SuperPrice</h1>
+                <h1>My Profile</h1>
             </div>
         </main>
     )

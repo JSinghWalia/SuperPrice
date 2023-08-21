@@ -25,3 +25,47 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+/* Add this CSS to your styles.css file */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.logo img {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  padding: 0.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.welcome-text {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 2rem; /* Adjust the font size as needed */
+  text-align: center;
+}
