@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="" />
+    <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,14 +41,29 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Jassie Singh-Walia/Documents/Uni/Software Engineering/Year 2 Semester 2/Software Processes/Group 7/team-project-group-p07-07/team-project-group-p07-07/frontend/src/app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "C:\\Users\\Jassie Singh-Walia\\Documents\\Uni\\Software Engineering\\Year 2 Semester 2\\Software Processes\\Group 7\\team-project-group-p07-07\\team-project-group-p07-07\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app" />
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\profile" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\public" />
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\images" />
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app" />
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\products" />
+      <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\pages" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -54,5 +78,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
