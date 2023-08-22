@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'; // Import the Link component
 
-export default function Home() {
+export default function ShoppingCart() {
     return (
         <main className="flex min-h-screen flex-col">
             <nav className="navbar">
                 <div className="logo">
                     <Link href="/">
-                            <Image src="/logo.png" alt="Logo" width={200} height={50} />
+                        <Image src="/logo.png" alt="Logo" width={200} height={50} />
                     </Link>
                 </div>
                 <ul className="nav-links">
@@ -18,7 +18,7 @@ export default function Home() {
                 </ul>
             </nav>
             <div className="welcome-text">
-                <h1>Welcome to SuperPrice</h1>
+                <h1>Shopping Cart</h1>
             </div>
         </main>
     )

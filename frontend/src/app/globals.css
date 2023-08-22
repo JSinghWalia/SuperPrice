@@ -38,7 +38,7 @@ body {
 
 .logo img {
   display: block;
-  width: 50px;
+  width: 200px;
   height: 50px;
 }
 
@@ -69,3 +69,26 @@ body {
   font-size: 2rem; /* Adjust the font size as needed */
   text-align: center;
 }
+
+/* Add this CSS to your styles.css file */
+
+.product-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  margin: 0 auto; /* Center the image horizontally */
+}
+
