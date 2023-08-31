@@ -1,5 +1,6 @@
 // pages/products/[productId].tsx
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Image from 'next/image';
 import { productsData } from './productData'; // Make sure this path is correct
 
