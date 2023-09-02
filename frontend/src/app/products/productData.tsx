@@ -8,7 +8,7 @@ export const productsData = [
     {
         id: 't2',
         name: 'Coke',
-        imageSrc: '/coke.png',
+        imageSrc: '/cokeBottle.png',
         price: '$3.99'
     },
     {
