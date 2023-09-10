@@ -22,5 +22,17 @@ export const productsData = [
         name: 'Samsung Watch',
         imageSrc: '/watch.webp',
         price: '$200'
+    },
+    {
+        id: 't5',
+        name: 'Boost Chocolate',
+        imageSrc: '/boostchocolate.webp',
+        price: '$2.99'
+    },
+    {
+        id: 't6',
+        name: 'Banana',
+        imageSrc: '/banana.png',
+        price: '$1.00'
     }
 ];
