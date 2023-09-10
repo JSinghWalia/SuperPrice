@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/SuperpriceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/basketballSample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/cokeSample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/tshirtSample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/watchSample.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/products/productData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/products/productData.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,6 +36,9 @@
   </component>
   <component name="ProjectId" id="2U3pNBjsUCvjtxiUSH7AuUfm73W" />
   <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
+    <option name="flattenModules" value="true" />
+    <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -57,7 +57,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
     "spring.configuration.checksum": "55ba44c548d3ebafd9f70e64a7f232b0",
     "ts.external.directory.path": "C:\\Users\\Jassie Singh-Walia\\Documents\\Uni\\Software Engineering\\Year 2 Semester 2\\Software Processes\\Group 7\\team-project-group-p07-07\\team-project-group-p07-07\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -76,7 +79,22 @@
       <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\pages" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
+    <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.SuperpriceApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MoviesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="movies" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="au.edu.rmit.sept.cinemas.movies.MoviesApplication" />
@@ -90,9 +108,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SuperpriceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="superprice" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.superprice.SuperpriceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.MoviesApplication" />
+        <item itemvalue="JUnit.SuperpriceApplicationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -109,6 +135,8 @@
       <workItem from="1692772665599" duration="564000" />
       <workItem from="1692782331526" duration="3213000" />
       <workItem from="1693456030168" duration="4496000" />
+      <workItem from="1694053807292" duration="5000" />
+      <workItem from="1694053856197" duration="927000" />
     </task>
     <servers />
   </component>
