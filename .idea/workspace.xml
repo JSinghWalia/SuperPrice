@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/SuperpriceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Jassie Singh-Walia/Documents/Uni/Software Engineering/Year 2 Semester 2/Software Processes/Group 7/team-project-group-p07-07/team-project-group-p07-07/frontend/src/app",
+    "last_opened_file_path": "C:/Users/rjagu/Documents/GitHub/team-project-group-p07-07",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,7 +63,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "spring.configuration.checksum": "55ba44c548d3ebafd9f70e64a7f232b0",
+    "spring.configuration.checksum": "cf8a4430c484d8ec385e9769f92f9548",
     "ts.external.directory.path": "C:\\Users\\Jassie Singh-Walia\\Documents\\Uni\\Software Engineering\\Year 2 Semester 2\\Software Processes\\Group 7\\team-project-group-p07-07\\team-project-group-p07-07\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -78,13 +80,16 @@
       <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\products" />
       <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\pages" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.superprice" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
     <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.superprice.*" />
+          <option name="PATTERN" value="com.example.superprice.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,7 +141,10 @@
       <workItem from="1692782331526" duration="3213000" />
       <workItem from="1693456030168" duration="4496000" />
       <workItem from="1694053807292" duration="5000" />
-      <workItem from="1694053856197" duration="927000" />
+      <workItem from="1694053856197" duration="1242000" />
+      <workItem from="1694071256470" duration="488000" />
+      <workItem from="1694072925042" duration="5000" />
+      <workItem from="1694434636415" duration="176000" />
     </task>
     <servers />
   </component>
