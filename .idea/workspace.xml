@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/services/SuperpriceServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +85,9 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.superprice" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.superprice.repositories" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
     <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -144,7 +149,7 @@
       <workItem from="1694053856197" duration="1242000" />
       <workItem from="1694071256470" duration="488000" />
       <workItem from="1694072925042" duration="5000" />
-      <workItem from="1694434636415" duration="435000" />
+      <workItem from="1694434636415" duration="609000" />
     </task>
     <servers />
   </component>
