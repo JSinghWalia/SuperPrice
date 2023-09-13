@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
+    <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/tests/product.page.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/products/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/products/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
