@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,6 @@ public class SuperpriceController {
     }
 
     public ArrayList<Product> searchKeyword(String keyword) {
-        return service.searchKeyword(keyword);
+        return this.service.searchKeyword(keyword);
     }
 }

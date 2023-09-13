@@ -44,6 +44,6 @@ public class SuperpriceControllerTest {
                 "/cokeBottle.png", (long) 69, (long) 6)));
         when(this.service.searchKeyword("Coke")).thenReturn(testList);
 
-        assertFalse(this.controller.searchKeyword("Coke").isEmpty());
+        assertEquals(testList, this.controller.searchKeyword("Coke"));
     }
 }
