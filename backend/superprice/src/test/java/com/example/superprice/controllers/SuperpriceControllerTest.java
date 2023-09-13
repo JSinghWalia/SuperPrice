@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,10 +39,11 @@ public class SuperpriceControllerTest {
 
     @Test
     void should_returnProduct_When_relatedProducts () {
-        when(this.service.searchKeyword("coke"))
-                .thenReturn((ArrayList<Product>) List.of(new Product((long) 4, "Coke",
-                        "A totally healthy beverage that is very tasty.", "Woolworths",
-                        "/cokeBottle.png", (long) 69, (long) 6)));
+        ArrayList<Product> testList = new ArrayList<>(Collections.singleton(new Product((long) 4, "Coke",
+                "A totally healthy beverage that is very tasty.", "Woolworths",
+                "/cokeBottle.png", (long) 69, (long) 6)));
+        when(this.service.searchKeyword("Coke")).thenReturn(testList);
+
         assertFalse(this.controller.searchKeyword("Coke").isEmpty());
     }
 }
