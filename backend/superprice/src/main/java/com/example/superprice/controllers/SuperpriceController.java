@@ -17,7 +17,7 @@ public class SuperpriceController {
         return "Hello World";
     }
 
-    public ArrayList<Product> searchKeyword() {
+    public ArrayList<Product> searchKeyword(String keyword) {
         ArrayList<Product> test = new ArrayList<Product>();
         return test;
     }

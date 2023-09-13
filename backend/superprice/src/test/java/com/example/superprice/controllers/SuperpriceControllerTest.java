@@ -1,6 +1,7 @@
 package com.example.superprice.controllers;
 
 
+import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class SuperpriceControllerTest {
@@ -24,7 +31,17 @@ public class SuperpriceControllerTest {
     }
 
     @Test
-    void should_returnFalse_When_noRelatedProducts () {
+    void should_returnEmpty_When_noRelatedProducts () {
+        when(this.service.searchKeyword("completelyunrelatedword")).thenReturn(new ArrayList<>());
+        assertEquals(0, this.controller.searchKeyword("completelyunrelatedword").size());
+    }
 
+    @Test
+    void should_returnProduct_When_relatedProducts () {
+        when(this.service.searchKeyword("coke"))
+                .thenReturn((ArrayList<Product>) List.of(new Product((long) 4, "Coke",
+                        "A totally healthy beverage that is very tasty.", "Woolworths",
+                        "/cokeBottle.png", (long) 69, (long) 6)));
+        assertFalse(this.controller.searchKeyword("Coke").isEmpty());
     }
 }
