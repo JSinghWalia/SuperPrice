@@ -8,8 +8,6 @@ public class SuperpriceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SuperpriceApplication.class, args);
-
-		// comment
 	}
 
 }
