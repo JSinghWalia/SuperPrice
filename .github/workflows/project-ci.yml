@@ -14,6 +14,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Maven
+        working-directory: backend/superprice
         run: ./mvnw --batch-mode --update-snapshots package
   build-frontend:
     runs-on: ubuntu-latest

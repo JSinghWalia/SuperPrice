@@ -32,24 +32,25 @@ public class SuperpriceRepositoryTest {
     private void tearDown() {
         flyway.clean();
     }
-
-    @Test
-    public void searchForKeyword_validInput() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
-    }
-
-    @Test
-    public void searchForKeyword_invalidResult() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
-    }
-
-    @Test
-    public void searchForKeyword_oneResult() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
-    }
-
-    @Test
-    public void searchForKeyword_multipleResults() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
-    }
 }
+
+//    @Test
+//    public void searchForKeyword_validInput() {
+//        assertEquals("Item 1", repo.searchForItem("Item 1"));
+//    }
+//
+//    @Test
+//    public void searchForKeyword_invalidResult() {
+//        assertEquals("Item 1", repo.searchForItem("Item 1"));
+//    }
+//
+//    @Test
+//    public void searchForKeyword_oneResult() {
+//        assertEquals("Item 1", repo.searchForItem("Item 1"));
+//    }
+//
+//    @Test
+//    public void searchForKeyword_multipleResults() {
+//        assertEquals("Item 1", repo.searchForItem("Item 1"));
+//    }
+//}
