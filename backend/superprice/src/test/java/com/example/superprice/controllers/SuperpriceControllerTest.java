@@ -31,6 +31,7 @@ public class SuperpriceControllerTest {
         this.controller = mock(SuperpriceController.class);
     }
 
+    // Search keyword tests
     @Test
     void should_returnEmpty_When_noRelatedProducts () {
         when(this.service.searchKeyword("completelyunrelatedword")).thenReturn(new ArrayList<>());

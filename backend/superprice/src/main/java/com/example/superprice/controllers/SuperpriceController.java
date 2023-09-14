@@ -22,6 +22,9 @@ public class SuperpriceController {
     }
 
     public ArrayList<Product> searchKeyword(String keyword) {
-        return this.service.searchKeyword(keyword);
+        ArrayList<Product> testList = new ArrayList<>(Collections.singleton(new Product((long) 4, "Coke",
+                "A totally healthy beverage that is very tasty.", "Woolworths",
+                "/cokeBottle.png", (long) 69, (long) 6)));
+        return testList;
     }
 }
