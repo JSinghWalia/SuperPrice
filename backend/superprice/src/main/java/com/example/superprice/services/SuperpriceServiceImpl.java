@@ -4,9 +4,9 @@ import com.example.superprice.model.Product;
 import com.example.superprice.repositories.SuperpriceRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SuperpriceServiceImpl implements SuperpriceService {
@@ -23,8 +23,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
 
     // To be fixed
     public Collection<Product> searchKeyword(String keyword){
-        ArrayList<Product> test = new ArrayList<Product>();
-        return test;
+        return repo.searchForItem(keyword);
     }
 
 

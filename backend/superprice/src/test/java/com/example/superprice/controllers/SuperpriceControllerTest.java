@@ -37,8 +37,6 @@ public class SuperpriceControllerTest {
 
     @Test
     void should_returnProduct_When_relatedProducts() {
-
-
         Product p1 = new Product((long) 4, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", (long) 69, (long) 6);
@@ -52,5 +50,4 @@ public class SuperpriceControllerTest {
         assertNotNull(p);
         assertEquals(1, p.size());
     }
-
 }

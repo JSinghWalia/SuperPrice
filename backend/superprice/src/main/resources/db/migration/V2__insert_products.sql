@@ -9,3 +9,6 @@ VALUES ('Molten Basketball', 'A nice basketball that is not overpriced at all.',
 
 INSERT INTO products (name, description, store, imageURL, price, quantity)
 VALUES ('Samsung Watch', 'A new smart watch which is totally necessary.', 'Coles', '/watch.webp', 200, 3);
+
+INSERT INTO products (name, description, store, imageURL, price, quantity)
+VALUES ('Coke', 'A totally healthy beverage that is very tasty.', 'Coles', '/cokeBottle.png', 3.99, 18);
