@@ -17,22 +17,21 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "v1/superprice")
 public class SuperpriceController {
-    private SuperpriceService service = new SuperpriceServiceImpl();
 
-    @GetMapping
-    public String all() {
-        return "Hello World";
+    private SuperpriceService service;
+
+    @Autowired
+    public SuperpriceController(SuperpriceService service) {
+        this.service = service;
     }
 
-//    public ArrayList<Product> searchKeyword(String keyword) {
-//        ArrayList<Product> testList = new ArrayList<>(Collections.singleton(new Product((long) 4, "Coke",
-//                "A totally healthy beverage that is very tasty.", "Woolworths",
-//                "/cokeBottle.png", (long) 69, (long) 6)));
-//        return testList;
-//    }
+    @GetMapping
+    public Collection<Product> getProducts() {
+        return this.service.getAllProducts();
+    }
 
-    @GetMapping("/{id}")
-    public Collection<Product> get(@PathVariable String keyword) {
+    @GetMapping("/{keyword}")
+    public Collection<Product> searchForProduct(@PathVariable String keyword) {
         return service.searchKeyword(keyword);
     }
 }

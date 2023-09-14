@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/resources/db/migration/V2__insert_products.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/resources/db/migration/V1__create_products.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/resources/db/migration/V1__create_products.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +62,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/rjagu/Documents/GitHub/individual-web-app-s3840883",
+    "last_opened_file_path": "C:/Users/rjagu/Documents/GitHub/team-project-group-p07-07/backend/superprice/src/main/resources/db/migration",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,6 +79,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rjagu\Documents\GitHub\team-project-group-p07-07\backend\superprice\src\main\resources\db\migration" />
       <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app" />
       <recent name="C:\Users\Jassie Singh-Walia\Documents\Uni\Software Engineering\Year 2 Semester 2\Software Processes\Group 7\team-project-group-p07-07\team-project-group-p07-07\frontend\src\app\profile" />
     </key>
@@ -90,7 +97,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceControllerTest">
+  <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
     <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -158,8 +165,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SuperpriceControllerTest" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest" />
+        <item itemvalue="JUnit.SuperpriceControllerTest" />
         <item itemvalue="Spring Boot.MoviesApplication" />
         <item itemvalue="JUnit.SuperpriceApplicationTests" />
       </list>
@@ -190,7 +197,7 @@
       <workItem from="1694518827915" duration="260000" />
       <workItem from="1694519094416" duration="125000" />
       <workItem from="1694519224940" duration="162000" />
-      <workItem from="1694663429590" duration="1800000" />
+      <workItem from="1694663429590" duration="3766000" />
     </task>
     <servers />
   </component>
