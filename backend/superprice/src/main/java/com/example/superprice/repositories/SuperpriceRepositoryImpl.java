@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,22 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public Optional<Product> searchForItem(String keyword) {
-        return Optional.empty();
+    public Collection<Product> searchForItem(String keyword) {
+        try {
+            // source: W3schools, https://www.w3schools.com/sql/sql_like.asp
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
+                    "SELECT * FROM products WHERE name LIKE ?");
+            stm.setString(1, "%" + keyword + "%");
+            ResultSet rs = stm.executeQuery();
+            List<Product> products = new ArrayList<>();
+            while (rs.next()) {
+                products.add(extractProduct(rs));
+            }
+
+            return products;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in searchForItem(keyword)", e);
+        }
     }
 }
