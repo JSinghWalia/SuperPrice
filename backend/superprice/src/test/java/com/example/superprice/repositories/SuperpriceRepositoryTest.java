@@ -34,6 +34,12 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
+    public void completeListOfProducts() {
+        var products = repo.getAllProducts();
+        assertEquals(4, products.size());
+    }
+
+    @Test
     public void searchForKeyword_validInput() {
         assertEquals("Item 1", repo.searchForItem("Item 1"));
     }
@@ -52,4 +58,5 @@ public class SuperpriceRepositoryTest {
     public void searchForKeyword_multipleResults() {
         assertEquals("Item 1", repo.searchForItem("Item 1"));
     }
+
 }
