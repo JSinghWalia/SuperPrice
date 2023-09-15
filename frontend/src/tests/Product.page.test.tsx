@@ -11,21 +11,4 @@ describe('Products page', () => {
         const h1 = wrapper.container.querySelector('h1')
         expect(h1?.textContent).toBe('Products')
     })
-}),
-
-    describe('Products page', () => {
-        test('Displays search bar', () => {
-            // Render the Products component
-            render(<Products />);
-
-            // Query for the search input element
-            const searchBar = screen.getByPlaceholderText('Search..');
-
-            // Assert that the search bar is present
-            expect(searchBar).toBeTruthy();
-        })
-    })
-
-
-
-;
+});

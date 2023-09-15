@@ -13,6 +13,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Grant execute permission to Maven wrapper
+        working-directory: backend/superprice
+        run: chmod +x ./mvnw
       - name: Build with Maven
         working-directory: backend/superprice
         run: ./mvnw --batch-mode --update-snapshots package
