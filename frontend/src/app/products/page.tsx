@@ -1,12 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { productsData } from './productData'; // Make sure this path is correct
 import { Navbar } from '../components/navbar';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from "react";
 
+let productsData = [];
 
 export default function Products() {
+    async function getProductData() {
+        const res = await fetch('http://localhost:8080/v1/superprice');
+        const testData = await res.json();
+        productsData = testData
+    }
+    getProductData()
     return (
         <main className="flex min-h-screen flex-col">
             <Navbar activePath="Products" />
@@ -17,9 +23,9 @@ export default function Products() {
                 {productsData.map(product => (
                     <Link key={product.id} href={`/products/${product.id}`}>
                         <div className="product-card">
-                            <Image src={product.imageSrc} alt={product.name} width={200} height={200} />
+                            <Image src={product.imageURL} alt={product.name} width={200} height={200} />
                             <h2>{product.name}</h2>
-                            <p>{product.price}</p>
+                            <p>${product.price}</p>
                             <button className="add-to-cart-button">
                                 <span>Add to Cart</span>
                                 <i className="material-icons"></i> {/* Example icon */}

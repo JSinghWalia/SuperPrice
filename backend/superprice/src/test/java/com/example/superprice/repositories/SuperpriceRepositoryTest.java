@@ -1,6 +1,7 @@
 package com.example.superprice.repositories;
 
 
+import com.example.superprice.model.Product;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Collection;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class SuperpriceRepositoryTest {
@@ -33,23 +36,35 @@ public class SuperpriceRepositoryTest {
         flyway.clean();
     }
 
+    // Getting list of products
     @Test
-    public void searchForKeyword_validInput() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
+    public void completeListOfProducts() {
+        var products = repo.getAllProducts();
+        assertEquals(5, products.size());
+    }
+
+    // Searching for a product
+
+    // With results
+    @Test
+    public void searchByKeyword_OneResult() {
+        String keyword = "Molten Basketball";
+        Collection<Product> expectedObj = repo.searchForItem(keyword);
+        assertEquals(expectedObj, repo.searchForItem("Basketball"));
     }
 
     @Test
-    public void searchForKeyword_invalidResult() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
+    public void searchByKeyword_MultipleResults() {
+        String keyword = "Coke";
+        Collection<Product> expectedObj = repo.searchForItem(keyword);
+        assertEquals(expectedObj, repo.searchForItem(keyword));
     }
 
+    // No results
     @Test
-    public void searchForKeyword_oneResult() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
+    public void searchByKeyword_NoResults() {
+        String keyword = "No result";
+        assertTrue(repo.searchForItem(keyword).isEmpty());
     }
 
-    @Test
-    public void searchForKeyword_multipleResults() {
-        assertEquals("Item 1", repo.searchForItem("Item 1"));
-    }
 }

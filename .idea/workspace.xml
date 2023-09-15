@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51e26680-3904-4e7a-832f-a2c81546ff3a" name="Changes" comment="">
+    <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/project-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/project-ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/products/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/products/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/tests/product.page.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/tests/product.page.test.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +89,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest">
+  <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
     <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
