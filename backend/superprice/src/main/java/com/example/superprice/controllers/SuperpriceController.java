@@ -4,15 +4,13 @@ import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
 import com.example.superprice.services.SuperpriceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value = "v1/superprice")
+@RequestMapping()
 public class SuperpriceController {
 
     private SuperpriceService service;
@@ -22,6 +20,7 @@ public class SuperpriceController {
         this.service = service;
     }
 
+    //@CrossOrigin(origins = "http://localhost:8080")
     @GetMapping
     public Collection<Product> getProducts() {
         return this.service.getAllProducts();

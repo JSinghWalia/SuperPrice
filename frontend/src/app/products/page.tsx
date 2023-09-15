@@ -1,28 +1,31 @@
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '../components/navbar';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from "react";
 
-let productsData = [];
-
 export default function Products() {
+    const [productsData, setProductsData] = React.useState([]);
+
     async function getProductData() {
         try {
-            const res = await fetch('http://localhost:8080/v1/superprice');
-
+            const res = await fetch('http://localhost:8080');
             if (!res.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
             }
-
             const testData = await res.json();
-            productsData = testData
+            setProductsData(testData);
         } catch (error) {
-            console.error('Error fetching product data:', error);
-            // You can add further error handling here, such as displaying an error message to the user.
+            console.error("Error fetching data:", error);
         }
     }
-    getProductData()
+
+
+    React.useEffect(() => {
+        getProductData();
+    }, []);
+
     return (
         <main className="flex min-h-screen flex-col">
             <Navbar activePath="Products" />
