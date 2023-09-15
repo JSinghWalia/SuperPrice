@@ -23,7 +23,7 @@ import {
 
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
-    const [shippingOption, setShippingOption] = useState('1'); // Default to the first option
+    const [shippingOption, setShippingOption] = useState('5'); // Default to the first option
 
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
@@ -108,7 +108,7 @@ export default function ShoppingCart() {
                                                             </MDBTypography>
                                                         </MDBCol>
                                                         <MDBCol md="1" lg="1" xl="1" className="text-end">
-                                                            <a href="#!" className="text-muted">
+                                                            <a href="" className="text-muted">
                                                                 <MDBIcon fas icon="times" onClick={() => handleRemoveFromCart(product.id)} />
                                                             </a>
                                                         </MDBCol>
