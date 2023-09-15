@@ -23,7 +23,6 @@ public class SuperpriceServiceImpl implements SuperpriceService {
         return repo.getAllProducts();
     }
 
-    // To be fixed
     @Override
     public Collection<Product> searchKeyword(String keyword) {
         return repo.searchForItem(keyword);
@@ -40,7 +39,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     }
 
     @Override
-    public Product removeProductFromCart(Long id) {
-        return null;
+    public void removeProductFromCart(Long cartId, Long productId) {
+        repo.removeProductFromCart(cartId, productId);
     }
 }

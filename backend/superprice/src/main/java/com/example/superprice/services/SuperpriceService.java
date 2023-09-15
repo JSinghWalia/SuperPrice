@@ -17,7 +17,7 @@ public interface SuperpriceService {
 
     CartItem addItemToCart(Long quantity, Long cartId, Long productId);
 
-    Product removeProductFromCart(Long id);
+    void removeProductFromCart(Long cartId, Long productId);
 
 
 }

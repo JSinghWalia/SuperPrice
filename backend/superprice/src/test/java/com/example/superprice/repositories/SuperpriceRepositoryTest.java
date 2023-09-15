@@ -78,7 +78,7 @@ public class SuperpriceRepositoryTest {
     // No results
     @Test
     public void searchByKeyword_NoResults() {
-        String keyword = "No result";
+        String keyword = "empty result";
         assertTrue(repo.searchForItem(keyword).isEmpty());
     }
 
@@ -134,9 +134,22 @@ public class SuperpriceRepositoryTest {
     // Remove items from cart
     @Test
     public void removeItemFromCart_Success() {
+        // Check size before
+        assertEquals(2, repo.getCartProducts(2L).size());
+
+        // Delete the item
+        repo.removeProductFromCart(2L, 1L);
+
+        // Check size after
+        assertEquals(1, repo.getCartProducts(2L).size());
+
+        // Verify the object
+        assertEquals("Molten Basketball", repo.getCartProducts(2L).get(0).name());
     }
 
     @Test
     public void removeItemFromCart_Fail() {
+        // Delete the item
+        assertThrows(RuntimeException.class, () -> repo.removeProductFromCart(2L, 100L));
     }
 }

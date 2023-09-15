@@ -141,8 +141,25 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
 
     @Override
-    public Product removeProductFromCart(Long id) {
-        return null;
+    public void removeProductFromCart(Long cartId, Long productId) {
+        try {
+            // Execute Query
+            String query = "DELETE FROM cartitem\n" +
+                    "WHERE cartId = ? AND productId = ?";
+            PreparedStatement stm = dataSource.getConnection().prepareStatement
+                    (query, Statement.RETURN_GENERATED_KEYS);
+            stm.setLong(1, cartId);
+            stm.setLong(2, productId);
+
+            int row = stm.executeUpdate();
+
+            if (row == 0) {
+                throw new SQLException("Failed to remove " + productId + " from cart " + cartId);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in remove from cart.", e);
+        }
     }
 
 
