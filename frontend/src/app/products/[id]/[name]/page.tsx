@@ -13,12 +13,8 @@ export default function ProductDetail() {
     const pathParts = pathname.split('/');
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
-    console.log("pathname: " + pathname);
-    console.log("product Name: " + productName);
-    console.log("product Id: " + productId);
     const [productsData, setProductData] = React.useState([]);
     const urlAPI = 'http://localhost:8080' + "/" + productName;
-    console.log(urlAPI);
 
     async function getProductData() {
         try {
@@ -40,12 +36,6 @@ export default function ProductDetail() {
 
     let product = productsData.find(product => productId===product.id);
 
-    // const pathname = usePathname();
-    // const pathParts = pathname.split('/');
-    // const productId = pathParts[pathParts.length - 1];
-
-    // const product = productsData.find(product => product.name === productId);
-
     const { addToCart } = useCart();
 
     const handleAddToCart = () => {
@@ -60,9 +50,6 @@ export default function ProductDetail() {
         }
     };
 
-
-    console.log("product: " + product);
-    console.log("productsData: " + productsData);
     if (!product) {
         // Handle the case when the product is not found
         return <div>Product not found</div>;
@@ -78,7 +65,8 @@ export default function ProductDetail() {
     return (
         <>
         {
-                    <main className="container mx-auto p-4"><Navbar activePath="Products" /><h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2><div className="flex flex-col lg:flex-row">
+                    <main className="container mx-auto p-4"><Navbar activePath="Products" />
+                    <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2><div className="flex flex-col lg:flex-row">
                     {/* Left Section */}
                     <div className="lg:w-1/2 lg:pr-4 mb-4">
                         <div className="mb-4">
@@ -103,8 +91,13 @@ export default function ProductDetail() {
                         <div className="mb-4">
                             <span className="text-2xl font-semibold">${product.price}</span>
                         </div>
+                        <div className="mb-4">
                         <p className="text-xl mb-4">{product.description}</p>
-                        <div className="flex items-center space-x-4 mb-4">
+                        </div>
+                        <div className="mb-4">
+                        <p className="text-xl mb-4">Store: {product.store}</p>
+                        </div>
+                        <div className="flex items-center space-x-4 mb-4 mt-4">
                             <div>
                                 <label htmlFor="quantity" className="block text-gray-600">Quantity:</label>
                                 <input type="number" id="quantity" className="border rounded-md p-2 w-16 text-black" />

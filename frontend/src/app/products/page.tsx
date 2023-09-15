@@ -40,6 +40,7 @@ export default function Products() {
                         <div className="product-card">
                             <Image src={product.imageURL} alt={product.name} width={200} height={200} />
                             <h2>{product.name}</h2>
+                            <h3>From: {product.store}</h3>
                             <p>${product.price}</p>
                             <button className="add-to-cart-button">
                                 <span>Add to Carts</span>
