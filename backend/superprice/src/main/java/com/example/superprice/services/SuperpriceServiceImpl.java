@@ -29,8 +29,8 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     }
 
     @Override
-    public List<Product> getCartProducts() {
-        return repo.getCartProducts();
+    public List<Product> getCartProducts(Long inputId) {
+        return repo.getCartProducts(inputId);
     }
 
     @Override

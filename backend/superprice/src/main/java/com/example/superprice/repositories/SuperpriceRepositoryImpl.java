@@ -63,10 +63,22 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public List<Product> getCartProducts() {
+    public List<Product> getCartProducts(Long inputId) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM cart;");
+            String cartProductQuery = "SELECT\n" +
+                    "    p.productId,\n" +
+                    "    p.name,\n" +
+                    "    p.description,\n" +
+                    "    p.store,\n" +
+                    "    p.imageURL,\n" +
+                    "    p.price,\n" +
+                    "    p.productQuantity\n" +
+                    "FROM products p\n" +
+                    "JOIN cartitem ci ON p.productId = ci.productId\n" +
+                    "WHERE ci.cartId = ?;\n";
+            PreparedStatement stm = connection.prepareStatement(cartProductQuery);
+            stm.setLong(1, inputId);
             List<Product> products = new ArrayList<>();
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

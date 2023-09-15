@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -80,20 +81,32 @@ public class SuperpriceRepositoryTest {
 
     // Getting products from the cart database
 
-    // Scenario: There is at least one item in the cart
+    // Scenario: Check if we can retrieve items from the different carts.
     @Test
-    public void getProductsInCart_OneItem() {
-        assertEquals(1, repo.getCartProducts().size());
+    public void getProductsInCart() {
+        assertEquals(5, repo.getCartProducts(1L).size());
+        assertEquals(2, repo.getCartProducts(2L).size());
+        assertEquals(3, repo.getCartProducts(3L).size());
     }
 
-    @Test
-    public void getProductsInCart_MultipleItems() {
-        assertEquals(repo.getCartProducts().size() > 1, repo.getCartProducts().size());
-    }
-
+    // Scenario: Check if an invalid cart returns an empty cart
     @Test
     public void getProductsInCart_NoItems() {
-        assertEquals(0, repo.getCartProducts().size());
+        assertEquals(0, repo.getCartProducts(4L).size());
+    }
+
+    // Check if the cart content is correct
+    @Test
+    public void checkCartContent() {
+        // Cart 1
+        List<Product> c1 = repo.getCartProducts(1L);
+        String c1Item1 = c1.get(0).name();
+        String c1Item2 = c1.get(1).name();
+        String c1Item3 = c1.get(2).name();
+
+        assertEquals("T-Shirt", c1Item1);
+        assertEquals("Coke", c1Item2);
+        assertEquals("Molten Basketball", c1Item3);
     }
 
     // Adding items to cart

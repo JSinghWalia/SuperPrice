@@ -12,7 +12,7 @@ public interface SuperpriceService {
 
     Collection<Product> searchKeyword(String keyword);
 
-    List<Product> getCartProducts();
+    List<Product> getCartProducts(Long inputId);
 
     Product addItemToCart(Product product);
 
