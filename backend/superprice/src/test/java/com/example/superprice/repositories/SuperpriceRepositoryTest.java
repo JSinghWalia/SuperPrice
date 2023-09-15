@@ -60,7 +60,9 @@ public class SuperpriceRepositoryTest {
     @Test
     public void searchByKeyword_Synonym() {
         String keyword = "Basketball";
+        // Search for the object that contains "Basketball" in the name
         Collection<Product> expectedObj = repo.searchForItem("Molten Basketball");
+        // Check if the the search result is correct
         assertEquals(expectedObj, repo.searchForItem(keyword));
     }
 
@@ -96,7 +98,7 @@ public class SuperpriceRepositoryTest {
         assertEquals(0, repo.getCartProducts(4L).size());
     }
 
-    // Check if the cart content is correct
+    // Scenario: Check if the cart content is correct
     @Test
     public void checkCartContent() {
         // Cart 1
