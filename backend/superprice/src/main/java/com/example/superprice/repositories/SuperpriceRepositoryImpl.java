@@ -108,8 +108,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             stm.setLong(3, productId);
             int row = stm.executeUpdate();
 
-            if (row == 0) {
-                throw new SQLException("Failed to add item to cart. " + productId);
+            if (getCartProducts(cartId).isEmpty()) {
+                throw new RuntimeException("Cart does not exist.");
             }
 
             ResultSet generatedKeys = stm.getGeneratedKeys();
@@ -124,6 +124,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in create", e);
         }
     }
+
 
     @Override
     public Product removeProductFromCart(Long id) {

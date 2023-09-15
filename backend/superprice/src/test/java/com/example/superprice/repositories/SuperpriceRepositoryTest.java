@@ -127,6 +127,7 @@ public class SuperpriceRepositoryTest {
 
     @Test
     public void addItemToCart_Fail() {
+        assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(1L, 100L, 1L));
     }
 
     // Remove items from cart
