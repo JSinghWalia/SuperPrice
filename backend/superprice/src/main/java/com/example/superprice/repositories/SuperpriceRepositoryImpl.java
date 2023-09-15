@@ -4,10 +4,7 @@ import com.example.superprice.model.Product;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -81,5 +78,10 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Error in getAllProducts()", e);
         }
+    }
+
+    @Override
+    public Product addItemToCart(Product product) {
+        return null;
     }
 }

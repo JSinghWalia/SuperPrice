@@ -12,5 +12,8 @@ public interface SuperpriceService {
     Collection<Product> searchKeyword(String keyword);
     List<Product> getCartProducts();
 
+    Product addItemToCart(Product product);
+
+
 
 }
