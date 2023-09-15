@@ -95,4 +95,23 @@ public class SuperpriceRepositoryTest {
     public void getProductsInCart_NoItems() {
         assertEquals(0, repo.getCartProducts().size());
     }
+
+    // Adding items to cart
+    @Test
+    public void addItemToCart_Success() {
+
+    }
+
+    @Test
+    public void addItemToCart_Fail() {
+    }
+
+    // Remove items from cart
+    @Test
+    public void removeItemFromCart_Success() {
+    }
+
+    @Test
+    public void removeItemFromCart_Fail() {
+    }
 }

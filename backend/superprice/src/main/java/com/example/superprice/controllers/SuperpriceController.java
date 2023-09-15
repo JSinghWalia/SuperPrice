@@ -4,10 +4,9 @@ import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
 import com.example.superprice.services.SuperpriceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -35,5 +34,17 @@ public class SuperpriceController {
     @GetMapping("/{cart}")
     public Collection<Product> getCartProducts() {
         return service.getCartProducts();
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> addProductToCart(@RequestBody Product product) {
+        Product p = service.addItemToCart(product);
+        return new ResponseEntity<Product>(p, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> remove(@PathVariable Long id) {
+        this.service.removeProductFromCart(id);
+        return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
 }

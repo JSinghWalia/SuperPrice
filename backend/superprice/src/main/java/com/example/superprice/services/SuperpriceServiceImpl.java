@@ -33,5 +33,13 @@ public class SuperpriceServiceImpl implements SuperpriceService {
         return repo.getCartProducts();
     }
 
+    @Override
+    public Product addItemToCart(Product product) {
+        return repo.addItemToCart(product);
+    }
 
+    @Override
+    public Product removeProductFromCart(Long id) {
+        return null;
+    }
 }

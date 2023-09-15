@@ -14,4 +14,8 @@ public interface SuperpriceRepository {
 
     List<Product> getCartProducts();
 
+    Product addItemToCart(Product product);
+
+    Product removeProductFromCart(Long id);
+
 }
