@@ -48,16 +48,20 @@ public class SuperpriceRepositoryTest {
     // With results
     @Test
     public void searchByKeyword_OneResult() {
-        String keyword = "Molten Basketball";
-        Collection<Product> expectedObj = repo.searchForItem(keyword);
-        assertEquals(expectedObj, repo.searchForItem("Basketball"));
+        // Search for the object
+        Collection<Product> expectedObj = repo.searchForItem("Basketball");
+        // Check if it outputs one result.
+        assertNotNull(expectedObj);
+        assertEquals(1, expectedObj.size());
     }
 
     @Test
     public void searchByKeyword_MultipleResults() {
-        String keyword = "Coke";
-        Collection<Product> expectedObj = repo.searchForItem(keyword);
-        assertEquals(expectedObj, repo.searchForItem(keyword));
+        // Search for the object
+        Collection<Product> expectedObj = repo.searchForItem("Coke");
+        // Check if it outputs two results. {there are 2 coke records in the db.}
+        assertNotNull(expectedObj);
+        assertEquals(2, expectedObj.size());
     }
 
     // No results
