@@ -29,28 +29,37 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     public List<Product> getAllProducts() {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM products;");
-            List<Product> products = new ArrayList<>();
+            // Execute query
+            String query = "SELECT * FROM products;";
+            PreparedStatement stm = connection.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
+
+            // Get product objects and add them into ArrayList
+            List<Product> products = new ArrayList<>();
             while (rs.next()) {
                 Product p = extractProduct(rs);
                 products.add(p);
             }
+
+            // Close the connection and return list of products
             connection.close();
             return products;
         } catch (SQLException e) {
-            throw new RuntimeException("Error in getAllProducts()", e);
+            throw new RuntimeException("Error in getting products", e);
         }
     }
 
     @Override
     public Collection<Product> searchForItem(String keyword) {
         try {
+            // Execute query
             // source: W3schools, https://www.w3schools.com/sql/sql_like.asp
-            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM products WHERE name LIKE ?");
+            String query = "SELECT * FROM products WHERE name LIKE ?";
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);
             stm.setString(1, "%" + keyword + "%");
             ResultSet rs = stm.executeQuery();
+
+            // Get the product objects and add them into ArrayList
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
                 products.add(extractProduct(rs));
@@ -59,69 +68,74 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             return products;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error in searchForItem(keyword)", e);
+            throw new RuntimeException("Error in product search", e);
         }
     }
 
     @Override
     public List<Product> getCartProducts(Long inputId) {
         try {
+            // Execute Query
             Connection connection = dataSource.getConnection();
-            String cartProductQuery = "SELECT\n" +
-                    "    p.productId,\n" +
-                    "    p.name,\n" +
-                    "    p.description,\n" +
-                    "    p.store,\n" +
-                    "    p.imageURL,\n" +
-                    "    p.price,\n" +
-                    "    p.productQuantity\n" +
+            String query = "SELECT\n" +
+                    "p.productId,\n" +
+                    "p.name,\n" +
+                    "p.description,\n" +
+                    "p.store,\n" +
+                    "p.imageURL,\n" +
+                    "p.price,\n" +
+                    "p.productQuantity\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
-            PreparedStatement stm = connection.prepareStatement(cartProductQuery);
+            PreparedStatement stm = connection.prepareStatement(query);
             stm.setLong(1, inputId);
-            List<Product> products = new ArrayList<>();
             ResultSet rs = stm.executeQuery();
+
+            // Get the product objects and add them into ArrayList
+            List<Product> products = new ArrayList<>();
             while (rs.next()) {
                 Product p = extractProduct(rs);
                 products.add(p);
             }
+
+            // Close the connection and return list of products
             connection.close();
             return products;
         } catch (SQLException e) {
-            throw new RuntimeException("Error in getAllProducts()", e);
+            throw new RuntimeException("Error in getting cart products", e);
         }
     }
 
     @Override
     public CartItem addItemToCart(Long quantity, Long cartId, Long productId) {
         try {
-            String addQuery =
-                    "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
-                            "VALUES (?, ?, ?)";
-            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
-                    addQuery,
-                    Statement.RETURN_GENERATED_KEYS);
+            // Execute Query
+            String query = "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
+                    "VALUES (?, ?, ?)";
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement
+                    (query, Statement.RETURN_GENERATED_KEYS);
 
             stm.setLong(1, quantity);
             stm.setLong(2, cartId);
             stm.setLong(3, productId);
             int row = stm.executeUpdate();
 
+            // If the cartId does not exist, throw exception
             if (getCartProducts(cartId).isEmpty()) {
                 throw new RuntimeException("Cart does not exist.");
             }
 
+            // Check if item was added successfully
             ResultSet generatedKeys = stm.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getLong(1);
-                System.out.println("Successfully added item.");
                 return new CartItem(quantity, cartId, productId);
             } else {
-                throw new SQLException("Creating book failed, no ID obtained.");
+                throw new SQLException("SQL Error in adding item");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error in create", e);
+            throw new RuntimeException("Error in trying to add item to cart", e);
         }
     }
 

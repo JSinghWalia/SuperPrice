@@ -3,13 +3,12 @@ package com.example.superprice.controllers;
 import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
-import com.example.superprice.services.SuperpriceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Collection;
 
 @RestController
 @RequestMapping(value = "v1/superprice")
