@@ -84,4 +84,11 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     public Product addItemToCart(Product product) {
         return null;
     }
+
+    @Override
+    public Product removeProductFromCart(Long id) {
+        return null;
+    }
+
+
 }

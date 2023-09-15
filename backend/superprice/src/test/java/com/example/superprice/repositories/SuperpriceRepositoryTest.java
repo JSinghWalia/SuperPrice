@@ -105,4 +105,13 @@ public class SuperpriceRepositoryTest {
     @Test
     public void addItemToCart_Fail() {
     }
+
+    // Remove items from cart
+    @Test
+    public void removeItemFromCart_Success() {
+    }
+
+    @Test
+    public void removeItemFromCart_Fail() {
+    }
 }

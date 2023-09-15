@@ -41,4 +41,10 @@ public class SuperpriceController {
         Product p = service.addItemToCart(product);
         return new ResponseEntity<Product>(p, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> remove(@PathVariable Long id) {
+        this.service.removeProductFromCart(id);
+        return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
+    }
 }
