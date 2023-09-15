@@ -8,9 +8,19 @@ let productsData = [];
 
 export default function Products() {
     async function getProductData() {
-        const res = await fetch('http://localhost:8080/v1/superprice');
-        const testData = await res.json();
-        productsData = testData
+        try {
+            const res = await fetch('http://localhost:8080/v1/superprice');
+
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const testData = await res.json();
+            productsData = testData
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+            // You can add further error handling here, such as displaying an error message to the user.
+        }
     }
     getProductData()
     return (
