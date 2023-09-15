@@ -1,5 +1,6 @@
 package com.example.superprice.services;
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.repositories.SuperpriceRepository;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     }
 
     @Override
-    public Product addItemToCart(Product product) {
-        return repo.addItemToCart(product);
+    public CartItem addItemToCart(Long quantity, Long cartId, Long productId) {
+        return repo.addItemToCart(quantity, cartId, productId);
     }
 
     @Override

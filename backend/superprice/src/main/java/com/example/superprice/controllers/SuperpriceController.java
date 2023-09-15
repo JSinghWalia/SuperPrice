@@ -1,5 +1,6 @@
 package com.example.superprice.controllers;
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
 import com.example.superprice.services.SuperpriceServiceImpl;
@@ -37,9 +38,9 @@ public class SuperpriceController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> addProductToCart(@RequestBody Product product) {
-        Product p = service.addItemToCart(product);
-        return new ResponseEntity<Product>(p, HttpStatus.CREATED);
+    public ResponseEntity<CartItem> addProductToCart(@RequestBody Long quantity, Long cartId, Long productId) {
+        CartItem ci = service.addItemToCart(quantity, cartId, productId);
+        return new ResponseEntity<CartItem>(ci, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

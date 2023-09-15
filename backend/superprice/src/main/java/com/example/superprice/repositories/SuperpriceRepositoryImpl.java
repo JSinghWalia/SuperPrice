@@ -1,5 +1,6 @@
 package com.example.superprice.repositories;
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import org.springframework.stereotype.Repository;
 
@@ -93,8 +94,35 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public Product addItemToCart(Product product) {
-        return null;
+    public CartItem addItemToCart(Long quantity, Long cartId, Long productId) {
+        try {
+            String addQuery =
+                    "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
+                            "VALUES (?, ?, ?)";
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
+                    addQuery,
+                    Statement.RETURN_GENERATED_KEYS);
+
+            stm.setLong(1, quantity);
+            stm.setLong(2, cartId);
+            stm.setLong(3, productId);
+            int row = stm.executeUpdate();
+
+            if (row == 0) {
+                throw new SQLException("Failed to add item to cart. " + productId);
+            }
+
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                Long id = generatedKeys.getLong(1);
+                System.out.println("Successfully added item.");
+                return new CartItem(quantity, cartId, productId);
+            } else {
+                throw new SQLException("Creating book failed, no ID obtained.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in create", e);
+        }
     }
 
     @Override

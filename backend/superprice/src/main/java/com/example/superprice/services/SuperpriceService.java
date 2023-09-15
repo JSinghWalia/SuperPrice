@@ -1,5 +1,6 @@
 package com.example.superprice.services;
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ public interface SuperpriceService {
 
     List<Product> getCartProducts(Long inputId);
 
-    Product addItemToCart(Product product);
+    CartItem addItemToCart(Long quantity, Long cartId, Long productId);
 
     Product removeProductFromCart(Long id);
 

@@ -1,6 +1,7 @@
 package com.example.superprice.repositories;
 
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
@@ -112,7 +113,14 @@ public class SuperpriceRepositoryTest {
     // Adding items to cart
     @Test
     public void addItemToCart_Success() {
+        // Check size before
+        assertEquals(5, repo.getCartProducts(1L).size());
 
+        // Add the item
+        repo.addItemToCart(1L, 1L, 1L);
+
+        // Check size after
+        assertEquals(6, repo.getCartProducts(1L).size());
     }
 
     @Test

@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/model/CartItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
@@ -23,9 +23,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -200,7 +200,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
