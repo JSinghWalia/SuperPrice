@@ -41,7 +41,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             connection.close();
             return products;
         } catch (SQLException e) {
-            throw new RuntimeException("Error in findAll", e);
+            throw new RuntimeException("Error in getAllProducts()", e);
         }
     }
 
@@ -62,6 +62,24 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
         } catch (SQLException e) {
             throw new RuntimeException("Error in searchForItem(keyword)", e);
+        }
+    }
+
+    @Override
+    public List<Product> getCartProducts() {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM cart;");
+            List<Product> products = new ArrayList<>();
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = extractProduct(rs);
+                products.add(p);
+            }
+            connection.close();
+            return products;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in getAllProducts()", e);
         }
     }
 }

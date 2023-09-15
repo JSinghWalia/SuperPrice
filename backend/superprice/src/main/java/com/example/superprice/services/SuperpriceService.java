@@ -9,7 +9,8 @@ import java.util.Optional;
 public interface SuperpriceService {
 
     List<Product> getAllProducts();
-    public Collection<Product> searchKeyword(String keyword);
+    Collection<Product> searchKeyword(String keyword);
+    List<Product> getCartProducts();
 
 
 }

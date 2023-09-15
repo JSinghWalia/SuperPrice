@@ -9,5 +9,9 @@ import java.util.Optional;
 public interface SuperpriceRepository {
 
     List<Product> getAllProducts();
+
     Collection<Product> searchForItem(String keyword);
+
+    List<Product> getCartProducts();
+
 }

@@ -16,14 +16,21 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     public SuperpriceServiceImpl(SuperpriceRepository repo) {
         this.repo = repo;
     }
+
     @Override
     public List<Product> getAllProducts() {
         return repo.getAllProducts();
     }
 
     // To be fixed
-    public Collection<Product> searchKeyword(String keyword){
+    @Override
+    public Collection<Product> searchKeyword(String keyword) {
         return repo.searchForItem(keyword);
+    }
+
+    @Override
+    public List<Product> getCartProducts() {
+        return repo.getCartProducts();
     }
 
 

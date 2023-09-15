@@ -56,6 +56,13 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
+    public void searchByKeyword_Synonym() {
+        String keyword = "Basketball";
+        Collection<Product> expectedObj = repo.searchForItem("Molten Basketball");
+        assertEquals(expectedObj, repo.searchForItem(keyword));
+    }
+
+    @Test
     public void searchByKeyword_MultipleResults() {
         // Search for the object
         Collection<Product> expectedObj = repo.searchForItem("Coke");
@@ -71,4 +78,21 @@ public class SuperpriceRepositoryTest {
         assertTrue(repo.searchForItem(keyword).isEmpty());
     }
 
+    // Getting products from the cart database
+
+    // Scenario: There is at least one item in the cart
+    @Test
+    public void getProductsInCart_OneItem() {
+        assertEquals(1, repo.getCartProducts().size());
+    }
+
+    @Test
+    public void getProductsInCart_MultipleItems() {
+        assertEquals(repo.getCartProducts().size() > 1, repo.getCartProducts().size());
+    }
+
+    @Test
+    public void getProductsInCart_NoItems() {
+        assertEquals(0, repo.getCartProducts().size());
+    }
 }
