@@ -26,6 +26,8 @@ export default function Products() {
         getProductData();
     }, []);
 
+    console.log(productsData);
+
     return (
         <main className="flex min-h-screen flex-col">
             <Navbar activePath="Products" />
@@ -34,13 +36,13 @@ export default function Products() {
             </div>
             <section className="product-section">
                 {productsData.map(product => (
-                    <Link key={product.id} href={`/products/${product.id}`}>
+                    <Link key={product.id} href={`/products/${product.id}/${product.name}`}>
                         <div className="product-card">
                             <Image src={product.imageURL} alt={product.name} width={200} height={200} />
                             <h2>{product.name}</h2>
                             <p>${product.price}</p>
                             <button className="add-to-cart-button">
-                                <span>Add to Cart</span>
+                                <span>Add to Carts</span>
                                 <i className="material-icons"></i> {/* Example icon */}
                                 <ShoppingCartIcon className="h-6 w-6" />
                             </button>

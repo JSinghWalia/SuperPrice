@@ -1,59 +1,61 @@
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
 
-
-export const productsData = [
+export const products = [
     {
-        id: 1,
+        id: 't1',
         name: 'T-Shirt',
-        description: 'This is a pretty cool shirt.',
-        store: 'Coles',
-        imageURL: '/tshirt.png',
-        price: 20,
-        quantity: 20
+        imageSrc: '/tshirt.png',
+        images: ['/tshirt.png', '/tshirt2.png'],
+        description: 'This is a T-Shirt',
+        price: '$19.99'
     },
     {
-        id: 2,
+        id: 't2',
         name: 'Coke',
-        description: 'A totally healthy beverage that is very tasty.',
-        store: 'Woolworths',
-        imageURL: '/cokeBottle.png',
-        price: 4,
-        quantity: 18
+        imageSrc: '/cokeBottle.png',
+        images: ['/cokeBottle.png', '/cokeBottle2.png'],
+        description: 'This is a Coke',
+        price: '$3.99'
     },
     {
-        id: 3,
+        id: 't3',
         name: 'Molten Basketball',
-        description: 'A nice basketball that is not overpriced at all.',
-        store: 'Woolworhts',
-        imageURL: '/basketball.png',
-        price: 69,
-        quantity: 6
+        imageSrc: '/basketball.png',
+        images: ['/basketball.png', '/basketball2.png'],
+        description: 'This is a Molten Basketball',
+        price: '$69'
     },
     {
-        id: 4,
+        id: 't4',
         name: 'Samsung Watch',
-        description: 'A new smart watch which is totally necessary.',
-        store: 'Coles',
-        imageURL: '/watch.webp',
-        price: 200,
-        quantity: 3
+        imageSrc: '/watch.webp',
+        images: ['/watch.webp', '/watch2.webp'],
+        description: 'This is a Samsung Watch',
+        price: '$200'
     },
     {
-        id: 5,
-        name: 'Coke',
-        description: 'A totally healthy beverage that is very tasty.',
-        store: 'Coles',
-        imageURL: '/cokeBottle.png',
-        price: 4,
-        quantity: 18
+        id: 't5',
+        name: 'Boost Chocolate',
+        imageSrc: '/boostchocolate.webp',
+        images: ['/boostchocolate.webp', '/boostchocolate2.webp'],
+        description: 'This is a Boost Chocolate',
+        price: '$2.99'
+    },
+    {
+        id: 't6',
+        name: 'Banana',
+        imageSrc: '/banana.png',
+        images: ['/banana.png', '/banana2.png'],
+        description: 'This is a Banana',
+        price: '$1.00'
     }
+
 ]
 
-
 export const handlers = [
-    rest.get('http://localhost:8080/v1/superprice', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(productsData))
+    rest.get('http://localhost:3000/products', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(products))
     }),
 ]
 
