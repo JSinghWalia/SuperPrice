@@ -1,6 +1,7 @@
 // ShoppingCart.js
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import './shoppingCart.css';
 import { useCart } from '../context/cartContext';
 import { Navbar } from '../components/navbar';
@@ -20,10 +21,14 @@ import {
     MDBRow,
     MDBTypography,
 } from "mdb-react-ui-kit";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
     const [shippingOption, setShippingOption] = useState('5'); // Default to the first option
+    const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
+    const router = useRouter();
 
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
@@ -50,6 +55,23 @@ export default function ShoppingCart() {
             removeFromCart(productId);
         }
     };
+
+    const handleCheckout = () => {
+        if (cart.length === 0) {
+            // Show alert for an empty cart
+            setIsCheckoutAlertOpen(true);
+        } else {
+            // Navigate to the checkout page or perform the desired action
+            // Replace this with your actual navigation logic
+            // For example: router.push('/checkout');
+            router.push('/checkout');
+        }
+    };
+
+    const handleCheckoutAlertClose = () => {
+        setIsCheckoutAlertOpen(false);
+    };
+
 
     return (
         <>
@@ -176,9 +198,16 @@ export default function ShoppingCart() {
                                                     <MDBTypography tag="h5">$ {totalWithShipping.toFixed(2)}</MDBTypography>
                                                 </div>
 
-                                                <MDBBtn color="dark" block size="lg">
+                                                <MDBBtn color="dark" block size="lg" onClick={handleCheckout}>
                                                     Checkout
                                                 </MDBBtn>
+
+                                                <Snackbar open={isCheckoutAlertOpen} autoHideDuration={3000} onClose={handleCheckoutAlertClose}>
+                                                    <Alert onClose={handleCheckoutAlertClose} severity="error">
+                                                        Cart is empty. Add items to the cart before proceeding to checkout.
+                                                    </Alert>
+                                                </Snackbar>
+
                                             </div>
                                         </MDBCol>
 
