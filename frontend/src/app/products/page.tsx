@@ -7,10 +7,12 @@ import * as React from "react";
 
 export default function Products() {
     const [productsData, setProductsData] = React.useState([]);
+    const [searchTerm, setSearchTerm] = React.useState('');
 
-    async function getProductData() {
+    async function fetchProducts(searchTerm = '') {
         try {
-            const res = await fetch('http://localhost:8080');
+            const url = `http://localhost:8080/${searchTerm}`;
+            const res = await fetch(url);
             if (!res.ok) {
                 throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
             }
@@ -21,18 +23,31 @@ export default function Products() {
         }
     }
 
-
     React.useEffect(() => {
-        getProductData();
+        fetchProducts(); // Fetch products when the component mounts
     }, []);
 
-    console.log(productsData);
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        await fetchProducts(searchTerm); // Fetch products when the form is submitted
+    }
 
     return (
         <main className="flex min-h-screen flex-col">
             <Navbar activePath="Products" />
             <div className="welcome-text">
                 <h1>Products</h1>
+            </div>
+            <div className="search-container">
+                <form onSubmit={handleSearchSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button type="submit">Submit</button>
+                </form>
             </div>
             <section className="product-section">
                 {productsData.map(product => (
@@ -43,8 +58,7 @@ export default function Products() {
                             <h3>From: {product.store}</h3>
                             <p>${product.price}</p>
                             <button className="add-to-cart-button">
-                                <span>Add to Carts</span>
-                                <i className="material-icons"></i> {/* Example icon */}
+                                <span>Add to Cart</span>
                                 <ShoppingCartIcon className="h-6 w-6" />
                             </button>
                         </div>
@@ -54,3 +68,4 @@ export default function Products() {
         </main>
     );
 }
+``
