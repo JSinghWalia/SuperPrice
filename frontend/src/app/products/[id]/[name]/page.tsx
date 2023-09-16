@@ -7,6 +7,8 @@ import { Navbar } from '../../../components/navbar';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useCart } from '../../../context/cartContext';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function ProductDetail() {
     const pathname = usePathname();
@@ -15,6 +17,24 @@ export default function ProductDetail() {
     const productId = parseInt(pathParts[pathParts.length -2]);
     const [productsData, setProductData] = React.useState([]);
     const urlAPI = 'http://localhost:8080' + "/" + productName;
+
+    const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
+    const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [quantity, setQuantity] = useState(0);
+
+    const handleSetQuantity = (value: number) => {
+        setQuantity(value);
+    };
+
+    const handleSuccessAlertClose = () => {
+        setIsSuccessAlertOpen(false);
+    };
+
+    const handleErrorAlertClose = () => {
+        setIsErrorAlertOpen(false);
+    };
+
 
     async function getProductData() {
         try {
@@ -42,13 +62,23 @@ export default function ProductDetail() {
         const quantityInput = document.getElementById('quantity') as HTMLInputElement;
         const quantity = quantityInput ? parseInt(quantityInput.value) : 0;
 
-        if (product) {
+        if (quantity <= 0) {
+            // Show error alert for invalid quantity
+            setIsErrorAlertOpen(true);
+            setAlertMessage('Please enter a valid quantity');
+        } else if (product) {
             addToCart(product, quantity);
+
+            // Show success alert for item added to cart
+            setIsSuccessAlertOpen(true);
+            setAlertMessage('Item added to cart');
+            setQuantity(0);
         } else {
             // Handle the case when the product is not found
             console.error('Product not found');
         }
     };
+
 
     if (!product) {
         // Handle the case when the product is not found
@@ -99,10 +129,22 @@ export default function ProductDetail() {
                         </div>
                         <div className="flex items-center space-x-4 mb-4 mt-4">
                             <div>
-                                <label htmlFor="quantity" className="block text-gray-600">Quantity:</label>
-                                <input type="number" id="quantity" className="border rounded-md p-2 w-16 text-black" />
+                                <label htmlFor="quantity" className="block text-gray-600">Quantity: </label>
+                                <input type="number" id="quantity" className="border rounded-md p-2 w-16 text-black" 
+                                onChange={(e) => handleSetQuantity(parseInt(e.target.value))} value={quantity}/>
                             </div>
                             <button onClick={handleAddToCart} className="bg-blue-500 text-white px-4 py-2 rounded-md">Add to Cart <ShoppingCartIcon className="h-6 w-6" /></button>
+                                <Snackbar open={isSuccessAlertOpen} autoHideDuration={3000} onClose={handleSuccessAlertClose}>
+                                    <Alert onClose={handleSuccessAlertClose} severity="success">
+                                        {alertMessage}
+                                    </Alert>
+                                </Snackbar>
+                                <Snackbar open={isErrorAlertOpen} autoHideDuration={3000} onClose={handleErrorAlertClose}>
+                                    <Alert onClose={handleErrorAlertClose} severity="error">
+                                        {alertMessage}
+                                    </Alert>
+                                </Snackbar>
+
                         </div>
                     </div>
                 </div>
