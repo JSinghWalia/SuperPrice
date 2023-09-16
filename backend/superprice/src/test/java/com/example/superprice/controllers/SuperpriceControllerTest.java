@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.sql.DataSource;
@@ -109,13 +110,20 @@ public class SuperpriceControllerTest {
         assertEquals(1, p.size());
     }
 
-    // addProductToCart
+    // addProductToCart test
     @Test
     void should_returnResponseEntity_addProductToCart() {
         CartItem ci = new CartItem(1L, 1L, 1L);
-        when(service.addItemToCart(1L, 1L, 1L)).thenReturn(ci);
+        when(this.service.addItemToCart(1L, 1L, 1L)).thenReturn(ci);
         ResponseEntity response = this.controller.addProductToCart(1L, 1L, 1L);
 
         assertEquals(ci, response.getBody());
+    }
+
+    // remove test
+    @Test
+    void should_return_ACCEPTEDHttpStatus() {
+        ResponseEntity<HttpStatus> response = new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
+        assertEquals(response, this.controller.remove(1L, 1L));
     }
 }
