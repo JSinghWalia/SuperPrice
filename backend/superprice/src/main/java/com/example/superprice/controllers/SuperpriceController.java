@@ -24,8 +24,7 @@ public class SuperpriceController {
 
     @GetMapping
     public Collection<Product> getProducts() {
-//        return this.service.getAllProducts();
-        return null;
+        return this.service.getAllProducts();
     }
 
     @GetMapping("/{keyword}")
