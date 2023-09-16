@@ -45,6 +45,7 @@ public class SuperpriceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> remove(@PathVariable Long cartId, Long productId) {
-        return null;
+        this.service.removeProductFromCart(cartId, productId);
+        return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
 }
