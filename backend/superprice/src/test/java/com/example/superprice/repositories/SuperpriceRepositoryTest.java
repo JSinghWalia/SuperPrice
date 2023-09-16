@@ -1,6 +1,7 @@
 package com.example.superprice.repositories;
 
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,6 +58,15 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
+    public void searchByKeyword_Synonym() {
+        String keyword = "Basketball";
+        // Search for the object that contains "Basketball" in the name
+        Collection<Product> expectedObj = repo.searchForItem("Molten Basketball");
+        // Check if the the search result is correct
+        assertEquals(expectedObj, repo.searchForItem(keyword));
+    }
+
+    @Test
     public void searchByKeyword_MultipleResults() {
         // Search for the object
         Collection<Product> expectedObj = repo.searchForItem("Coke");
@@ -67,8 +78,78 @@ public class SuperpriceRepositoryTest {
     // No results
     @Test
     public void searchByKeyword_NoResults() {
-        String keyword = "No result";
+        String keyword = "empty result";
         assertTrue(repo.searchForItem(keyword).isEmpty());
     }
 
+    // Getting products from the cart database
+
+    // Scenario: Check if we can retrieve items from the different carts.
+    @Test
+    public void getProductsInCart() {
+        assertEquals(5, repo.getCartProducts(1L).size());
+        assertEquals(2, repo.getCartProducts(2L).size());
+        assertEquals(3, repo.getCartProducts(3L).size());
+    }
+
+    // Scenario: Check if an invalid cart returns an empty cart
+    @Test
+    public void getProductsInCart_NoItems() {
+        assertEquals(0, repo.getCartProducts(4L).size());
+    }
+
+    // Scenario: Check if the cart content is correct
+    @Test
+    public void checkCartContent() {
+        // Cart 1
+        List<Product> c1 = repo.getCartProducts(1L);
+        String c1Item1 = c1.get(0).name();
+        String c1Item2 = c1.get(1).name();
+        String c1Item3 = c1.get(2).name();
+
+        assertEquals("T-Shirt", c1Item1);
+        assertEquals("Coke", c1Item2);
+        assertEquals("Molten Basketball", c1Item3);
+    }
+
+    // Adding items to cart
+    @Test
+    public void addItemToCart_Success() {
+        // Check size before
+        assertEquals(5, repo.getCartProducts(1L).size());
+
+        // Add the item
+        repo.addItemToCart(1L, 1L, 1L);
+
+        // Check size after
+        assertEquals(6, repo.getCartProducts(1L).size());
+    }
+
+    // Scenario: Cannot add item to a cart that does not exist.
+    @Test
+    public void addItemToCart_Fail() {
+        assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(1L, 100L, 1L));
+    }
+
+    // Remove items from cart
+    @Test
+    public void removeItemFromCart_Success() {
+        // Check size before
+        assertEquals(2, repo.getCartProducts(2L).size());
+
+        // Delete the item
+        repo.removeProductFromCart(2L, 1L);
+
+        // Check size after
+        assertEquals(1, repo.getCartProducts(2L).size());
+
+        // Verify the object
+        assertEquals("Molten Basketball", repo.getCartProducts(2L).get(0).name());
+    }
+
+    @Test
+    public void removeItemFromCart_Fail() {
+        // Delete the item
+        assertThrows(RuntimeException.class, () -> repo.removeProductFromCart(2L, 100L));
+    }
 }
