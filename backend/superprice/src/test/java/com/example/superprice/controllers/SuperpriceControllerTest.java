@@ -1,6 +1,7 @@
 package com.example.superprice.controllers;
 
 
+import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.services.SuperpriceService;
 import org.flywaydb.core.Flyway;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 import javax.sql.DataSource;
 
@@ -105,5 +107,15 @@ public class SuperpriceControllerTest {
                         "/cokeBottle.png", (long) 69, (long) 6)));
         Collection<Product> p = this.controller.getCartProducts(1L);
         assertEquals(1, p.size());
+    }
+
+    // addProductToCart
+    @Test
+    void should_returnResponseEntity_addProductToCart() {
+        CartItem ci = new CartItem(1L, 1L, 1L);
+        when(service.addItemToCart(1L, 1L, 1L)).thenReturn(ci);
+        ResponseEntity response = this.controller.addProductToCart(1L, 1L, 1L);
+
+        assertEquals(ci, response.getBody());
     }
 }
