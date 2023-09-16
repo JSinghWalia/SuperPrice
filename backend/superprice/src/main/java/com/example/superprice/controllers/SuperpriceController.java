@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
@@ -33,7 +34,8 @@ public class SuperpriceController {
 
     @GetMapping("/cart/{id}")
     public Collection<Product> getCartProducts(@PathVariable Long id) {
-        return service.getCartProducts(id);
+//        return service.getCartProducts(id);
+        return new ArrayList<>();
     }
 
     @PostMapping

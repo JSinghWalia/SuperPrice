@@ -88,4 +88,22 @@ public class SuperpriceControllerTest {
         Collection<Product> p = this.controller.getProducts();
         assertEquals(0, p.size());
     }
+
+    // Get cart products
+    @Test
+    void should_returnEmpty_When_cartEmpty() {
+        when(this.service.getCartProducts(1L)).thenReturn(new ArrayList<>());
+        Collection<Product> p = this.controller.getCartProducts(1L);
+        assertEquals(0, p.size());
+    }
+
+    @Test
+    void should_returnProducts_When_cartNonEmpty() {
+        when(this.service.getCartProducts(1L)).thenReturn(
+                List.of(new Product((long) 4, "Coke",
+                        "A totally healthy beverage that is very tasty.", "Woolworths",
+                        "/cokeBottle.png", (long) 69, (long) 6)));
+        Collection<Product> p = this.controller.getCartProducts(1L);
+        assertEquals(1, p.size());
+    }
 }
