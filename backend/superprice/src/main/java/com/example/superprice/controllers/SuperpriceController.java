@@ -34,8 +34,7 @@ public class SuperpriceController {
 
     @GetMapping("/cart/{id}")
     public Collection<Product> getCartProducts(@PathVariable Long id) {
-//        return service.getCartProducts(id);
-        return new ArrayList<>();
+        return service.getCartProducts(id);
     }
 
     @PostMapping
