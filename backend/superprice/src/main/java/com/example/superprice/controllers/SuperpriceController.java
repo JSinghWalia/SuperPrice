@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value = "v1/superprice")
+@RequestMapping()
 public class SuperpriceController {
 
     private SuperpriceService service;
@@ -22,6 +23,7 @@ public class SuperpriceController {
         this.service = service;
     }
 
+    //@CrossOrigin(origins = "http://localhost:8080")
     @GetMapping
     public Collection<Product> getProducts() {
         return this.service.getAllProducts();
