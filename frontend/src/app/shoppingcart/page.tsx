@@ -26,15 +26,12 @@ import Alert from '@mui/material/Alert';
 
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
-    const [shippingOption, setShippingOption] = useState('5'); // Default to the first option
     const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
     const router = useRouter();
 
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
     const totalPrice = cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
-    const shippingCost = parseFloat(shippingOption);
-    const totalWithShipping = totalPrice + shippingCost;
 
 
 
@@ -165,23 +162,6 @@ export default function ShoppingCart() {
                                                 </div>
 
                                                 <MDBTypography tag="h5" className="text-uppercase mb-3">
-                                                    Shipping
-                                                </MDBTypography>
-
-                                                <div className="mb-4 pb-2">
-                                                    <select
-                                                        className="select p-2 rounded bg-grey"
-                                                        style={{ width: "100%" }}
-                                                        onChange={(e) => setShippingOption(e.target.value)}
-                                                        value={shippingOption}
-                                                    >
-                                                        <option value="5">Standard-Delivery (3-5 days)- $5.00</option>
-                                                        <option value="10">Express-Delivery (1-2 days)- $10.00</option>
-                                                        <option value="20">Same Day Delivery (1 day)- $20.00</option>
-                                                    </select>
-                                                </div>
-
-                                                <MDBTypography tag="h5" className="text-uppercase mb-3">
                                                     Give code
                                                 </MDBTypography>
 
@@ -195,7 +175,7 @@ export default function ShoppingCart() {
                                                     <MDBTypography tag="h5" className="text-uppercase">
                                                         Total price
                                                     </MDBTypography>
-                                                    <MDBTypography tag="h5">$ {totalWithShipping.toFixed(2)}</MDBTypography>
+                                                    <MDBTypography tag="h5">$ {totalPrice.toFixed(2)}</MDBTypography>
                                                 </div>
 
                                                 <MDBBtn color="dark" block size="lg" onClick={handleCheckout}>
