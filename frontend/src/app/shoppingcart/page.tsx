@@ -161,14 +161,6 @@ export default function ShoppingCart() {
                                                     <MDBTypography tag="h5">$ {totalPrice.toFixed(2)}</MDBTypography>
                                                 </div>
 
-                                                <MDBTypography tag="h5" className="text-uppercase mb-3">
-                                                    Give code
-                                                </MDBTypography>
-
-                                                <div className="mb-5">
-                                                    <MDBInput size="lg" label="Enter your code" />
-                                                </div>
-
                                                 <hr className="my-4" />
 
                                                 <div className="d-flex justify-content-between mb-5">
