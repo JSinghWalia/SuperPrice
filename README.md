@@ -57,5 +57,8 @@ Other tools will be required to complete the project (e.g., Docker)
 - Run the app with "npm run dev"
 
 
+# Milestone 2 Recording
+
+- Clarence O'Toole (s3943755) https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3943755_student_rmit_edu_au/Documents/Recordings/Clarence%20OToole%20-%20s3943755%20-%20COSC2299-23s2%20PTC1.mp4?csf=1&web=1&e=y7mWFo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 
 
