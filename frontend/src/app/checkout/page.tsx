@@ -2,6 +2,7 @@
 import "./checkout.css";
 import { useCart } from "../context/cartContext";
 import { Navbar } from "../components/navbar";
+import { useRouter } from 'next/navigation';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import {
@@ -28,6 +29,7 @@ function classNames(...classes: any) {
 
 
 export default function checkout(){
+    const router = useRouter();
     const { cart } = useCart();
     const [shippingOption, setShippingOption] = useState('5');
     const [agreed, setAgreed] = useState(false);
@@ -92,6 +94,8 @@ export default function checkout(){
             selectedDate,
             cvv,
         });
+
+        router.push("/receipt");
     };
 
     const handleDateChange = (event: any) => {
