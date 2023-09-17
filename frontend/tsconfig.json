@@ -14,10 +14,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./typings"
-    ],
+    // "typeRoots": [
+    //   "./node_modules/@types",
+    //   "./typings"
+    // ],
     "plugins": [
       {
         "name": "next"

@@ -11,7 +11,8 @@ INSERT INTO cart (cartId)
 VALUES
     (1),
     (2),
-    (3)
+    (3),
+    (4)
 ;
 
 INSERT INTO cartitem (cartItemQuantity, cartId, productId)
