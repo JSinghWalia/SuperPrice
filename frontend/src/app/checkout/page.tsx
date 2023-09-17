@@ -474,25 +474,26 @@ export default function CheckOut(){
                                                                 ${(product.price * quantity).toFixed(2)}
                                                             </MDBTypography>
                                                         </MDBCol>
-                                                        <MDBTypography tag="h5" className="text-uppercase mb-3 mt-10">
-                                                            Shipping
-                                                        </MDBTypography>
-
-                                                        <div className="mb-4 pb-2">
-                                                            <select
-                                                                className="select p-2 rounded bg-white"
-                                                                style={{ width: "100%" }}
-                                                                onChange={(e) => setShippingOption(e.target.value)}
-                                                                value={shippingOption}
-                                                            >
-                                                                <option value="5">Standard-Delivery (3-5 days)- $5.00</option>
-                                                                <option value="10">Express-Delivery (1-2 days)- $10.00</option>
-                                                                <option value="20">Same Day Delivery (1 day)- $20.00</option>
-                                                            </select>
-                                                        </div>
+                                                        
                                                     </MDBRow></>
 
                                                 ))}
+                                                <MDBTypography tag="h5" className="text-uppercase mb-3 mt-10">
+                                                    Shipping
+                                                </MDBTypography>
+
+                                                <div className="mb-4 pb-2">
+                                                    <select
+                                                        className="select p-2 rounded bg-white"
+                                                        style={{ width: "100%" }}
+                                                        onChange={(e) => setShippingOption(e.target.value)}
+                                                        value={shippingOption}
+                                                    >
+                                                        <option value="5">Standard-Delivery (3-5 days)- $5.00</option>
+                                                        <option value="10">Express-Delivery (1-2 days)- $10.00</option>
+                                                        <option value="20">Same Day Delivery (1 day)- $20.00</option>
+                                                    </select>
+                                                </div>
 
                                             <div className="d-flex justify-content-between mb-5">
                                                 <MDBTypography tag="h5" className="text-uppercase">
