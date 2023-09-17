@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
+  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest.searchByKeyword_NoResults">
     <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -118,6 +118,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SuperpriceRepositoryTest.searchByKeyword_NoResults" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
+      <option name="METHOD_NAME" value="searchByKeyword_NoResults" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MoviesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="movies" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="au.edu.rmit.sept.cinemas.movies.MoviesApplication" />
@@ -140,6 +156,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SuperpriceRepositoryTest.searchByKeyword_NoResults" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest" />
         <item itemvalue="Spring Boot.MoviesApplication" />
         <item itemvalue="JUnit.SuperpriceApplicationTests" />
