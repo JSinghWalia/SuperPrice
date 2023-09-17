@@ -54,7 +54,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         try {
             // Execute query
             // source: W3schools, https://www.w3schools.com/sql/sql_like.asp
-            String query = "SELECT * FROM products WHERE name LIKE ?";
+            String query = "SELECT * FROM products WHERE LOWER(name) LIKE '%' || LOWER(?) || '%';";
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);
             stm.setString(1, "%" + keyword + "%");
             ResultSet rs = stm.executeQuery();
