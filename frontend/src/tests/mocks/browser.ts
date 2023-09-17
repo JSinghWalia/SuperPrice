@@ -1,0 +1,1 @@
+export const usePathname = () => '/products/2/Coke';

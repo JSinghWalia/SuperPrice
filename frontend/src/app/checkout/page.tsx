@@ -28,7 +28,7 @@ function classNames(...classes: any) {
 }
 
 
-export default function checkout(){
+export default function CheckOut(){
     const router = useRouter();
     const { cart } = useCart();
     const [shippingOption, setShippingOption] = useState('5');
