@@ -46,15 +46,13 @@ Other tools will be required to complete the project (e.g., Docker)
 
 ## Backend
 
-- Delete any unused services (i.e. backend/movies). They are there only for an initial reference.
-- Use [Spring initializr](https://start.spring.io/) to create your (micro)services
-- Place any new backend service in its own directory (i.e., backend/<service-name>)
-- Confirm you can run your applicaiton (./mvnw package && java -jar target/[microservice]-0.0.1-SNAPSHOT.jar)
+- Run SuperpriceApplication and verify it works on http://localhost:8080/
 
 ## Frontend
 - cd into frontend/
 - Install dependencies "npm install"
 - Run the app with "npm run dev"
+- Go to http://localhost:3000/
 
 
 # Milestone 2 Recording
@@ -62,5 +60,6 @@ Other tools will be required to complete the project (e.g., Docker)
 - Clarence O'Toole (s3943755) https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3943755_student_rmit_edu_au/Documents/Recordings/Clarence%20OToole%20-%20s3943755%20-%20COSC2299-23s2%20PTC1.mp4?csf=1&web=1&e=y7mWFo&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 - Ramon Aguila (s3840883) https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3840883_student_rmit_edu_au/Documents/Recording-20230917_171305.webm?csf=1&web=1&e=T1VLpI&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 - Manik Thapliyal (s3953664) https://rmiteduau-my.sharepoint.com/:v:/g/personal/s3953664_student_rmit_edu_au/EffohSmAz7lKj9QTDblYlUMBxDARW8Bs9iJDdT-Psd3uSw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=Q1SB2o
+- Jaspal(Jassie) Singh-Walia (s3899925) https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3899925_student_rmit_edu_au/Documents/2023-09-17%2021-13-59.mkv?csf=1&web=1&e=bkCB4M&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 
 
