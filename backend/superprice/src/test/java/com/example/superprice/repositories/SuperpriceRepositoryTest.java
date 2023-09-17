@@ -74,7 +74,7 @@ public class SuperpriceRepositoryTest {
         assertNotNull(expectedObj);
         assertEquals(2, expectedObj.size());
     }
-    
+
     // Getting products from the cart database
 
     // Scenario: Check if we can retrieve items from the different carts.
