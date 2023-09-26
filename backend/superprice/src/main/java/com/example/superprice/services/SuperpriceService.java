@@ -19,5 +19,7 @@ public interface SuperpriceService {
 
     void removeProductFromCart(Long cartId, Long productId);
 
+    boolean getNotification(Product p);
+
 
 }

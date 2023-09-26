@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +211,7 @@
       <workItem from="1695203152374" duration="831000" />
       <workItem from="1695736355780" duration="958000" />
       <workItem from="1695745740508" duration="9000" />
-      <workItem from="1695745987290" duration="206000" />
+      <workItem from="1695745987290" duration="1050000" />
     </task>
     <servers />
   </component>

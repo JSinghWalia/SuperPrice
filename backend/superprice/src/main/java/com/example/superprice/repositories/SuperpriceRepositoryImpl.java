@@ -163,5 +163,13 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         }
     }
 
+    public boolean getNotification(Product p) {
+        // if notifications are OFF or there are no promotions, return false.
+        if (!p.promotion() || !p.notification())
+            return false;
+
+        return true;
+    }
+
 
 }
