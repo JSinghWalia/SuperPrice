@@ -20,6 +20,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         this.dataSource = dataSource;
     }
 
+    // Add boolean values once h2 database is updated
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
                 rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7));
