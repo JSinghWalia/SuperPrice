@@ -9,6 +9,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useCart } from '../../../context/cartContext';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 
 export default function ProductDetail() {
     const pathname = usePathname();
@@ -56,6 +60,7 @@ export default function ProductDetail() {
 
     let product = productsData.find(product => productId===product.id);
 
+
     const { addToCart } = useCart();
 
     const handleAddToCart = () => {
@@ -95,8 +100,9 @@ export default function ProductDetail() {
     return (
         <>
         {
-                    <main className="container mx-auto p-4"><Navbar activePath="Products" />
-                    <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2><div className="flex flex-col lg:flex-row">
+            <main className="container mx-auto p-4"><Navbar activePath="Products" />
+                <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2>
+                <div className="flex flex-col lg:flex-row">
                     {/* Left Section */}
                     <div className="lg:w-1/2 lg:pr-4 mb-4">
                         <div className="mb-4">
@@ -148,7 +154,35 @@ export default function ProductDetail() {
                         </div>
                     </div>
                 </div>
-                </main>
+                    <Typography variant='h4' style={{ fontSize: '30px' }} color="primary">
+                        Other Related Items
+                    </Typography>
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {productsData.map((product) => (
+                            <Link key={product.id} href={`/products/${product.id}/${product.name}` }>
+                            <Card key={product.id} style={{ width: '300px', margin: '16px' }}>
+                                {/* You can replace 'product.image' with the actual image source */}
+                                <img src={product.imageURL} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        {product.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {product.description}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Price: ${product.price}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Store: {product.store}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                            </Link>
+                        ))}
+                    </div>
+
+            </main>
                 
         
         }
