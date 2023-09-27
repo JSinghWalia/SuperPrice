@@ -126,4 +126,58 @@ public class SuperpriceControllerTest {
         ResponseEntity<HttpStatus> response = new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         assertEquals(response, this.controller.remove(1L, 1L));
     }
+
+    // Notifications
+    @Test
+    void notifications_displayPromoMessage() {
+        // Add a placeholder value onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, true, true);
+        when(this.service.getAllProducts()).thenReturn(
+                List.of(p1));
+
+        // Check if the output message is correct
+        assertEquals("There's a promotion!", this.controller.getProductNotification(0));
+    }
+    @Test
+    void notifications_NotificationsAreOff() {
+        // Add a placeholder value onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, true, false);
+        when(this.service.getAllProducts()).thenReturn(
+                List.of(p1));
+
+        // Check if the output message is correct
+        assertEquals("Notifications are off.", this.controller.getProductNotification(0));
+
+    }
+
+    @Test
+    void notifications_NoPromotion() {
+        // Add a placeholder value onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, false, true);
+        when(this.service.getAllProducts()).thenReturn(
+                List.of(p1));
+
+        // Check if the output message is correct
+        assertEquals("There is no promotion for this item.", this.controller.getProductNotification(0));
+    }
+
+    @Test
+    void notifications_NotificationsAndPromotions_AreOff() {
+        // Add a placeholder value onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, false, false);
+        when(this.service.getAllProducts()).thenReturn(
+                List.of(p1));
+
+        // Check if the output message is correct
+        assertEquals(String.format("Notifications are off and there are no promotions for %s.", p1.name()), this.controller.getProductNotification(0));
+
+    }
 }

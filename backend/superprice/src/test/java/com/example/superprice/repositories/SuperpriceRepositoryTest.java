@@ -159,14 +159,15 @@ public class SuperpriceRepositoryTest {
     }
 
     // Scenario: False Cases
-    // Promotion false + Notification true = return false;
-    // Promotion true + Notification false = return false;
     @Test
     public void getNotification_False() {
         // Get the cart
         List<Product> cart = repo.getCartProducts(1L);
         // Check if the item has a promo
+
+        // Promotion false + Notification true = return false;
         assertFalse(repo.getNotification(cart.get(1)));
+        // Promotion true + Notification false = return false;
         assertFalse(repo.getNotification(cart.get(2)));
     }
 
