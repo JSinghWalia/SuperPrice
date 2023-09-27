@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +89,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest.getDiscountedPrice_NoChange">
+  <component name="RunManager" selected="JUnit.SuperpriceControllerTest.getProductDiscount_NoChange">
     <configuration name="SuperpriceControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -107,7 +105,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuperpriceControllerTest.notifications_NoPromotion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SuperpriceControllerTest.getProductDiscount_ChangedPrice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -117,13 +115,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.superprice.controllers" />
       <option name="MAIN_CLASS_NAME" value="com.example.superprice.controllers.SuperpriceControllerTest" />
-      <option name="METHOD_NAME" value="notifications_NoPromotion" />
+      <option name="METHOD_NAME" value="getProductDiscount_ChangedPrice" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuperpriceControllerTest.notifications_NotificationsAndPromotions_AreOff" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SuperpriceControllerTest.getProductDiscount_NoChange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -133,7 +131,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.superprice.controllers" />
       <option name="MAIN_CLASS_NAME" value="com.example.superprice.controllers.SuperpriceControllerTest" />
-      <option name="METHOD_NAME" value="notifications_NotificationsAndPromotions_AreOff" />
+      <option name="METHOD_NAME" value="getProductDiscount_NoChange" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -193,11 +191,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SuperpriceControllerTest.getProductDiscount_NoChange" />
+        <item itemvalue="JUnit.SuperpriceControllerTest.getProductDiscount_ChangedPrice" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.getDiscountedPrice_NoChange" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.getDiscountPrice_ReducedPrice" />
         <item itemvalue="JUnit.SuperpriceControllerTest" />
-        <item itemvalue="JUnit.SuperpriceControllerTest.notifications_NotificationsAndPromotions_AreOff" />
-        <item itemvalue="JUnit.SuperpriceControllerTest.notifications_NoPromotion" />
       </list>
     </recent_temporary>
   </component>
@@ -250,20 +248,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java</url>
-          <line>197</line>
-          <properties class="com.example.superprice.repositories.SuperpriceRepositoryTest" method="getDiscountedPrice_NoChange">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -193,7 +193,7 @@ public class SuperpriceRepositoryTest {
         assertTrue(repo.getDiscountedPrice(p2) < p2.price());
     }
 
-    // Scenario: There is no promotion and the price does not change.
+    // Scenario: There is no promotion so the price does not change.
     @Test
     void getDiscountedPrice_NoChange() {
         // Get the products

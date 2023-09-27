@@ -59,4 +59,12 @@ public class SuperpriceController {
         return service.getNotification(p);
     }
 
+    @GetMapping("/discounts/{id}")
+    public float getDiscountPrice(@PathVariable int id) {
+        // Retrieve the product
+        Product p = service.getAllProducts().get(id);
+        // Return the discounted price
+        return service.getDiscountedPrice(p);
+    }
+
 }

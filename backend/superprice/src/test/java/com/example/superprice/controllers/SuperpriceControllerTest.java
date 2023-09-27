@@ -196,4 +196,56 @@ public class SuperpriceControllerTest {
         // Check if the output message is correct
         assertEquals(expected, this.controller.getProductNotification(0));
     }
+
+    // Getting discount price
+
+    // Scenario: There is promotion and price gets reduced
+    @Test
+    void getProductDiscount_ChangedPrice() {
+        // Add a placeholders value onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, 0.60F, true);
+
+        Product p2 = new Product((long) 4, "Samsung",
+                "A new smart watch which is totally necessary.", "Coles",
+                "/watch.webp", (long) 200, (long) 3, 0.010F, true);
+
+        // Set expected
+        float expectedP1 = p1.price() - (p1.price() * p1.promotion());
+        float expectedP2 = p2.price() - (p2.price() * p2.promotion());
+        when(service.getAllProducts()).thenReturn(List.of(p1, p2));
+        when(service.getDiscountedPrice(p1)).thenReturn(expectedP1);
+        when(service.getDiscountedPrice(p2)).thenReturn(expectedP2);
+
+        // Check if the output message is correct
+        assertEquals(expectedP1, service.getDiscountedPrice(p1));
+        assertEquals(expectedP2, service.getDiscountedPrice(p2));
+    }
+
+    // Scenario: There is no promotion and price does not change.
+    @Test
+    void getProductDiscount_NoChange() {
+        // Add a placeholder values onto the database
+        Product p1 = new Product((long) 1, "T-Shirt",
+                "This is a pretty cool shirt.", "Coles",
+                "/tshirt.png", (long) 19.99, (long) 20, 0, false);
+
+        Product p2 = new Product((long) 2, "Coke",
+                "A totally healthy beverage that is very tasty.", "Woolworths",
+                "/cokeBottle.png", (long) 3.99, (long) 18, 0, true);
+
+        // Set expected
+        float expectedP1 = p1.price() - (p1.price() * p1.promotion());
+        float expectedP2 = p2.price() - (p2.price() * p2.promotion());
+        when(service.getAllProducts()).thenReturn(List.of(p1, p2));
+        when(service.getDiscountedPrice(p1)).thenReturn(expectedP1);
+        when(service.getDiscountedPrice(p2)).thenReturn(expectedP2);
+
+        // Check if the output message is correct
+        assertEquals(expectedP1, service.getDiscountedPrice(p1));
+        assertEquals(expectedP2, service.getDiscountedPrice(p2));
+
+    }
+
 }
