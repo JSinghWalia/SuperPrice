@@ -53,17 +53,10 @@ public class SuperpriceController {
 
     @GetMapping("/promotions/{id}")
     public String getProductNotification(@PathVariable int id) {
+        // Retrieve the product
         Product p = service.getAllProducts().get(id);
-        if (p.promotion() && p.notification())
-            return "There's a promotion!";
-        else if (p.promotion() && !p.notification())
-            return "Notifications are off.";
-        else if (!p.promotion() && p.notification())
-            return "There is no promotion for this item.";
-        else if (!p.promotion() && !p.notification())
-            return String.format("Notifications are off and there are no promotions for %s.", p.name());
-
-        return String.format("Error getting notifications for %s", p.name());
+        // Return the notification String
+        return service.getNotification(p);
     }
 
 }

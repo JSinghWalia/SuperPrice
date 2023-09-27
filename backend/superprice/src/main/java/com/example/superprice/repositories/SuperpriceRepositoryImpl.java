@@ -23,8 +23,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     // Add boolean values once h2 database is updated
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7),
-                rs.getBoolean(8), rs.getBoolean(9));
+                rs.getString(4), rs.getString(5), rs.getFloat(6), rs.getLong(7),
+                rs.getFloat(8), rs.getBoolean(9));
     }
 
     @Override
@@ -166,12 +166,32 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         }
     }
 
-    public boolean getNotification(Product p) {
-        // if notifications are OFF or there are no promotions, return false.
-        if (!p.promotion() || !p.notification())
-            return false;
+    @Override
+    public String getNotification(Product p) {
+        // Promotion: ON, Notification: ON
+        if (p.promotion() > 0F && p.notification()) {
+            return printDiscountMsg(p);
+        }
+        // Promotion: ON, Notification: OFF
+        else if (p.promotion() > 0F && !p.notification())
+            return "Notifications are off.";
+        // Promotion: OFF, Notification: ON
+        else if (p.promotion() == 0F && p.notification())
+            return String.format("There is no promotion for %d %s.",
+                    p.id(), p.name());
+        // Promotion: OFF, Notification: OFF
+        else if (p.promotion() == 0F && !p.notification())
+            return String.format("Notifications are off and there are no promotions for %d %s.", p.id(), p.name());
 
-        return true;
+        return String.format("Error getting notifications for %d %s", p.id(), p.name());
+    }
+
+    // Print the discount message for notification
+    @Override
+    public String printDiscountMsg(Product p) {
+        float discountedPrice = p.price() - (p.price() * p.promotion());
+        return String.format("There's a promotion for %s (ID: %d)!\nOriginal price: $%.2f, New price: $%.2f",
+                p.name(), p.id(), p.price(), discountedPrice);
     }
 
 

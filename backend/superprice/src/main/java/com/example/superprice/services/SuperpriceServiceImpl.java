@@ -44,7 +44,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     }
 
     @Override
-    public boolean getNotification(Product p) {
+    public String getNotification(Product p) {
         return repo.getNotification(p);
     }
 }

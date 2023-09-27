@@ -9,7 +9,7 @@ CREATE TABLE products
     price              FLOAT           NOT NULL,
     productQuantity    INT             NOT NULL,
     promotion          FLOAT           NOT NULL,
-    notification       BOOL            NOT NULL,
+    notification       BOOL            NOT NULL
 );
 
 CREATE TABLE cart (

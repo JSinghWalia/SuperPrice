@@ -19,6 +19,8 @@ public interface SuperpriceRepository {
 
     void removeProductFromCart(Long cartId, Long productId);
 
-    boolean getNotification(Product p);
+    String getNotification(Product p);
+
+    String printDiscountMsg(Product p);
 
 }

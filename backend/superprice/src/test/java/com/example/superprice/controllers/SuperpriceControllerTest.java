@@ -42,12 +42,12 @@ public class SuperpriceControllerTest {
     void should_returnProduct_When_relatedProducts() {
         Product p1 = new Product((long) 4, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 69, (long) 6, true, false);
+                "/cokeBottle.png", (long) 69, (long) 6, 0, false);
 
         when(this.service.searchKeyword("Coke")).thenReturn(
                 List.of(new Product((long) 4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
-                        "/cokeBottle.png", (long) 69, (long) 6, true, false)));
+                        "/cokeBottle.png", (long) 69, (long) 6, 0, false)));
 
         Collection<Product> p = this.controller.searchForProduct("Coke");
         assertNotNull(p);
@@ -56,26 +56,26 @@ public class SuperpriceControllerTest {
 
     // Get all tests
     @Test
-    void should_returnCollection_When_getProducts () {
+    void should_returnCollection_When_getProducts() {
         Product p1 = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20, false, false);
+                "/tshirt.png", (long) 19.99, (long) 20, 0, false);
 
         Product p2 = new Product((long) 2, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 3.99, (long) 18, false, true);
+                "/cokeBottle.png", (long) 3.99, (long) 18, 0, true);
 
         Product p3 = new Product((long) 3, "Molten Basketball",
                 "A nice basketball that is not overpriced at all.", "Woolworths",
-                "/basketball.png", (long) 69, (long) 6, true, false);
+                "/basketball.png", (long) 69, (long) 6, 0.05F, false);
 
         Product p4 = new Product((long) 4, "Samsung",
                 "A new smart watch which is totally necessary.", "Coles",
-                "/watch.webp", (long) 200, (long) 3, true, true);
+                "/watch.webp", (long) 200, (long) 3, 0.010F, true);
 
         Product p5 = new Product((long) 5, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 3.99, (long) 18, false, true);
+                "/cokeBottle.png", (long) 3.99, (long) 18, 0, true);
 
         when(this.service.getAllProducts()).thenReturn(
                 List.of(p1, p2, p3, p4, p5));
@@ -104,8 +104,8 @@ public class SuperpriceControllerTest {
     void should_returnProducts_When_cartNonEmpty() {
         when(this.service.getCartProducts(1L)).thenReturn(
                 List.of(new Product((long) 2, "Coke",
-                "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 3.99, (long) 18, false, true)));
+                        "A totally healthy beverage that is very tasty.", "Woolworths",
+                        "/cokeBottle.png", (long) 3.99, (long) 18, 0, true)));
         Collection<Product> p = this.controller.getCartProducts(1L);
         assertEquals(1, p.size());
     }
@@ -131,53 +131,69 @@ public class SuperpriceControllerTest {
     @Test
     void notifications_displayPromoMessage() {
         // Add a placeholder value onto the database
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20, true, true);
-        when(this.service.getAllProducts()).thenReturn(
-                List.of(p1));
+                "/tshirt.png", (long) 19.99, (long) 20, 0.10F, true);
+
+        // Set the expected message
+        float discountedPrice = p.price() - (p.price() * p.promotion());
+        String expected = String.format("There's a promotion for %s (ID: %d)!\nOriginal price: $%.2f, New price: $%.2f",
+                p.name(), p.id(), p.price(), discountedPrice);
+
+        when(this.service.getAllProducts()).thenReturn(List.of(p));
+        when(this.service.getNotification(p)).thenReturn(expected);
 
         // Check if the output message is correct
-        assertEquals("There's a promotion!", this.controller.getProductNotification(0));
+        assertEquals(expected, this.controller.getProductNotification(0));
     }
+
     @Test
     void notifications_NotificationsAreOff() {
         // Add a placeholder value onto the database
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20, true, false);
-        when(this.service.getAllProducts()).thenReturn(
-                List.of(p1));
+                "/tshirt.png", (long) 19.99, (long) 20, 0.05F, false);
+
+        // Set expected
+        String expected = "Notifications are off.";
+        when(service.getAllProducts()).thenReturn(List.of(p));
+        when(service.getNotification(p)).thenReturn(expected);
 
         // Check if the output message is correct
-        assertEquals("Notifications are off.", this.controller.getProductNotification(0));
+        assertEquals(expected, this.controller.getProductNotification(0));
 
     }
 
     @Test
     void notifications_NoPromotion() {
         // Add a placeholder value onto the database
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20, false, true);
-        when(this.service.getAllProducts()).thenReturn(
-                List.of(p1));
+                "/tshirt.png", (long) 19.99, (long) 20, 0, true);
+
+        // Set expected
+        String expected = String.format("There is no promotion for %d %s.",
+                p.id(), p.name());
+        when(service.getAllProducts()).thenReturn(List.of(p));
+        when(service.getNotification(p)).thenReturn(expected);
 
         // Check if the output message is correct
-        assertEquals("There is no promotion for this item.", this.controller.getProductNotification(0));
+        assertEquals(expected, this.controller.getProductNotification(0));
     }
 
     @Test
     void notifications_NotificationsAndPromotions_AreOff() {
         // Add a placeholder value onto the database
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20, false, false);
-        when(this.service.getAllProducts()).thenReturn(
-                List.of(p1));
+                "/tshirt.png", (long) 19.99, (long) 20, 0, true);
+
+        // Set expected
+        String expected = String.format("Notifications are off and there are no promotions for %d %s.", p.id(), p.name());
+        when(service.getAllProducts()).thenReturn(List.of(p));
+        when(service.getNotification(p)).thenReturn(expected);
 
         // Check if the output message is correct
-        assertEquals(String.format("Notifications are off and there are no promotions for %s.", p1.name()), this.controller.getProductNotification(0));
-
+        assertEquals(expected, this.controller.getProductNotification(0));
     }
 }

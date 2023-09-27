@@ -40,7 +40,7 @@ public class SuperpriceRepositoryTest {
 
     // Getting list of products
     @Test
-    public void completeListOfProducts() {
+    void completeListOfProducts() {
         var products = repo.getAllProducts();
         assertEquals(5, products.size());
     }
@@ -49,7 +49,7 @@ public class SuperpriceRepositoryTest {
 
     // With results
     @Test
-    public void searchByKeyword_OneResult() {
+    void searchByKeyword_OneResult() {
         // Search for the object
         Collection<Product> expectedObj = repo.searchForItem("Basketball");
         // Check if it outputs one result.
@@ -58,7 +58,7 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
-    public void searchByKeyword_Synonym() {
+    void searchByKeyword_Synonym() {
         String keyword = "Basketball";
         // Search for the object that contains "Basketball" in the name
         Collection<Product> expectedObj = repo.searchForItem("Molten Basketball");
@@ -67,7 +67,7 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
-    public void searchByKeyword_MultipleResults() {
+    void searchByKeyword_MultipleResults() {
         // Search for the object
         Collection<Product> expectedObj = repo.searchForItem("Coke");
         // Check if it outputs two results. {there are 2 coke records in the db.}
@@ -79,7 +79,7 @@ public class SuperpriceRepositoryTest {
 
     // Scenario: Check if we can retrieve items from the different carts.
     @Test
-    public void getProductsInCart() {
+    void getProductsInCart() {
         assertEquals(5, repo.getCartProducts(1L).size());
         assertEquals(2, repo.getCartProducts(2L).size());
         assertEquals(3, repo.getCartProducts(3L).size());
@@ -87,13 +87,13 @@ public class SuperpriceRepositoryTest {
 
     // Scenario: Check if an invalid cart returns an empty cart
     @Test
-    public void getProductsInCart_NoItems() {
+    void getProductsInCart_NoItems() {
         assertEquals(0, repo.getCartProducts(4L).size());
     }
 
     // Scenario: Check if the cart content is correct
     @Test
-    public void checkCartContent() {
+    void checkCartContent() {
         // Cart 1
         List<Product> c1 = repo.getCartProducts(1L);
         String c1Item1 = c1.get(0).name();
@@ -107,7 +107,7 @@ public class SuperpriceRepositoryTest {
 
     // Adding items to cart
     @Test
-    public void addItemToCart_Success() {
+    void addItemToCart_Success() {
         // Check size before
         assertEquals(5, repo.getCartProducts(1L).size());
 
@@ -120,13 +120,13 @@ public class SuperpriceRepositoryTest {
 
     // Scenario: Cannot add item to a cart that does not exist.
     @Test
-    public void addItemToCart_Fail() {
+    void addItemToCart_Fail() {
         assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(1L, 100L, 1L));
     }
 
     // Remove items from cart
     @Test
-    public void removeItemFromCart_Success() {
+    void removeItemFromCart_Success() {
         // Check size before
         assertEquals(2, repo.getCartProducts(2L).size());
 
@@ -141,7 +141,7 @@ public class SuperpriceRepositoryTest {
     }
 
     @Test
-    public void removeItemFromCart_Fail() {
+    void removeItemFromCart_Fail() {
         // Delete the item
         assertThrows(RuntimeException.class, () -> repo.removeProductFromCart(2L, 100L));
     }
@@ -151,24 +151,26 @@ public class SuperpriceRepositoryTest {
     // Scenario: True Case
     // Promotion true + Notification true = return true;
     @Test
-    public void getNotification_True() {
-        // Get the cart
-        List<Product> cart = repo.getCartProducts(1L);
+    void getNotification_True() {
+        // Get the products
+        Product p = repo.getAllProducts().get(3);
         // Check if the item has a promo
-        assertTrue(repo.getNotification(cart.get(3)));
+        assertEquals(repo.printDiscountMsg(p), repo.getNotification(p));
     }
 
     // Scenario: False Cases
     @Test
-    public void getNotification_False() {
-        // Get the cart
-        List<Product> cart = repo.getCartProducts(1L);
-        // Check if the item has a promo
+    void getNotification_False() {
+        // Get the products
+        Product p1 = repo.getAllProducts().get(1);
+        Product p2 = repo.getAllProducts().get(2);
 
-        // Promotion false + Notification true = return false;
-        assertFalse(repo.getNotification(cart.get(1)));
-        // Promotion true + Notification false = return false;
-        assertFalse(repo.getNotification(cart.get(2)));
+        // Check if the item has a promo
+        // Promotion: OFF, Notification: ON
+        assertEquals(String.format("There is no promotion for %d %s.",
+                    p1.id(), p1.name()), repo.getNotification(p1));
+        // Promotion: ON, Notification: OFF
+        assertEquals("Notifications are off.", repo.getNotification(p2));
     }
 
 }
