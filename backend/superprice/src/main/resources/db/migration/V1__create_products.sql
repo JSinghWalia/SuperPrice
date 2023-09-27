@@ -8,8 +8,8 @@ CREATE TABLE products
     imageURL           VARCHAR(255)    NOT NULL,
     price              FLOAT           NOT NULL,
     productQuantity    INT             NOT NULL,
-    promotion          BOOL            NOT NULL,
-    notification       BOOL            NOT NULL
+    promotion          FLOAT           NOT NULL,
+    notification       BOOL            NOT NULL,
 );
 
 CREATE TABLE cart (
