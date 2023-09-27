@@ -155,7 +155,7 @@ public class SuperpriceRepositoryTest {
         // Get the cart
         List<Product> cart = repo.getCartProducts(1L);
         // Check if the item has a promo
-        assertTrue(repo.getNotification(cart.get(0)));
+        assertTrue(repo.getNotification(cart.get(3)));
     }
 
     // Scenario: False Cases
@@ -166,8 +166,8 @@ public class SuperpriceRepositoryTest {
         // Get the cart
         List<Product> cart = repo.getCartProducts(1L);
         // Check if the item has a promo
-        assertFalse(repo.getNotification(cart.get(0)));
         assertFalse(repo.getNotification(cart.get(1)));
+        assertFalse(repo.getNotification(cart.get(2)));
     }
 
 }

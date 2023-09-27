@@ -23,7 +23,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     // Add boolean values once h2 database is updated
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7));
+                rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7),
+                rs.getBoolean(8), rs.getBoolean(9));
     }
 
     @Override
@@ -79,13 +80,15 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             // Execute Query
             Connection connection = dataSource.getConnection();
             String query = "SELECT\n" +
-                    "p.productId,\n" +
-                    "p.name,\n" +
-                    "p.description,\n" +
-                    "p.store,\n" +
-                    "p.imageURL,\n" +
-                    "p.price,\n" +
-                    "p.productQuantity\n" +
+                    "p.productId, " +
+                    "p.name, " +
+                    "p.description, " +
+                    "p.store, " +
+                    "p.imageURL, " +
+                    "p.price, " +
+                    "p.productQuantity, " +
+                    "p.promotion, " +
+                    "p.notification\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";

@@ -42,12 +42,12 @@ public class SuperpriceControllerTest {
     void should_returnProduct_When_relatedProducts() {
         Product p1 = new Product((long) 4, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 69, (long) 6);
+                "/cokeBottle.png", (long) 69, (long) 6, true, false);
 
         when(this.service.searchKeyword("Coke")).thenReturn(
                 List.of(new Product((long) 4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
-                        "/cokeBottle.png", (long) 69, (long) 6)));
+                        "/cokeBottle.png", (long) 69, (long) 6, true, false)));
 
         Collection<Product> p = this.controller.searchForProduct("Coke");
         assertNotNull(p);
@@ -59,23 +59,23 @@ public class SuperpriceControllerTest {
     void should_returnCollection_When_getProducts () {
         Product p1 = new Product((long) 1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
-                "/tshirt.png", (long) 19.99, (long) 20);
+                "/tshirt.png", (long) 19.99, (long) 20, false, false);
 
         Product p2 = new Product((long) 2, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 3.99, (long) 18);
+                "/cokeBottle.png", (long) 3.99, (long) 18, false, true);
 
         Product p3 = new Product((long) 3, "Molten Basketball",
                 "A nice basketball that is not overpriced at all.", "Woolworths",
-                "/basketball.png", (long) 69, (long) 6);
+                "/basketball.png", (long) 69, (long) 6, true, false);
 
         Product p4 = new Product((long) 4, "Samsung",
                 "A new smart watch which is totally necessary.", "Coles",
-                "/watch.webp", (long) 200, (long) 3);
+                "/watch.webp", (long) 200, (long) 3, true, true);
 
         Product p5 = new Product((long) 5, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
-                "/cokeBottle.png", (long) 3.99, (long) 18);
+                "/cokeBottle.png", (long) 3.99, (long) 18, false, true);
 
         when(this.service.getAllProducts()).thenReturn(
                 List.of(p1, p2, p3, p4, p5));
@@ -103,9 +103,9 @@ public class SuperpriceControllerTest {
     @Test
     void should_returnProducts_When_cartNonEmpty() {
         when(this.service.getCartProducts(1L)).thenReturn(
-                List.of(new Product((long) 4, "Coke",
-                        "A totally healthy beverage that is very tasty.", "Woolworths",
-                        "/cokeBottle.png", (long) 69, (long) 6)));
+                List.of(new Product((long) 2, "Coke",
+                "A totally healthy beverage that is very tasty.", "Woolworths",
+                "/cokeBottle.png", (long) 3.99, (long) 18, false, true)));
         Collection<Product> p = this.controller.getCartProducts(1L);
         assertEquals(1, p.size());
     }
