@@ -194,5 +194,10 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
                 p.name(), p.id(), p.price(), discountedPrice);
     }
 
+    @Override
+    public float getDiscountedPrice(Product p) {
+        return p.price() - (p.price() * p.promotion());
+    }
+
 
 }

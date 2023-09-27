@@ -21,5 +21,7 @@ public interface SuperpriceService {
 
     String getNotification(Product p);
 
+    float getDiscountedPrice(Product p);
+
 
 }

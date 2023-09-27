@@ -168,9 +168,46 @@ public class SuperpriceRepositoryTest {
         // Check if the item has a promo
         // Promotion: OFF, Notification: ON
         assertEquals(String.format("There is no promotion for %d %s.",
-                    p1.id(), p1.name()), repo.getNotification(p1));
+                p1.id(), p1.name()), repo.getNotification(p1));
         // Promotion: ON, Notification: OFF
         assertEquals("Notifications are off.", repo.getNotification(p2));
+    }
+
+    // Getting discounted price
+    // Scenario: There is a promotion and the price changes.
+    @Test
+    void getDiscountPrice_ReducedPrice() {
+        // Get the products
+        Product p1 = repo.getAllProducts().get(2);
+        Product p2 = repo.getAllProducts().get(3);
+
+        // Set the expected prices
+        float expectedPriceP1 = p1.price() - (p1.price() * p1.promotion());
+        float expectedPriceP2 = p2.price() - (p2.price() * p2.promotion());
+
+        // Check if the prices match and if it's less than the original price
+        assertEquals(expectedPriceP1, repo.getDiscountedPrice(p1));
+        assertTrue(repo.getDiscountedPrice(p1) < p1.price());
+
+        assertEquals(expectedPriceP2, repo.getDiscountedPrice(p2));
+        assertTrue(repo.getDiscountedPrice(p2) < p2.price());
+    }
+
+    // Scenario: There is no promotion and the price does not change.
+    @Test
+    void getDiscountedPrice_NoChange() {
+        // Get the products
+        Product p1 = repo.getAllProducts().get(0);
+        Product p2 = repo.getAllProducts().get(1);
+
+        // Set the expected prices
+        float expectedPriceP1 = p1.price() - (p1.price() * p1.promotion());
+        float expectedPriceP2 = p2.price() - (p2.price() * p2.promotion());
+
+        // Check if the prices did not change
+        assertEquals(expectedPriceP1, repo.getDiscountedPrice(p1));
+        assertEquals(expectedPriceP2, repo.getDiscountedPrice(p2));
+
     }
 
 }

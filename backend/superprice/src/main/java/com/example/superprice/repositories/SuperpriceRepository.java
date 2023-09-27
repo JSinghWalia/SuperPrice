@@ -23,4 +23,6 @@ public interface SuperpriceRepository {
 
     String printDiscountMsg(Product p);
 
+    float getDiscountedPrice(Product p);
+
 }

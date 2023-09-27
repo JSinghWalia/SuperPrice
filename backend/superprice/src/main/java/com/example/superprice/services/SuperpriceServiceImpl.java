@@ -47,4 +47,9 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     public String getNotification(Product p) {
         return repo.getNotification(p);
     }
+
+    @Override
+    public float getDiscountedPrice(Product p) {
+         return repo.getDiscountedPrice(p);
+    }
 }
