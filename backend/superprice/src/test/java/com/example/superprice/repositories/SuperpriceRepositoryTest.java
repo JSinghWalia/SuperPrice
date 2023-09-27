@@ -145,4 +145,29 @@ public class SuperpriceRepositoryTest {
         // Delete the item
         assertThrows(RuntimeException.class, () -> repo.removeProductFromCart(2L, 100L));
     }
+
+    // Notifications
+
+    // Scenario: True Case
+    // Promotion true + Notification true = return true;
+    @Test
+    public void getNotification_True() {
+        // Get the cart
+        List<Product> cart = repo.getCartProducts(1L);
+        // Check if the item has a promo
+        assertTrue(repo.getNotification(cart.get(0)));
+    }
+
+    // Scenario: False Cases
+    // Promotion false + Notification true = return false;
+    // Promotion true + Notification false = return false;
+    @Test
+    public void getNotification_False() {
+        // Get the cart
+        List<Product> cart = repo.getCartProducts(1L);
+        // Check if the item has a promo
+        assertFalse(repo.getNotification(cart.get(0)));
+        assertFalse(repo.getNotification(cart.get(1)));
+    }
+
 }

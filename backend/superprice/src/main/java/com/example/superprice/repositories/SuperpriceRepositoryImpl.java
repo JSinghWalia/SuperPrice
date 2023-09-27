@@ -20,6 +20,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         this.dataSource = dataSource;
     }
 
+    // Add boolean values once h2 database is updated
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
                 rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7));
@@ -160,6 +161,14 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Error in remove from cart.", e);
         }
+    }
+
+    public boolean getNotification(Product p) {
+        // if notifications are OFF or there are no promotions, return false.
+        if (!p.promotion() || !p.notification())
+            return false;
+
+        return true;
     }
 
 
