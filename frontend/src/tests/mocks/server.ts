@@ -3,49 +3,52 @@ import { rest } from 'msw'
 
 export const products = [
     {
-        id: 't1',
+        id: 1,
         name: 'T-Shirt',
-        imageSrc: '/tshirt.png',
-        description: 'This is a T-Shirt',
-        price: '$19.99'
+        description: 'This is a pretty cool shirt.',
+        store: 'Coles',
+        imageURL: '/tshirt.png',
+        price: 20,
+        quantity: 20
     },
     {
-        id: 't2',
+        id: 2,
         name: 'Coke',
-        imageSrc: '/cokeBottle.png',
-        description: 'This is a Coke',
-        price: '$3.99'
+        description: 'A totally healthy beverage that is very tasty.',
+        store: 'Woolworths',
+        imageURL: '/cokeBottle.png',
+        price: 4,
+        quantity: 18
     },
     {
-        id: 't3',
+        id: 3,
         name: 'Molten Basketball',
-        imageSrc: '/basketball.png',
-        description: 'This is a Molten Basketball',
-        price: '$69'
+        description: 'A nice basketball that is not overpriced at all.',
+        store: 'Woolworths',
+        imageURL: '/basketball.png',
+        price: 69,
+        quantity: 6
     },
     {
-        id: 't4',
+        id: 4,
         name: 'Samsung Watch',
-        imageSrc: '/watch.webp',
-        description: 'This is a Samsung Watch',
-        price: '$200'
+        description: 'A new smartwatch which is totally necessary.',
+        store: 'Coles',
+        imageURL: '/watch.webp',
+        price: 200,
+        quantity: 3
     },
     {
-        id: 't5',
-        name: 'Boost Chocolate',
-        imageSrc: '/boostchocolate.webp',
-        description: 'This is a Boost Chocolate',
-        price: '$2.99'
-    },
-    {
-        id: 't6',
-        name: 'Banana',
-        imageSrc: '/banana.png',
-        description: 'This is a Banana',
-        price: '$1.00'
+        id: 5,
+        name: 'Coke',
+        description: 'A totally healthy beverage that is very tasty.',
+        store: 'Coles',
+        imageURL: '/cokeBottle.png',
+        price: 4,
+        quantity: 18
     }
-
 ]
+
 
 export const handlers = [
     rest.get('http://localhost:8080', (req, res, ctx) => {

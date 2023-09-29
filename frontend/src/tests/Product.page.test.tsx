@@ -10,6 +10,7 @@ describe('Products page', () => {
         // Get by h1
         const h1 = wrapper.container.querySelector('h1')
         expect(h1?.textContent).toBe('Products')
+
     })
 });
     describe('Products page', () => {
