@@ -27,11 +27,29 @@ import Alert from '@mui/material/Alert';
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
     const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
+    const [shoppingCart, setShoppingCart] = useState([]);
     const router = useRouter();
+    const apiURL ="http://localhost:8080/cart/2"
 
+    async function getShoppingCart(){
+        try {
+            const res = await fetch(apiURL);
+            if (!res.ok) {
+                throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
+            }
+            const testData = await res.json();
+            setShoppingCart(testData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    React.useEffect(() => {
+        getShoppingCart(); // Fetch products when the component mounts
+    }, []);
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
 
 
@@ -59,8 +77,6 @@ export default function ShoppingCart() {
             setIsCheckoutAlertOpen(true);
         } else {
             // Navigate to the checkout page or perform the desired action
-            // Replace this with your actual navigation logic
-            // For example: router.push('/checkout');
             router.push('/checkout');
         }
     };

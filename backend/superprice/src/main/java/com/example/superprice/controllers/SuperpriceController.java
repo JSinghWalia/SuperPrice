@@ -39,10 +39,21 @@ public class SuperpriceController {
         return service.getCartProducts(id);
     }
 
-    @PostMapping
+    //default one
+    @PostMapping("/api/additem/{quantity}/{cartId}/{productId}")
     public ResponseEntity<CartItem> addProductToCart(@RequestBody Long quantity, Long cartId, Long productId) {
         CartItem ci = service.addItemToCart(quantity, cartId, productId);
         return new ResponseEntity<CartItem>(ci, HttpStatus.CREATED);
+    }
+
+    // new one
+    @PostMapping("/cart/add")
+    public ResponseEntity<String> addItem(
+            @RequestParam Long quantity,
+            @RequestParam Long cartId,
+            @RequestParam Long productId) {
+        CartItem ci = service.addItemToCart(quantity, cartId, productId);
+        return ResponseEntity.ok("Item added to cart successfully");
     }
 
     @DeleteMapping("/{id}")
