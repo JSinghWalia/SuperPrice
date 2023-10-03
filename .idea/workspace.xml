@@ -8,7 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/model/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest">
+  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest.addItemToCart_ExcessQuantity">
     <configuration name="SuperpriceControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -120,6 +120,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SuperpriceRepositoryTest.addItemToCart_ExcessQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
+      <option name="METHOD_NAME" value="addItemToCart_ExcessQuantity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SuperpriceRepositoryTest.addItemToCart_Fail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
+      <option name="METHOD_NAME" value="addItemToCart_Fail" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SuperpriceRepositoryTest.addItemToCart_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -136,38 +168,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuperpriceRepositoryTest.getProductsInCart_NoItems" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="superprice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.superprice.repositories.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
-      <option name="METHOD_NAME" value="getProductsInCart_NoItems" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SuperpriceRepositoryTest.searchByKeyword_OneResult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="superprice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.superprice.repositories.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
-      <option name="METHOD_NAME" value="searchByKeyword_OneResult" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SuperpriceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="superprice" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.superprice.SuperpriceApplication" />
@@ -177,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SuperpriceRepositoryTest" />
+        <item itemvalue="JUnit.SuperpriceRepositoryTest.addItemToCart_ExcessQuantity" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.addItemToCart_Success" />
-        <item itemvalue="JUnit.SuperpriceRepositoryTest.searchByKeyword_OneResult" />
-        <item itemvalue="JUnit.SuperpriceRepositoryTest.getProductsInCart_NoItems" />
+        <item itemvalue="JUnit.SuperpriceRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceControllerTest" />
+        <item itemvalue="JUnit.SuperpriceRepositoryTest.addItemToCart_Fail" />
       </list>
     </recent_temporary>
   </component>
