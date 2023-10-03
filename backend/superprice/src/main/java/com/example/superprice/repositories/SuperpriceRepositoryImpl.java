@@ -156,36 +156,6 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in trying to add item to cart", e);
         }
     }
-
-    @Override
-    public boolean canBeAdded(Long itemId, Long quantityToBeAdded) {
-        try {
-            // Execute Query
-            Connection connection = dataSource.getConnection();
-            String query = "SELECT\n" +
-                    "p.productId,\n" +
-                    "p.productQuantity\n" +
-                    "ci.cartItemQuantity\n" +
-                    "FROM products p\n" +
-                    "JOIN cartitem ci ON p.productId = ci.productId\n" +
-                    "WHERE p.productId = ?;\n";
-            PreparedStatement stm = connection.prepareStatement(query);
-            stm.setLong(1, itemId);
-            ResultSet rs = stm.executeQuery();
-            int currentQuantity = rs.getInt(1);
-
-            if (quantityToBeAdded > currentQuantity) {
-                return false;
-            }
-            connection.close();
-
-            return true;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error in getting cart products", e);
-        }
-    }
-
-
     @Override
     public void removeProductFromCart(Long cartId, Long productId) {
         try {
