@@ -13,6 +13,8 @@ public interface SuperpriceRepository {
 
     Collection<Product> searchForItem(String keyword);
 
+    Optional<Product> findById(int id);
+
     List<Product> getCartProducts(Long inputId);
 
     CartItem addItemToCart(CartItem item);

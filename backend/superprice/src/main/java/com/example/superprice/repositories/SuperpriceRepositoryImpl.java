@@ -73,6 +73,22 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
+    public Optional<Product> findById(int id) {
+        try {
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
+                    "SELECT * FROM products WHERE id = ?");
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return Optional.of(extractProduct(rs));
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in findById", e);
+        }
+    }
+
+    @Override
     public List<Product> getCartProducts(Long inputId) {
         try {
             // Execute Query
@@ -128,6 +144,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
             // Check if item was added successfully
             ResultSet generatedKeys = stm.getGeneratedKeys();
+
+
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getLong(1);
                 return new CartItem(item.quantity(), item.cartId(), item.productId());
@@ -136,6 +154,34 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error in trying to add item to cart", e);
+        }
+    }
+
+    @Override
+    public boolean canBeAdded(Long itemId, Long quantityToBeAdded) {
+        try {
+            // Execute Query
+            Connection connection = dataSource.getConnection();
+            String query = "SELECT\n" +
+                    "p.productId,\n" +
+                    "p.productQuantity\n" +
+                    "ci.cartItemQuantity\n" +
+                    "FROM products p\n" +
+                    "JOIN cartitem ci ON p.productId = ci.productId\n" +
+                    "WHERE p.productId = ?;\n";
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setLong(1, itemId);
+            ResultSet rs = stm.executeQuery();
+            int currentQuantity = rs.getInt(1);
+
+            if (quantityToBeAdded > currentQuantity) {
+                return false;
+            }
+            connection.close();
+
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in getting cart products", e);
         }
     }
 
