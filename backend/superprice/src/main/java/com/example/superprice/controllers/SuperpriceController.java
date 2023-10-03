@@ -26,7 +26,7 @@ public class SuperpriceController {
     //@CrossOrigin(origins = "http://localhost:8080")
     @GetMapping
     public Collection<Product> getProducts() {
-        return this.service.getAllProducts();
+        return this.service.getProducts();
     }
 
     @GetMapping("/{keyword}")
@@ -35,19 +35,19 @@ public class SuperpriceController {
     }
 
     @GetMapping("/cart/{id}")
-    public Collection<Product> getCartProducts(@PathVariable Long id) {
+    public Collection<Product> getCartProducts(@PathVariable int id) {
         return service.getCartProducts(id);
     }
 
     @PostMapping
     public ResponseEntity<CartItem> addProductToCart(@RequestBody CartItem item) {
-        CartItem ci = service.addItemToCart(item);
+        CartItem ci = service.addToCart(item);
         return new ResponseEntity<CartItem>(ci, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> removeProductFromCart(@PathVariable Long cartId, Long productId) {
-        this.service.removeProductFromCart(cartId, productId);
+    public ResponseEntity<HttpStatus> removeProductFromCart(@PathVariable int cartId, int productId) {
+        this.service.removeFromCart(cartId, productId);
         return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
 }

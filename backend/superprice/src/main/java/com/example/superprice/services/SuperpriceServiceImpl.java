@@ -14,32 +14,34 @@ public class SuperpriceServiceImpl implements SuperpriceService {
 
     SuperpriceRepository repo;
 
-    public SuperpriceServiceImpl(SuperpriceRepository repo) {
-        this.repo = repo;
+
+    @Override
+    public List<Product> getProducts() {
+        return repo.getProducts();
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return repo.getAllProducts();
+    public Collection<Product> findByKeyword(String keyword) {
+        return repo.findByKeyword(keyword);
     }
 
     @Override
-    public Collection<Product> searchKeyword(String keyword) {
-        return repo.searchForItem(keyword);
+    public Optional<Product> findById(int id) {
+        return repo.findById(id);
     }
 
     @Override
-    public List<Product> getCartProducts(Long inputId) {
-        return repo.getCartProducts(inputId);
+    public List<Product> getCartProducts(int id) {
+        return repo.getCartProducts(id);
     }
 
     @Override
-    public CartItem addItemToCart(CartItem item)
-        {
-            return repo.addItemToCart(item);
-        }
+    public CartItem addToCart(CartItem item) {
+        return repo.addToCart(item);
+    }
+
     @Override
-    public void removeProductFromCart(Long cartId, Long productId) {
-        repo.removeProductFromCart(cartId, productId);
+    public void removeFromCart(int cartId, int productId) {
+        repo.removeFromCart(cartId, productId);
     }
 }

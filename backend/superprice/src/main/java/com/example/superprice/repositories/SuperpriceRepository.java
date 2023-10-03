@@ -9,16 +9,16 @@ import java.util.Optional;
 
 public interface SuperpriceRepository {
 
-    List<Product> getAllProducts();
+    List<Product> getProducts();
 
-    Collection<Product> searchForItem(String keyword);
+    Collection<Product> findByKeyword(String keyword);
 
     Optional<Product> findById(int id);
 
-    List<Product> getCartProducts(Long inputId);
+    List<Product> getCartProducts(int id);
 
-    CartItem addItemToCart(CartItem item);
+    CartItem addToCart(CartItem item);
 
-    void removeProductFromCart(Long cartId, Long productId);
+    void removeFromCart(int cartId, int productId);
 
 }

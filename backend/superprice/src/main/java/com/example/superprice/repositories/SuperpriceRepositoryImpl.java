@@ -26,7 +26,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getProducts() {
         try {
             Connection connection = dataSource.getConnection();
             // Execute query
@@ -50,7 +50,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public Collection<Product> searchForItem(String keyword) {
+    public Collection<Product> findByKeyword(String keyword) {
         try {
             // Execute query
             // source: W3schools, https://www.w3schools.com/sql/sql_like.asp
@@ -89,7 +89,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public List<Product> getCartProducts(Long inputId) {
+    public List<Product> getCartProducts(int id) {
         try {
             // Execute Query
             Connection connection = dataSource.getConnection();
@@ -105,7 +105,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
             PreparedStatement stm = connection.prepareStatement(query);
-            stm.setLong(1, inputId);
+            stm.setLong(1, id);
             ResultSet rs = stm.executeQuery();
 
             // Get the product objects and add them into ArrayList
@@ -124,7 +124,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public CartItem addItemToCart(CartItem item) {
+    public CartItem addToCart(CartItem item) {
         try {
             // Execute Query
             String query = "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
@@ -157,7 +157,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         }
     }
     @Override
-    public void removeProductFromCart(Long cartId, Long productId) {
+    public void removeFromCart(int cartId, int productId) {
         try {
             // Execute Query
             String query = "DELETE FROM cartitem\n" +

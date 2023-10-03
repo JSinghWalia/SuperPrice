@@ -9,15 +9,17 @@ import java.util.Optional;
 
 public interface SuperpriceService {
 
-    List<Product> getAllProducts();
+    List<Product> getProducts();
 
-    Collection<Product> searchKeyword(String keyword);
+    Collection<Product> findByKeyword(String keyword);
 
-    List<Product> getCartProducts(Long inputId);
+    Optional<Product> findById(int id);
 
-    CartItem addItemToCart(CartItem item);
+    List<Product> getCartProducts(int id);
 
-    void removeProductFromCart(Long cartId, Long productId);
+    CartItem addToCart(CartItem item);
+
+    void removeFromCart(int cartId, int productId);
 
 
 }
