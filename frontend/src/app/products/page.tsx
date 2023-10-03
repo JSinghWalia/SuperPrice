@@ -1,35 +1,42 @@
 "use client"
 import Image from 'next/image';
 import Link from 'next/link';
-import { Navbar } from '../components/navbar';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {Navbar} from '../components/navbar';
 import * as React from "react";
+
+//function to fetch products, with optional search term.
+export async function fetchProducts(searchTerm = '') {
+    try {
+        //fetches from backend
+        const url = `http://localhost:8080/${searchTerm}`;
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
+        }
+        return await res.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return [];
+    }
+}
+
 
 export default function Products() {
     const [productsData, setProductsData] = React.useState([]);
     const [searchTerm, setSearchTerm] = React.useState('');
 
-    async function fetchProducts(searchTerm = '') {
-        try {
-            const url = `http://localhost:8080/${searchTerm}`;
-            const res = await fetch(url);
-            if (!res.ok) {
-                throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
-            }
-            const testData = await res.json();
-            setProductsData(testData);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
+    async function loadProducts(searchTerm = '') {
+        const data = await fetchProducts(searchTerm);
+        setProductsData(data);
     }
 
     React.useEffect(() => {
-        fetchProducts(); // Fetch products when the component mounts
+        loadProducts(); // Fetch products when the component mounts
     }, []);
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
-        await fetchProducts(searchTerm); // Fetch products when the form is submitted
+        await loadProducts(searchTerm); // Fetch products when the form is submitted
     }
 
     return (
@@ -44,6 +51,7 @@ export default function Products() {
                         type="text"
                         placeholder="Search..."
                         value={searchTerm}
+                        //sets search term when search bar is changed
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button type="submit">Submit</button>
@@ -57,10 +65,6 @@ export default function Products() {
                             <h2>{product.name}</h2>
                             <h3>From: {product.store}</h3>
                             <p>${product.price}</p>
-                            <button className="add-to-cart-button">
-                                <span>Add to Cart</span>
-                                <ShoppingCartIcon className="h-6 w-6" />
-                            </button>
                         </div>
                     </Link>
                 ))}

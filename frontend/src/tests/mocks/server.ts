@@ -48,12 +48,32 @@ export const products = [
         quantity: 18
     }
 ]
-
+export const basketballSearch = [
+    {
+        id: 3,
+        name: 'Molten Basketball',
+        description: 'A nice basketball that is not overpriced at all.',
+        store: 'Woolworths',
+        imageURL: '/basketball.png',
+        price: 69,
+        quantity: 6
+    },
+]
 
 export const handlers = [
-    rest.get('http://localhost:8080', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(products))
+    rest.get('http://localhost:8080/:searchTerm', (req, res, ctx) => {
+        // You can use req.params.searchTerm to access the searchTerm if needed
+        return res(ctx.status(200), ctx.json(products));
     }),
+    rest.get('http://localhost:8080/:basketball', (req, res, ctx) => {
+        // You can use req.params.searchTerm to access the searchTerm if needed
+        return res(ctx.status(200), ctx.json(basketballSearch));
+    }),
+    rest.get('http://localhost:8080', (req, res, ctx) => {
+        // You can use req.params.searchTerm to access the searchTerm if needed
+        return res(ctx.status(200), ctx.json(products));
+    })
+
 ]
 
 // This configures a Service Worker with the given request handlers.
