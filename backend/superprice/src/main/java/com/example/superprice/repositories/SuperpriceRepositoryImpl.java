@@ -22,7 +22,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7));
+                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                rs.getDouble(8), rs.getBoolean(9));
     }
 
     @Override
@@ -100,7 +101,9 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
                     "p.store,\n" +
                     "p.imageURL,\n" +
                     "p.price,\n" +
-                    "ci.cartItemQuantity\n" +
+                    "ci.cartItemQuantity,\n" +
+                    "p.promotion,\n" +
+                    "p.notification,\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
@@ -156,6 +159,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in trying to add item to cart", e);
         }
     }
+
     @Override
     public void removeFromCart(int cartId, int productId) {
         try {
@@ -175,6 +179,32 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
         } catch (SQLException e) {
             throw new RuntimeException("Error in remove from cart.", e);
+        }
+    }
+
+    @Override
+    public List<Product> getPromoProducts() {
+        try {
+            Connection connection = dataSource.getConnection();
+            // Execute query
+            String query = "SELECT * FROM products WHERE notification = TRUE AND promotion > 0;";
+
+            PreparedStatement stm = connection.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            // Get product objects and add them into ArrayList
+            List<Product> products = new ArrayList<>();
+            while (rs.next()) {
+                Product p = extractProduct(rs);
+                products.add(p);
+            }
+
+            // Close the connection and return list of products
+            connection.close();
+            return products;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in getting promo products", e);
         }
     }
 

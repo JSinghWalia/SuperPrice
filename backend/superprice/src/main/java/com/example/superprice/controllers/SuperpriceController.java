@@ -50,4 +50,9 @@ public class SuperpriceController {
         this.service.removeFromCart(cartId, productId);
         return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("{notifications}")
+    public Collection<Product> getPromoProducts() {
+        return this.service.getPromoProducts();
+    }
 }

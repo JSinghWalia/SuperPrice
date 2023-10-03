@@ -44,4 +44,9 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     public void removeFromCart(int cartId, int productId) {
         repo.removeFromCart(cartId, productId);
     }
+
+    @Override
+    public List<Product> getPromoProducts() {
+        return repo.getPromoProducts();
+    }
 }

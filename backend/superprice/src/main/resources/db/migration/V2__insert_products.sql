@@ -1,10 +1,10 @@
 INSERT INTO products (name, description, store, imageURL, price, productQuantity, promotion, notification)
 VALUES
-    ('T-Shirt', 'This is a pretty cool shirt.', 'Coles', '/tshirt.png', 19.99, 20, false, false),
-    ('Coke', 'A totally healthy beverage that is very tasty.', 'Woolworths', '/cokeBottle.png', 3.99, 18, false, true),
-    ('Molten Basketball', 'A nice basketball that is not overpriced at all.', 'Woolworhts', '/basketball.png', 69, 6, 0.05, false),
+    ('T-Shirt', 'This is a pretty cool shirt.', 'Coles', '/tshirt.png', 19.99, 20, 0, false),
+    ('Coke', 'A totally healthy beverage that is very tasty.', 'Woolworths', '/cokeBottle.png', 3.99, 18, 0, true),
+    ('Molten Basketball', 'A nice basketball that is not overpriced at all.', 'Woolworths', '/basketball.png', 69, 6, 0.05, true),
     ('Samsung Watch', 'A new smart watch which is totally necessary.', 'Coles', '/watch.webp', 200, 3, 0.10, true),
-    ('Coke', 'A totally healthy bevemvnrage that is very tasty.', 'Coles', '/cokeBottle.png', 3.99, 18, false, false)
+    ('Coke', 'A totally healthy bevemvnrage that is very tasty.', 'Coles', '/cokeBottle.png', 3.99, 18, 0, false)
 ;
 
 INSERT INTO cart (cartId)

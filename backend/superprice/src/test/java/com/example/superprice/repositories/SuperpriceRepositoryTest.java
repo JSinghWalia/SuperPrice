@@ -145,4 +145,13 @@ public class SuperpriceRepositoryTest {
         // Delete the item
         assertThrows(RuntimeException.class, () -> repo.removeFromCart(2, 100));
     }
+
+    // Notifications
+
+    // Getting promo products
+    @Test
+    public void getPromoProducts() {
+        List<Product> products = repo.getPromoProducts();
+        assertEquals(2, products.size());
+    }
 }
