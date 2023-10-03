@@ -77,7 +77,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     public Optional<Product> findById(int id) {
         try {
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM products WHERE id = ?");
+                    "SELECT * FROM products WHERE productId = ?");
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
