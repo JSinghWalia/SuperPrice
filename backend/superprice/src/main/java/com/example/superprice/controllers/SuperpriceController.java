@@ -39,9 +39,9 @@ public class SuperpriceController {
         return service.getCartProducts(id);
     }
 
-    @PostMapping
-    public ResponseEntity<CartItem> addProductToCart(@RequestBody Long quantity, Long cartId, Long productId) {
-        CartItem ci = service.addItemToCart(quantity, cartId, productId);
+    @PostMapping("/cart/adding")
+    public ResponseEntity<CartItem> addProductToCart(@RequestBody CartItem item) {
+        CartItem ci = service.addItemToCart(item);
         return new ResponseEntity<CartItem>(ci, HttpStatus.CREATED);
     }
 

@@ -15,7 +15,7 @@ public interface SuperpriceRepository {
 
     List<Product> getCartProducts(Long inputId);
 
-    CartItem addItemToCart(Long quantity, Long cartId, Long productId);
+    CartItem addItemToCart(CartItem item);
 
     void removeProductFromCart(Long cartId, Long productId);
 

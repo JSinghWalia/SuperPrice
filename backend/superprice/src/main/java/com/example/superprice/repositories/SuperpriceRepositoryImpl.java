@@ -84,7 +84,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
                     "p.store,\n" +
                     "p.imageURL,\n" +
                     "p.price,\n" +
-                    "p.productQuantity\n" +
+                    "ci.cartItemQuantity\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
@@ -108,7 +108,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public CartItem addItemToCart(Long quantity, Long cartId, Long productId) {
+    public CartItem addItemToCart(CartItem item) {
         try {
             // Execute Query
             String query = "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
@@ -116,13 +116,13 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement
                     (query, Statement.RETURN_GENERATED_KEYS);
 
-            stm.setLong(1, quantity);
-            stm.setLong(2, cartId);
-            stm.setLong(3, productId);
+            stm.setLong(1, item.quantity());
+            stm.setLong(2, item.cartId());
+            stm.setLong(3, item.productId());
             int row = stm.executeUpdate();
 
             // If the cartId does not exist, throw exception
-            if (getCartProducts(cartId).isEmpty()) {
+            if (getCartProducts(item.cartId()).isEmpty()) {
                 throw new RuntimeException("Cart does not exist.");
             }
 
@@ -130,7 +130,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             ResultSet generatedKeys = stm.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getLong(1);
-                return new CartItem(quantity, cartId, productId);
+                return new CartItem(item.quantity(), item.cartId(), item.productId());
             } else {
                 throw new SQLException("SQL Error in adding item");
             }
