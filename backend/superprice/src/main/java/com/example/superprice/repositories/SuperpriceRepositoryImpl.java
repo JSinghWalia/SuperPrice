@@ -20,15 +20,13 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         this.dataSource = dataSource;
     }
 
-    // Add boolean values once h2 database is updated
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getFloat(6), rs.getLong(7),
-                rs.getFloat(8), rs.getBoolean(9));
+                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7));
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getProducts() {
         try {
             Connection connection = dataSource.getConnection();
             // Execute query
@@ -52,7 +50,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public Collection<Product> searchForItem(String keyword) {
+    public Collection<Product> findByKeyword(String keyword) {
         try {
             // Execute query
             // source: W3schools, https://www.w3schools.com/sql/sql_like.asp
@@ -75,25 +73,39 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public List<Product> getCartProducts(Long inputId) {
+    public Optional<Product> findById(int id) {
+        try {
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
+                    "SELECT * FROM products WHERE id = ?");
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return Optional.of(extractProduct(rs));
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in findById", e);
+        }
+    }
+
+    @Override
+    public List<Product> getCartProducts(int id) {
         try {
             // Execute Query
             Connection connection = dataSource.getConnection();
             String query = "SELECT\n" +
-                    "p.productId, " +
-                    "p.name, " +
-                    "p.description, " +
-                    "p.store, " +
-                    "p.imageURL, " +
-                    "p.price, " +
-                    "p.productQuantity, " +
-                    "p.promotion, " +
-                    "p.notification\n" +
+                    "p.productId,\n" +
+                    "p.name,\n" +
+                    "p.description,\n" +
+                    "p.store,\n" +
+                    "p.imageURL,\n" +
+                    "p.price,\n" +
+                    "ci.cartItemQuantity\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
             PreparedStatement stm = connection.prepareStatement(query);
-            stm.setLong(1, inputId);
+            stm.setLong(1, id);
             ResultSet rs = stm.executeQuery();
 
             // Get the product objects and add them into ArrayList
@@ -112,7 +124,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     }
 
     @Override
-    public CartItem addItemToCart(Long quantity, Long cartId, Long productId) {
+    public CartItem addToCart(CartItem item) {
         try {
             // Execute Query
             String query = "INSERT INTO cartitem (cartItemQuantity, cartId, productId)\n" +
@@ -120,21 +132,23 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement
                     (query, Statement.RETURN_GENERATED_KEYS);
 
-            stm.setLong(1, quantity);
-            stm.setLong(2, cartId);
-            stm.setLong(3, productId);
+            stm.setLong(1, item.quantity());
+            stm.setLong(2, item.cartId());
+            stm.setLong(3, item.productId());
             int row = stm.executeUpdate();
 
             // If the cartId does not exist, throw exception
-            if (getCartProducts(cartId).isEmpty()) {
+            if (getCartProducts(item.cartId()).isEmpty()) {
                 throw new RuntimeException("Cart does not exist.");
             }
 
             // Check if item was added successfully
             ResultSet generatedKeys = stm.getGeneratedKeys();
+
+
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getLong(1);
-                return new CartItem(quantity, cartId, productId);
+                return new CartItem(item.quantity(), item.cartId(), item.productId());
             } else {
                 throw new SQLException("SQL Error in adding item");
             }
@@ -142,10 +156,8 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in trying to add item to cart", e);
         }
     }
-
-
     @Override
-    public void removeProductFromCart(Long cartId, Long productId) {
+    public void removeFromCart(int cartId, int productId) {
         try {
             // Execute Query
             String query = "DELETE FROM cartitem\n" +
@@ -164,39 +176,6 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Error in remove from cart.", e);
         }
-    }
-
-    @Override
-    public String getNotification(Product p) {
-        // Promotion: ON, Notification: ON
-        if (p.promotion() > 0F && p.notification()) {
-            return printDiscountMsg(p);
-        }
-        // Promotion: ON, Notification: OFF
-        else if (p.promotion() > 0F && !p.notification())
-            return "Notifications are off.";
-        // Promotion: OFF, Notification: ON
-        else if (p.promotion() == 0F && p.notification())
-            return String.format("There is no promotion for %d %s.",
-                    p.id(), p.name());
-        // Promotion: OFF, Notification: OFF
-        else if (p.promotion() == 0F && !p.notification())
-            return String.format("Notifications are off and there are no promotions for %d %s.", p.id(), p.name());
-
-        return String.format("Error getting notifications for %d %s", p.id(), p.name());
-    }
-
-    // Print the discount message for notification
-    @Override
-    public String printDiscountMsg(Product p) {
-        float discountedPrice = p.price() - (p.price() * p.promotion());
-        return String.format("There's a promotion for %s (ID: %d)!\nOriginal price: $%.2f, New price: $%.2f",
-                p.name(), p.id(), p.price(), discountedPrice);
-    }
-
-    @Override
-    public float getDiscountedPrice(Product p) {
-        return p.price() - (p.price() * p.promotion());
     }
 
 

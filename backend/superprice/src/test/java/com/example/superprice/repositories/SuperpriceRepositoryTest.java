@@ -40,8 +40,8 @@ public class SuperpriceRepositoryTest {
 
     // Getting list of products
     @Test
-    void completeListOfProducts() {
-        var products = repo.getAllProducts();
+    public void completeListOfProducts() {
+        var products = repo.getProducts();
         assertEquals(5, products.size());
     }
 
@@ -49,27 +49,27 @@ public class SuperpriceRepositoryTest {
 
     // With results
     @Test
-    void searchByKeyword_OneResult() {
+    public void searchByKeyword_OneResult() {
         // Search for the object
-        Collection<Product> expectedObj = repo.searchForItem("Basketball");
+        Collection<Product> expectedObj = repo.findByKeyword("Basketball");
         // Check if it outputs one result.
         assertNotNull(expectedObj);
         assertEquals(1, expectedObj.size());
     }
 
     @Test
-    void searchByKeyword_Synonym() {
+    public void searchByKeyword_Synonym() {
         String keyword = "Basketball";
         // Search for the object that contains "Basketball" in the name
-        Collection<Product> expectedObj = repo.searchForItem("Molten Basketball");
-        // Check if the the search result is correct
-        assertEquals(expectedObj, repo.searchForItem(keyword));
+        Collection<Product> expectedObj = repo.findByKeyword("Molten Basketball");
+        // Check if the search result is correct
+        assertEquals(expectedObj, repo.findByKeyword(keyword));
     }
 
     @Test
-    void searchByKeyword_MultipleResults() {
+    public void searchByKeyword_MultipleResults() {
         // Search for the object
-        Collection<Product> expectedObj = repo.searchForItem("Coke");
+        Collection<Product> expectedObj = repo.findByKeyword("Coke");
         // Check if it outputs two results. {there are 2 coke records in the db.}
         assertNotNull(expectedObj);
         assertEquals(2, expectedObj.size());
@@ -79,23 +79,23 @@ public class SuperpriceRepositoryTest {
 
     // Scenario: Check if we can retrieve items from the different carts.
     @Test
-    void getProductsInCart() {
-        assertEquals(5, repo.getCartProducts(1L).size());
-        assertEquals(2, repo.getCartProducts(2L).size());
-        assertEquals(3, repo.getCartProducts(3L).size());
+    public void getProductsInCart() {
+        assertEquals(5, repo.getCartProducts(1).size());
+        assertEquals(2, repo.getCartProducts(2).size());
+        assertEquals(3, repo.getCartProducts(3).size());
     }
 
     // Scenario: Check if an invalid cart returns an empty cart
     @Test
-    void getProductsInCart_NoItems() {
-        assertEquals(0, repo.getCartProducts(4L).size());
+    public void getProductsInCart_NoItems() {
+        assertEquals(0, repo.getCartProducts(4).size());
     }
 
     // Scenario: Check if the cart content is correct
     @Test
-    void checkCartContent() {
+    public void checkCartContent() {
         // Cart 1
-        List<Product> c1 = repo.getCartProducts(1L);
+        List<Product> c1 = repo.getCartProducts(1);
         String c1Item1 = c1.get(0).name();
         String c1Item2 = c1.get(1).name();
         String c1Item3 = c1.get(2).name();
@@ -107,107 +107,42 @@ public class SuperpriceRepositoryTest {
 
     // Adding items to cart
     @Test
-    void addItemToCart_Success() {
+    public void addItemToCart_Success() {
         // Check size before
-        assertEquals(5, repo.getCartProducts(1L).size());
+        assertEquals(5, repo.getCartProducts(1).size());
 
         // Add the item
-        repo.addItemToCart(1L, 1L, 1L);
+        repo.addToCart(new CartItem(1, 1, 1));
 
         // Check size after
-        assertEquals(6, repo.getCartProducts(1L).size());
+        assertEquals(6, repo.getCartProducts(1).size());
     }
 
     // Scenario: Cannot add item to a cart that does not exist.
     @Test
-    void addItemToCart_Fail() {
-        assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(1L, 100L, 1L));
+    public void addItemToCart_Fail() {
+        assertThrows(RuntimeException.class, () -> this.repo.addToCart(new CartItem(1, 1, 100)));
     }
 
     // Remove items from cart
     @Test
-    void removeItemFromCart_Success() {
+    public void removeItemFromCart_Success() {
         // Check size before
-        assertEquals(2, repo.getCartProducts(2L).size());
+        assertEquals(2, repo.getCartProducts(2).size());
 
         // Delete the item
-        repo.removeProductFromCart(2L, 1L);
+        repo.removeFromCart(2, 1);
 
         // Check size after
-        assertEquals(1, repo.getCartProducts(2L).size());
+        assertEquals(1, repo.getCartProducts(2).size());
 
         // Verify the object
-        assertEquals("Molten Basketball", repo.getCartProducts(2L).get(0).name());
+        assertEquals("Molten Basketball", repo.getCartProducts(2).get(0).name());
     }
 
     @Test
-    void removeItemFromCart_Fail() {
+    public void removeItemFromCart_Fail() {
         // Delete the item
-        assertThrows(RuntimeException.class, () -> repo.removeProductFromCart(2L, 100L));
+        assertThrows(RuntimeException.class, () -> repo.removeFromCart(2, 100));
     }
-
-    // Notifications
-
-    // Scenario: True Case
-    // Promotion true + Notification true = return true;
-    @Test
-    void getNotification_True() {
-        // Get the products
-        Product p = repo.getAllProducts().get(3);
-        // Check if the item has a promo
-        assertEquals(repo.printDiscountMsg(p), repo.getNotification(p));
-    }
-
-    // Scenario: False Cases
-    @Test
-    void getNotification_False() {
-        // Get the products
-        Product p1 = repo.getAllProducts().get(1);
-        Product p2 = repo.getAllProducts().get(2);
-
-        // Check if the item has a promo
-        // Promotion: OFF, Notification: ON
-        assertEquals(String.format("There is no promotion for %d %s.",
-                p1.id(), p1.name()), repo.getNotification(p1));
-        // Promotion: ON, Notification: OFF
-        assertEquals("Notifications are off.", repo.getNotification(p2));
-    }
-
-    // Getting discounted price
-    // Scenario: There is a promotion and the price changes.
-    @Test
-    void getDiscountPrice_ReducedPrice() {
-        // Get the products
-        Product p1 = repo.getAllProducts().get(2);
-        Product p2 = repo.getAllProducts().get(3);
-
-        // Set the expected prices
-        float expectedPriceP1 = p1.price() - (p1.price() * p1.promotion());
-        float expectedPriceP2 = p2.price() - (p2.price() * p2.promotion());
-
-        // Check if the prices match and if it's less than the original price
-        assertEquals(expectedPriceP1, repo.getDiscountedPrice(p1));
-        assertTrue(repo.getDiscountedPrice(p1) < p1.price());
-
-        assertEquals(expectedPriceP2, repo.getDiscountedPrice(p2));
-        assertTrue(repo.getDiscountedPrice(p2) < p2.price());
-    }
-
-    // Scenario: There is no promotion so the price does not change.
-    @Test
-    void getDiscountedPrice_NoChange() {
-        // Get the products
-        Product p1 = repo.getAllProducts().get(0);
-        Product p2 = repo.getAllProducts().get(1);
-
-        // Set the expected prices
-        float expectedPriceP1 = p1.price() - (p1.price() * p1.promotion());
-        float expectedPriceP2 = p2.price() - (p2.price() * p2.promotion());
-
-        // Check if the prices did not change
-        assertEquals(expectedPriceP1, repo.getDiscountedPrice(p1));
-        assertEquals(expectedPriceP2, repo.getDiscountedPrice(p2));
-
-    }
-
 }
