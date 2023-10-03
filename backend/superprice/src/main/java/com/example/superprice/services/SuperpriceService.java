@@ -21,9 +21,6 @@ public interface SuperpriceService {
 
     void removeFromCart(int cartId, int productId);
 
-    String getNotification(Product p);
-
-    float getDiscountedPrice(Product p);
 
 
 }

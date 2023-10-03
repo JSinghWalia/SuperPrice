@@ -20,11 +20,4 @@ public interface SuperpriceRepository {
     CartItem addToCart(CartItem item);
 
     void removeFromCart(int cartId, int productId);
-
-    String getNotification(Product p);
-
-    String printDiscountMsg(Product p);
-
-    float getDiscountedPrice(Product p);
-
 }
