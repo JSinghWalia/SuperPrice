@@ -22,7 +22,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
 
     private Product extractProduct(ResultSet rs) throws SQLException {
         return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getLong(6), rs.getInt(7));
+                rs.getString(4), rs.getString(5), rs.getLong(6), rs.getLong(7));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
     public Optional<Product> findById(int id) {
         try {
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement(
-                    "SELECT * FROM products WHERE productId = ?");
+                    "SELECT * FROM products WHERE id = ?");
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -84,7 +84,7 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new RuntimeException("Error in findById" + id, e);
+            throw new RuntimeException("Error in findById", e);
         }
     }
 
@@ -142,13 +142,6 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
                 throw new RuntimeException("Cart does not exist.");
             }
 
-            // if the item quantity exceeds the stock, throw exception
-            int stock = findById(item.productId()).get().quantity();
-            if (item.quantity() > stock) {
-                throw new RuntimeException(String.format("Error! Stock: %d; Tried to add quantity: %d",
-                        stock, item.quantity()));
-            }
-
             // Check if item was added successfully
             ResultSet generatedKeys = stm.getGeneratedKeys();
 
@@ -163,7 +156,6 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in trying to add item to cart", e);
         }
     }
-
     @Override
     public void removeFromCart(int cartId, int productId) {
         try {

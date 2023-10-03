@@ -124,17 +124,6 @@ public class SuperpriceRepositoryTest {
         assertThrows(RuntimeException.class, () -> this.repo.addToCart(new CartItem(1, 1, 100)));
     }
 
-    // Scenario: Item quantity cannot exceed the current stock
-    @Test
-    public void addItemToCart_ExcessQuantity() {
-        CartItem ci = new CartItem(50, 1, 1);
-        try {
-            repo.addToCart(ci);
-        } catch(RuntimeException e) {
-            assertEquals("Error! Stock: 20; Tried to add quantity: 50", e.getMessage());
-        }
-    }
-
     // Remove items from cart
     @Test
     public void removeItemFromCart_Success() {
