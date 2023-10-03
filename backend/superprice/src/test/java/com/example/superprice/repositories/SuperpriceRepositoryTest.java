@@ -112,7 +112,7 @@ public class SuperpriceRepositoryTest {
         assertEquals(5, repo.getCartProducts(1L).size());
 
         // Add the item
-        repo.addItemToCart(1L, 1L, 1L);
+        repo.addItemToCart(new CartItem(1L, 1L, 1L));
 
         // Check size after
         assertEquals(6, repo.getCartProducts(1L).size());
@@ -121,7 +121,7 @@ public class SuperpriceRepositoryTest {
     // Scenario: Cannot add item to a cart that does not exist.
     @Test
     public void addItemToCart_Fail() {
-        assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(1L, 100L, 1L));
+        assertThrows(RuntimeException.class, () -> this.repo.addItemToCart(new CartItem(1L, 1L, 100L)));
     }
 
     // Remove items from cart
