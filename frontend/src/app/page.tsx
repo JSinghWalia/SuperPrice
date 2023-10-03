@@ -1,18 +1,18 @@
 "use client"
-import { Navbar } from './components/navbar';
-import { CartProvider } from './context/cartContext';
+import {Navbar} from './components/navbar';
+import {CartProvider} from './context/cartContext';
 import Image from 'next/image';
 import * as React from 'react';
 import Link from 'next/link';
 
-async function fetchRandomProductImages() {
+//fetches all products
+export async function fetchRandomProductImages() {
     try {
         const res = await fetch('http://localhost:8080'); // Replace with your API endpoint that returns all products
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
         }
-        const productImages = await res.json();
-        return productImages;
+        return await res.json();
     } catch (error) {
         console.error("Error fetching data:", error);
         return [];
@@ -30,7 +30,7 @@ export default function Home() {
             const images = await fetchRandomProductImages();
             setRandomProductImages(images);
 
-            // Generate random indexes for selecting three images
+            // randomly selects three images from all products to display
             const maxIndex = images.length - 1;
             const randomIndexes = [];
             while (randomIndexes.length < 3) {
@@ -44,7 +44,7 @@ export default function Home() {
 
         fetchRandomImages();
     }, []);
-
+    //functions to cycle next and prev image
     const cycleNextImage = () => {
         setCurrentIndex((currentIndex + 1) % 3);
     };
@@ -58,10 +58,10 @@ export default function Home() {
         cycleNextImage();
     };
 
-    // Set up automatic image advance using setTimeout
+    //automatic image advance using setTimeout
     React.useEffect(() => {
-        const intervalId = setInterval(autoAdvance, 3000); // Change the time (in milliseconds) as needed
-        return () => clearInterval(intervalId); // Clean up the interval when the component unmounts
+        const intervalId = setInterval(autoAdvance, 3000);
+        return () => clearInterval(intervalId);
     }, [currentIndex])
 
     return (
