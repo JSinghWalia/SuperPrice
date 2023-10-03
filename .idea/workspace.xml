@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +87,8 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest.addItemToCart_Fail">
-    <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.SuperpriceControllerTest">
+    <configuration name="SuperpriceControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -98,8 +96,8 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.example.superprice" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.SuperpriceApplicationTests" />
+      <option name="PACKAGE_NAME" value="com.example.superprice.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.controllers.SuperpriceControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SuperpriceControllerTest" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.addItemToCart_Fail" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.searchByKeyword_NoResults" />
         <item itemvalue="Spring Boot.MoviesApplication" />
-        <item itemvalue="JUnit.SuperpriceApplicationTests" />
       </list>
     </recent_temporary>
   </component>
