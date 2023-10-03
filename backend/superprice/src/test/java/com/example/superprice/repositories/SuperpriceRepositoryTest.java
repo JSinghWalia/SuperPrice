@@ -62,7 +62,7 @@ public class SuperpriceRepositoryTest {
         String keyword = "Basketball";
         // Search for the object that contains "Basketball" in the name
         Collection<Product> expectedObj = repo.findByKeyword("Molten Basketball");
-        // Check if the the search result is correct
+        // Check if the search result is correct
         assertEquals(expectedObj, repo.findByKeyword(keyword));
     }
 
@@ -80,22 +80,22 @@ public class SuperpriceRepositoryTest {
     // Scenario: Check if we can retrieve items from the different carts.
     @Test
     public void getProductsInCart() {
-        assertEquals(5, repo.getCartProducts(1L).size());
-        assertEquals(2, repo.getCartProducts(2L).size());
-        assertEquals(3, repo.getCartProducts(3L).size());
+        assertEquals(5, repo.getCartProducts(1).size());
+        assertEquals(2, repo.getCartProducts(2).size());
+        assertEquals(3, repo.getCartProducts(3).size());
     }
 
     // Scenario: Check if an invalid cart returns an empty cart
     @Test
     public void getProductsInCart_NoItems() {
-        assertEquals(0, repo.getCartProducts(4L).size());
+        assertEquals(0, repo.getCartProducts(4).size());
     }
 
     // Scenario: Check if the cart content is correct
     @Test
     public void checkCartContent() {
         // Cart 1
-        List<Product> c1 = repo.getCartProducts(1L);
+        List<Product> c1 = repo.getCartProducts(1);
         String c1Item1 = c1.get(0).name();
         String c1Item2 = c1.get(1).name();
         String c1Item3 = c1.get(2).name();
@@ -109,40 +109,40 @@ public class SuperpriceRepositoryTest {
     @Test
     public void addItemToCart_Success() {
         // Check size before
-        assertEquals(5, repo.getCartProducts(1L).size());
+        assertEquals(5, repo.getCartProducts(1).size());
 
         // Add the item
-        repo.addToCart(new CartItem(1L, 1L, 1L));
+        repo.addToCart(new CartItem(1, 1, 1));
 
         // Check size after
-        assertEquals(6, repo.getCartProducts(1L).size());
+        assertEquals(6, repo.getCartProducts(1).size());
     }
 
     // Scenario: Cannot add item to a cart that does not exist.
     @Test
     public void addItemToCart_Fail() {
-        assertThrows(RuntimeException.class, () -> this.repo.addToCart(new CartItem(1L, 1L, 100L)));
+        assertThrows(RuntimeException.class, () -> this.repo.addToCart(new CartItem(1, 1, 100)));
     }
 
     // Remove items from cart
     @Test
     public void removeItemFromCart_Success() {
         // Check size before
-        assertEquals(2, repo.getCartProducts(2L).size());
+        assertEquals(2, repo.getCartProducts(2).size());
 
         // Delete the item
-        repo.removeFromCart(2L, 1L);
+        repo.removeFromCart(2, 1);
 
         // Check size after
-        assertEquals(1, repo.getCartProducts(2L).size());
+        assertEquals(1, repo.getCartProducts(2).size());
 
         // Verify the object
-        assertEquals("Molten Basketball", repo.getCartProducts(2L).get(0).name());
+        assertEquals("Molten Basketball", repo.getCartProducts(2).get(0).name());
     }
 
     @Test
     public void removeItemFromCart_Fail() {
         // Delete the item
-        assertThrows(RuntimeException.class, () -> repo.removeFromCart(2L, 100L));
+        assertThrows(RuntimeException.class, () -> repo.removeFromCart(2, 100));
     }
 }

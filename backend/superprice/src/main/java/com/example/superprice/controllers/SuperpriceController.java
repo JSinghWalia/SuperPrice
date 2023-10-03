@@ -31,7 +31,7 @@ public class SuperpriceController {
 
     @GetMapping("/{keyword}")
     public Collection<Product> searchForProduct(@PathVariable String keyword) {
-        return service.searchKeyword(keyword);
+        return service.findByKeyword(keyword);
     }
 
     @GetMapping("/cart/{id}")
