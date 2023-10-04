@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "terminal",
     "spring.configuration.checksum": "eb7f6a08fe0bb047abfe2284a95c74fb",
-    "ts.external.directory.path": "C:\\Users\\Jassie Singh-Walia\\Documents\\Uni\\Software Engineering\\Year 2 Semester 2\\Software Processes\\Group 7\\team-project-group-p07-07\\team-project-group-p07-07\\frontend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -191,7 +192,7 @@
       <workItem from="1694753481999" duration="3378000" />
       <workItem from="1694782578340" duration="168000" />
       <workItem from="1694928705839" duration="80000" />
-      <workItem from="1696394940490" duration="918000" />
+      <workItem from="1696394940490" duration="3829000" />
     </task>
     <servers />
   </component>

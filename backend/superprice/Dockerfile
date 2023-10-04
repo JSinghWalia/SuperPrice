@@ -1,6 +1,9 @@
+# Source: Canvas - 08 Docker
+# https://rmit.instructure.com/courses/107324/pages/08-docker?module_item_id=5578010
+
 FROM eclipse-temurin:17-jdk-alpine as base
 
-# Build the application
+# Build application
 FROM base as builder
 WORKDIR /opt/app
 COPY .mvn/ .mvn
@@ -14,4 +17,4 @@ FROM base as runner
 WORKDIR /opt/app
 EXPOSE 8080
 COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+ENTRYPOINT ["java", "-jar", "/opt/app/*.jar" ]
