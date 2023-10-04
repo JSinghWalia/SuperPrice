@@ -3,12 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {Navbar} from '../components/navbar';
 import * as React from "react";
+export const dynamic = 'force-dynamic'
 
 //function to fetch products, with optional search term.
 export async function fetchProducts(searchTerm = '') {
     try {
         //fetches from backend
-        const url = `http://localhost:8080/${searchTerm}`;
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/${searchTerm}`;
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);

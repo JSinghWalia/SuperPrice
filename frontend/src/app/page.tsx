@@ -4,11 +4,12 @@ import {CartProvider} from './context/cartContext';
 import Image from 'next/image';
 import * as React from 'react';
 import Link from 'next/link';
-
+export const dynamic = 'force-dynamic'
+console.log("API_URL:", process.env.NEXT_PUBLIC_API_URL);
 //fetches all products
 export async function fetchRandomProductImages() {
     try {
-        const res = await fetch('http://localhost:8080'); // Replace with your API endpoint that returns all products
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
         }

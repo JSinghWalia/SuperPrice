@@ -13,6 +13,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+export const dynamic = 'force-dynamic'
 
 export default function ProductDetail() {
     const pathname = usePathname();
@@ -20,7 +21,7 @@ export default function ProductDetail() {
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
     const [productsData, setProductData] = React.useState([]);
-    const urlAPI = 'http://localhost:8080' + "/" + productName;
+    const urlAPI = process.env.NEXT_PUBLIC_API_URL + "/" + productName;
 
     const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
     const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
