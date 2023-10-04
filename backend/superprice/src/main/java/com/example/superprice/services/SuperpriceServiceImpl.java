@@ -24,6 +24,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
         cartRepository = cr;
     }
 
+    // ProductsRepository
     @Override
     public List<Product> getProducts() {
         return productRepository.getProducts();
@@ -39,6 +40,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
         return productRepository.findById(id);
     }
 
+    // CartRepository
     @Override
     public List<Product> getCartProducts(int id) {
         return cartRepository.getCartProducts(id);
@@ -54,6 +56,7 @@ public class SuperpriceServiceImpl implements SuperpriceService {
         cartRepository.removeFromCart(cartId, productId);
     }
 
+    // NotificationsRepository
     @Override
     public List<Product> getPromoProducts() {
         return notificationsRepository.getProducts();

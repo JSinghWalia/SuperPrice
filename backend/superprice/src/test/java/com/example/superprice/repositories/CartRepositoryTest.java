@@ -39,7 +39,7 @@ public class CartRepositoryTest {
 
     // Scenario: Check if we can retrieve items from the different carts.
     @Test
-    public void getProductsInCart() {
+    public void getCartProducts_AllCarts() {
         assertEquals(5, repo.getCartProducts(1).size());
         assertEquals(2, repo.getCartProducts(2).size());
         assertEquals(3, repo.getCartProducts(3).size());
@@ -47,13 +47,13 @@ public class CartRepositoryTest {
 
     // Scenario: Check if an invalid cart returns an empty cart
     @Test
-    public void getProductsInCart_NoItems() {
+    public void getCartProducts_NoItems() {
         assertEquals(0, repo.getCartProducts(4).size());
     }
 
     // Scenario: Check if the cart content is correct
     @Test
-    public void checkCartContent() {
+    public void getCartProducts_checkCartContent() {
         // Cart 1
         List<Product> c1 = repo.getCartProducts(1);
         String c1Item1 = c1.get(0).name();
@@ -65,9 +65,9 @@ public class CartRepositoryTest {
         assertEquals("Molten Basketball", c1Item3);
     }
 
-    // Adding items to cart
+    // Scenario: Adding a new item to cart
     @Test
-    public void addItemToCart_Success() {
+    public void addToCart_Success() {
         // Check size before
         assertEquals(5, repo.getCartProducts(1).size());
 
@@ -78,15 +78,15 @@ public class CartRepositoryTest {
         assertEquals(6, repo.getCartProducts(1).size());
     }
 
-    // Scenario: Cannot add item to a cart that does not exist.
+    // Scenario: Cannot add item to a cart that does not exist
     @Test
-    public void addItemToCart_Fail() {
+    public void addToCart_Fail() {
         assertThrows(RuntimeException.class, () -> this.repo.addToCart(new CartItem(1, 1, 100)));
     }
 
-    // Remove items from cart
+    // Scenario: Removing an item present in cart
     @Test
-    public void removeItemFromCart_Success() {
+    public void removeFromFromCart_Success() {
         // Check size before
         assertEquals(2, repo.getCartProducts(2).size());
 
@@ -100,8 +100,9 @@ public class CartRepositoryTest {
         assertEquals("Molten Basketball", repo.getCartProducts(2).get(0).name());
     }
 
+    // Scenario: Cannot remove an item that's not in the cart
     @Test
-    public void removeItemFromCart_Fail() {
+    public void removeFromCart_Fail() {
         // Delete the item
         assertThrows(RuntimeException.class, () -> repo.removeFromCart(2, 100));
     }

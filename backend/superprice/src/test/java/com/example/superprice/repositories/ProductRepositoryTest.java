@@ -36,18 +36,14 @@ public class ProductRepositoryTest {
         flyway.clean();
     }
 
-    // Getting list of products
     @Test
-    public void completeListOfProducts() {
+    public void getProducts_AllProducts() {
         var products = repo.getProducts();
         assertEquals(5, products.size());
     }
 
-    // Searching for a product
-
-    // With results
     @Test
-    public void searchByKeyword_OneResult() {
+    public void findByKeyword_OneResult() {
         // Search for the object
         Collection<Product> expectedObj = repo.findByKeyword("Basketball");
         // Check if it outputs one result.
@@ -56,7 +52,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void searchByKeyword_Synonym() {
+    public void findByKeyword_Synonym() {
         String keyword = "Basketball";
         // Search for the object that contains "Basketball" in the name
         Collection<Product> expectedObj = repo.findByKeyword("Molten Basketball");
@@ -65,7 +61,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void searchByKeyword_MultipleResults() {
+    public void findByKeyword_MultipleResults() {
         // Search for the object
         Collection<Product> expectedObj = repo.findByKeyword("Coke");
         // Check if it outputs two results. {there are 2 coke records in the db.}

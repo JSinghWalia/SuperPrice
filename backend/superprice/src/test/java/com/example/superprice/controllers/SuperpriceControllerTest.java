@@ -114,7 +114,7 @@ public class SuperpriceControllerTest {
     void should_returnResponseEntity_addProductToCart() {
         CartItem ci = new CartItem(1, 1, 1);
         when(this.service.addToCart(ci)).thenReturn(ci);
-        ResponseEntity response = this.controller.addProductToCart(ci);
+        ResponseEntity response = this.controller.addToCart(ci);
 
         assertEquals(ci, response.getBody());
     }
@@ -123,7 +123,7 @@ public class SuperpriceControllerTest {
     @Test
     void should_return_ACCEPTEDHttpStatus() {
         ResponseEntity<HttpStatus> response = new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
-        assertEquals(response, this.controller.removeProductFromCart(1, 1));
+        assertEquals(response, this.controller.removeFromCart(1, 1));
     }
 
     // notifications tests

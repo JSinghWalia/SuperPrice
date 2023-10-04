@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -40,13 +39,13 @@ public class SuperpriceController {
     }
 
     @PostMapping
-    public ResponseEntity<CartItem> addProductToCart(@RequestBody CartItem item) {
+    public ResponseEntity<CartItem> addToCart(@RequestBody CartItem item) {
         CartItem ci = service.addToCart(item);
         return new ResponseEntity<CartItem>(ci, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> removeProductFromCart(@PathVariable int cartId, int productId) {
+    public ResponseEntity<HttpStatus> removeFromCart(@PathVariable int cartId, int productId) {
         this.service.removeFromCart(cartId, productId);
         return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
