@@ -51,7 +51,7 @@ public class SuperpriceController {
         return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("{notifications}")
+    @GetMapping("/notifications")
     public Collection<Product> getPromoProducts() {
         return this.service.getPromoProducts();
     }

@@ -14,6 +14,9 @@ public class SuperpriceServiceImpl implements SuperpriceService {
 
     SuperpriceRepository repo;
 
+    public SuperpriceServiceImpl(SuperpriceRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public List<Product> getProducts() {
