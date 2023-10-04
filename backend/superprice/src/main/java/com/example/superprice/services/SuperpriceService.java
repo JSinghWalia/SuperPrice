@@ -23,5 +23,7 @@ public interface SuperpriceService {
 
     List<Product> getPromoProducts();
 
+    List<Product> findByKeywordPromo(String keyword);
+
 
 }

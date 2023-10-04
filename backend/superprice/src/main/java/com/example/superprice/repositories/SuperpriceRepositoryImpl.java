@@ -181,32 +181,4 @@ public class SuperpriceRepositoryImpl implements SuperpriceRepository {
             throw new RuntimeException("Error in remove from cart.", e);
         }
     }
-
-    @Override
-    public List<Product> getPromoProducts() {
-        try {
-            Connection connection = dataSource.getConnection();
-            // Execute query
-            String query = "SELECT * FROM products WHERE notification = TRUE AND promotion > 0;";
-
-            PreparedStatement stm = connection.prepareStatement(query);
-            ResultSet rs = stm.executeQuery();
-
-            // Get product objects and add them into ArrayList
-            List<Product> products = new ArrayList<>();
-            while (rs.next()) {
-                Product p = extractProduct(rs);
-                products.add(p);
-            }
-
-            // Close the connection and return list of products
-            connection.close();
-            return products;
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error in getting promo products", e);
-        }
-    }
-
-
 }

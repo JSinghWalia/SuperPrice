@@ -20,8 +20,4 @@ public interface SuperpriceRepository {
     CartItem addToCart(CartItem item);
 
     void removeFromCart(int cartId, int productId);
-
-    List<Product> getPromoProducts();
-
-
 }

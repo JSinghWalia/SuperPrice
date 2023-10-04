@@ -55,4 +55,9 @@ public class SuperpriceController {
     public Collection<Product> getPromoProducts() {
         return this.service.getPromoProducts();
     }
+
+    @GetMapping("/notifications/{keyword}")
+    public Collection<Product> getPromoProducts(@PathVariable String keyword) {
+        return this.service.findByKeywordPromo(keyword);
+    }
 }
