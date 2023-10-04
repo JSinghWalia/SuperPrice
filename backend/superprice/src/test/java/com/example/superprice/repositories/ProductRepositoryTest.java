@@ -1,7 +1,6 @@
 package com.example.superprice.repositories;
 
 
-import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
@@ -13,24 +12,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 
 import java.util.Collection;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class SuperpriceRepositoryTest {
+public class ProductRepositoryTest {
 
     @Autowired
     private Flyway flyway;
 
     @Autowired
     DataSource dataSource;
-    SuperpriceRepository repo;
+    ProductRepository repo;
 
     @BeforeEach
     private void setUp() {
         flyway.migrate();
-        repo = new SuperpriceRepositoryImpl(dataSource);
+        repo = new ProductRepositoryImpl(dataSource);
     }
 
     @AfterEach

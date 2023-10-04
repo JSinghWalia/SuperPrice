@@ -4,7 +4,7 @@ import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.repositories.CartRepository;
 import com.example.superprice.repositories.NotificationsRepository;
-import com.example.superprice.repositories.SuperpriceRepository;
+import com.example.superprice.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -14,29 +14,29 @@ import java.util.Optional;
 @Service
 public class SuperpriceServiceImpl implements SuperpriceService {
 
-    SuperpriceRepository superpriceRepository;
+    ProductRepository productRepository;
     NotificationsRepository notificationsRepository;
     CartRepository cartRepository;
 
-    public SuperpriceServiceImpl(SuperpriceRepository sr, NotificationsRepository nr, CartRepository cr) {
-        superpriceRepository = sr;
+    public SuperpriceServiceImpl(ProductRepository pr, NotificationsRepository nr, CartRepository cr) {
+        productRepository = pr;
         notificationsRepository = nr;
         cartRepository = cr;
     }
 
     @Override
     public List<Product> getProducts() {
-        return superpriceRepository.getProducts();
+        return productRepository.getProducts();
     }
 
     @Override
     public Collection<Product> findByKeyword(String keyword) {
-        return superpriceRepository.findByKeyword(keyword);
+        return productRepository.findByKeyword(keyword);
     }
 
     @Override
     public Optional<Product> findById(int id) {
-        return superpriceRepository.findById(id);
+        return productRepository.findById(id);
     }
 
     @Override

@@ -1,13 +1,12 @@
 package com.example.superprice.repositories;
 
-import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface SuperpriceRepository {
+public interface ProductRepository {
 
     List<Product> getProducts();
 

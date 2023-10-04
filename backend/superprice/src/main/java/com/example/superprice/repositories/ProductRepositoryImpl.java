@@ -1,6 +1,5 @@
 package com.example.superprice.repositories;
 
-import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import org.springframework.stereotype.Repository;
 
@@ -12,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class SuperpriceRepositoryImpl implements SuperpriceRepository {
+public class ProductRepositoryImpl implements ProductRepository {
 
     private final DataSource dataSource;
 
-    public SuperpriceRepositoryImpl(DataSource dataSource) {
+    public ProductRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
