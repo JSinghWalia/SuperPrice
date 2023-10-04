@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/CartRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/CartRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/NotificationRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/NotificationRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +102,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NotificationRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NotiRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -117,7 +111,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.NotificationRepositoryTest" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.NotiRepositoryTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -179,7 +173,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ProductRepositoryTest" />
-        <item itemvalue="JUnit.NotificationRepositoryTest" />
+        <item itemvalue="JUnit.NotiRepositoryTest" />
         <item itemvalue="JUnit.CartRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceControllerTest" />
         <item itemvalue="JUnit.ProductRepositoryTest.getPromoProducts" />

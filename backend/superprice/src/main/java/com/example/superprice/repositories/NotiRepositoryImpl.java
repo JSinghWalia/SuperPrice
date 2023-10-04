@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class NotificationsRepositoryImpl implements NotificationsRepository {
+public class NotiRepositoryImpl implements NotiRepository {
     private final DataSource dataSource;
 
-    public NotificationsRepositoryImpl(DataSource dataSource) {
+    public NotiRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

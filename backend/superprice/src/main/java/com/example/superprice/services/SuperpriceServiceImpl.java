@@ -3,7 +3,7 @@ package com.example.superprice.services;
 import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
 import com.example.superprice.repositories.CartRepository;
-import com.example.superprice.repositories.NotificationsRepository;
+import com.example.superprice.repositories.NotiRepository;
 import com.example.superprice.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,12 @@ import java.util.Optional;
 public class SuperpriceServiceImpl implements SuperpriceService {
 
     ProductRepository productRepository;
-    NotificationsRepository notificationsRepository;
+    NotiRepository notiRepository;
     CartRepository cartRepository;
 
-    public SuperpriceServiceImpl(ProductRepository pr, NotificationsRepository nr, CartRepository cr) {
+    public SuperpriceServiceImpl(ProductRepository pr, NotiRepository nr, CartRepository cr) {
         productRepository = pr;
-        notificationsRepository = nr;
+        notiRepository = nr;
         cartRepository = cr;
     }
 
@@ -59,11 +59,11 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     // NotificationsRepository
     @Override
     public List<Product> getPromoProducts() {
-        return notificationsRepository.getProducts();
+        return notiRepository.getProducts();
     }
 
     @Override
     public List<Product> findByKeywordPromo(String keyword) {
-        return notificationsRepository.findByKeyword(keyword);
+        return notiRepository.findByKeyword(keyword);
     }
 }

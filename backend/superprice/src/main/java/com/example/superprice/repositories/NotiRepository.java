@@ -4,7 +4,7 @@ import com.example.superprice.model.Product;
 
 import java.util.List;
 
-public interface NotificationsRepository {
+public interface NotiRepository {
 
     List<Product> getProducts();
 
