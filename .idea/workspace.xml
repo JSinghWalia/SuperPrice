@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/ResultSetUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/CartRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/CartRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/NotiRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/NotiRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/ProductRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/ProductRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +21,8 @@
       <list>
         <option value="TypeScript JSX File" />
         <option value="Record" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,7 +90,7 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProductRepositoryTest">
+  <component name="RunManager" selected="JUnit.SuperpriceControllerTest">
     <configuration name="CartRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -172,10 +176,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductRepositoryTest" />
-        <item itemvalue="JUnit.NotiRepositoryTest" />
-        <item itemvalue="JUnit.CartRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceControllerTest" />
+        <item itemvalue="JUnit.CartRepositoryTest" />
+        <item itemvalue="JUnit.NotiRepositoryTest" />
+        <item itemvalue="JUnit.ProductRepositoryTest" />
         <item itemvalue="JUnit.ProductRepositoryTest.getPromoProducts" />
       </list>
     </recent_temporary>

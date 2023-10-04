@@ -14,15 +14,10 @@ import java.util.Optional;
 public class ProductRepositoryImpl implements ProductRepository {
 
     private final DataSource dataSource;
+    private ResultSetUtil resultSetUtil = new ResultSetUtil();
 
     public ProductRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    private Product extractProduct(ResultSet rs) throws SQLException {
-        return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                rs.getDouble(8), rs.getBoolean(9));
     }
 
     @Override
@@ -37,7 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             // Get product objects and add them into ArrayList
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
-                Product p = extractProduct(rs);
+                Product p = resultSetUtil.extractProduct(rs);
                 products.add(p);
             }
 
@@ -62,7 +57,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             // Get the product objects and add them into ArrayList
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
-                products.add(extractProduct(rs));
+                products.add(resultSetUtil.extractProduct(rs));
             }
 
             return products;
@@ -80,7 +75,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                return Optional.of(extractProduct(rs));
+                return Optional.of(resultSetUtil.extractProduct(rs));
             }
             return Optional.empty();
         } catch (SQLException e) {

@@ -15,16 +15,12 @@ import java.util.Optional;
 public class CartRepositoryImpl implements CartRepository {
 
     private final DataSource dataSource;
+    private ResultSetUtil resultSetUtil = new ResultSetUtil();
 
     public CartRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    private Product extractProduct(ResultSet rs) throws SQLException {
-        return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                rs.getDouble(8), rs.getBoolean(9));
-    }
     @Override
     public List<Product> getCartProducts(int id) {
         try {
@@ -50,7 +46,7 @@ public class CartRepositoryImpl implements CartRepository {
             // Get the product objects and add them into ArrayList
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
-                Product p = extractProduct(rs);
+                Product p = resultSetUtil.extractProduct(rs);
                 products.add(p);
             }
 
