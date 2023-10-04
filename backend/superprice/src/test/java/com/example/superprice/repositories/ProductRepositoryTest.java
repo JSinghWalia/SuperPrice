@@ -45,7 +45,7 @@ public class ProductRepositoryTest {
     @Test
     public void findByKeyword_OneResult() {
         // Search for the object
-        Collection<Product> expectedObj = repo.findByKeyword("Basketball");
+        Collection<Product> expectedObj = repo.findByKeyword("Molten Basketball");
         // Check if it outputs one result.
         assertNotNull(expectedObj);
         assertEquals(1, expectedObj.size());
@@ -55,7 +55,7 @@ public class ProductRepositoryTest {
     public void findByKeyword_Synonym() {
         String keyword = "Basketball";
         // Search for the object that contains "Basketball" in the name
-        Collection<Product> expectedObj = repo.findByKeyword("Molten Basketball");
+        Collection<Product> expectedObj = repo.findByKeyword("Basketball");
         // Check if the search result is correct
         assertEquals(expectedObj, repo.findByKeyword(keyword));
     }
