@@ -14,10 +14,4 @@ public interface SuperpriceRepository {
     Collection<Product> findByKeyword(String keyword);
 
     Optional<Product> findById(int id);
-
-    List<Product> getCartProducts(int id);
-
-    CartItem addToCart(CartItem item);
-
-    void removeFromCart(int cartId, int productId);
 }

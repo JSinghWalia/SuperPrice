@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/NotificationsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/NotificationsRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/NotificationRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/CartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/CartRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/CartRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/controllers/SuperpriceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/repositories/SuperpriceRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/main/java/com/example/superprice/services/SuperpriceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
     </list>
@@ -26,8 +24,8 @@
       <list>
         <option value="TypeScript JSX File" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -95,7 +93,22 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest">
+  <component name="RunManager" selected="Spring Boot.SuperpriceApplication">
+    <configuration name="CartRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.CartRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NotificationRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -141,22 +154,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuperpriceRepositoryTest.addItemToCart_Fail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="superprice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.superprice.repositories.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
-      <option name="METHOD_NAME" value="addItemToCart_Fail" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SuperpriceRepositoryTest.getPromoProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
@@ -182,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CartRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest" />
         <item itemvalue="JUnit.NotificationRepositoryTest" />
         <item itemvalue="JUnit.SuperpriceControllerTest" />
         <item itemvalue="JUnit.SuperpriceRepositoryTest.getPromoProducts" />
-        <item itemvalue="JUnit.SuperpriceRepositoryTest.addItemToCart_Fail" />
       </list>
     </recent_temporary>
   </component>

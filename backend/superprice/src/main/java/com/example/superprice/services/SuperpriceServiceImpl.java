@@ -2,6 +2,7 @@ package com.example.superprice.services;
 
 import com.example.superprice.model.CartItem;
 import com.example.superprice.model.Product;
+import com.example.superprice.repositories.CartRepository;
 import com.example.superprice.repositories.NotificationsRepository;
 import com.example.superprice.repositories.SuperpriceRepository;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,13 @@ import java.util.Optional;
 public class SuperpriceServiceImpl implements SuperpriceService {
 
     SuperpriceRepository superpriceRepository;
-
     NotificationsRepository notificationsRepository;
+    CartRepository cartRepository;
 
-    public SuperpriceServiceImpl(SuperpriceRepository sr, NotificationsRepository nr) {
+    public SuperpriceServiceImpl(SuperpriceRepository sr, NotificationsRepository nr, CartRepository cr) {
         superpriceRepository = sr;
         notificationsRepository = nr;
+        cartRepository = cr;
     }
 
     @Override
@@ -39,17 +41,17 @@ public class SuperpriceServiceImpl implements SuperpriceService {
 
     @Override
     public List<Product> getCartProducts(int id) {
-        return superpriceRepository.getCartProducts(id);
+        return cartRepository.getCartProducts(id);
     }
 
     @Override
     public CartItem addToCart(CartItem item) {
-        return superpriceRepository.addToCart(item);
+        return cartRepository.addToCart(item);
     }
 
     @Override
     public void removeFromCart(int cartId, int productId) {
-        superpriceRepository.removeFromCart(cartId, productId);
+        cartRepository.removeFromCart(cartId, productId);
     }
 
     @Override
