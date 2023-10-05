@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ResultSetUtil {
     public Product extractProduct(ResultSet rs) throws SQLException {
-        return new Product(rs.getLong(1),
+        return new Product(rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
                 rs.getString(4),

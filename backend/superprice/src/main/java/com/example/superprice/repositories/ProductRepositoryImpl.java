@@ -82,4 +82,58 @@ public class ProductRepositoryImpl implements ProductRepository {
             throw new RuntimeException("Error in findById", e);
         }
     }
+
+    @Override
+    public void toggleNotification(int id, String command) throws SQLException {
+        try {
+            if (command.equals("ON")) {
+                turnOnNotification(id);
+                System.out.println("Turned on notification.");
+            } else if (command.equals("OFF")) {
+                turnOffNotification(id);
+                System.out.println("Turned off notification.");
+            } else
+                throw new RuntimeException("Invalid command, ON/OFF only.");
+        } catch (SQLException e) {
+            throw new SQLException("Error in toggleNotification", e);
+        }
+    }
+
+    @Override
+    public void turnOnNotification(int id) throws SQLException {
+        try {
+            String query = "UPDATE products SET notification = TRUE WHERE productId = ?";
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);
+            stm.setInt(1, id);
+            int rowsUpdated = stm.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Notification updated successfully for productId: " + id);
+            } else {
+                System.out.println("No rows were updated for productId: " + id);
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException("Error in turning on notifications", e);
+        }
+    }
+
+    @Override
+    public void turnOffNotification(int id) throws SQLException {
+        try {
+            String query = "UPDATE products SET notification = FALSE WHERE productId = ?";
+            PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);
+            stm.setInt(1, id);
+            int rowsUpdated = stm.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Notification updated successfully for productId: " + id);
+            } else {
+                System.out.println("No rows were updated for productId: " + id);
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException("Error in turning on notificaitons", e);
+        }
+    }
 }

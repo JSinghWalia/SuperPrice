@@ -39,13 +39,13 @@ public class SuperpriceControllerTest {
 
     @Test
     void should_returnProduct_When_relatedProducts() {
-        Product p1 = new Product((long) 4, "Coke",
+        Product p1 = new Product(4, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", 69, 6, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
         when(this.service.findByKeyword("Coke")).thenReturn(
-                List.of(new Product((long) 4, "Coke",
+                List.of(new Product(4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
                         "/cokeBottle.png", 69, 6, 0.5, true,
                         "currDate", "promoStartDate", "promoEndDate")));
@@ -58,27 +58,27 @@ public class SuperpriceControllerTest {
     // Get all tests
     @Test
     void should_returnCollection_When_getProducts() {
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p1 = new Product(1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
                 "/tshirt.png", 19.99, 20, 0, false,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p2 = new Product((long) 2, "Coke",
+        Product p2 = new Product(2, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", 3.99, 18, 0.5, false,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p3 = new Product((long) 3, "Molten Basketball",
+        Product p3 = new Product(3, "Molten Basketball",
                 "A nice basketball that is not overpriced at all.", "Woolworths",
                 "/basketball.png", 69, 6, 0.2, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p4 = new Product((long) 4, "Samsung",
+        Product p4 = new Product(4, "Samsung",
                 "A new smart watch which is totally necessary.", "Coles",
                 "/watch.webp", 200, 3, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p5 = new Product((long) 5, "Coke",
+        Product p5 = new Product(5, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", 3.99, 18, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
@@ -109,7 +109,7 @@ public class SuperpriceControllerTest {
     @Test
     void should_returnProducts_When_cartNonEmpty() {
         when(this.service.getCartProducts(1)).thenReturn(
-                List.of(new Product((long) 4, "Coke",
+                List.of(new Product(4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
                         "/cokeBottle.png", 69, 6, 0.2, true,
                         "currDate", "promoStartDate", "promoEndDate")));
@@ -138,17 +138,17 @@ public class SuperpriceControllerTest {
 
     @Test
     void getPromoProducts_Success() {
-        Product p1 = new Product((long) 1, "T-Shirt",
+        Product p1 = new Product(1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
                 "/tshirt.png", 19.99, 20, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p2 = new Product((long) 2, "Coke",
+        Product p2 = new Product(2, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", 3.99, 18, 0.5, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
-        Product p3 = new Product((long) 3, "Molten Basketball",
+        Product p3 = new Product(3, "Molten Basketball",
                 "A nice basketball that is not overpriced at all.", "Woolworths",
                 "/basketball.png", 69, 6, 0.2, true,
                 "currDate", "promoStartDate", "promoEndDate");
