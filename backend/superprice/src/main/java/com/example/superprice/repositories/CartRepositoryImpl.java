@@ -33,9 +33,12 @@ public class CartRepositoryImpl implements CartRepository {
                     "p.store,\n" +
                     "p.imageURL,\n" +
                     "p.price,\n" +
-                    "ci.cartItemQuantity,\n" +
+                    "ci.cartItemQuantity,\n" + // Display cart quantity instead of stock.
                     "p.promotion,\n" +
                     "p.notification,\n" +
+                    "p.currDate,\n" +
+                    "p.promoStartDate,\n" +
+                    "p.promoEndDate\n" +
                     "FROM products p\n" +
                     "JOIN cartitem ci ON p.productId = ci.productId\n" +
                     "WHERE ci.cartId = ?;\n";
