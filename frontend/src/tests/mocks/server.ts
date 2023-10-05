@@ -1,6 +1,6 @@
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-
+import { loadEnvConfig } from '@next/env'
 export const products = [
     {
         id: 1,
@@ -61,15 +61,16 @@ export const basketballSearch = [
 ]
 
 export const handlers = [
-    rest.get('http://localhost:8080/:searchTerm', (req, res, ctx) => {
+    rest.get(`${process.env.API_URL_TESTS}/searchTerm`, (req, res, ctx) => {
         // You can use req.params.searchTerm to access the searchTerm if needed
         return res(ctx.status(200), ctx.json(products));
     }),
-    rest.get('http://localhost:8080/:basketball', (req, res, ctx) => {
+    rest.get(`${process.env.API_URL_TESTS}/basketball`, (req, res, ctx) => {
         // You can use req.params.searchTerm to access the searchTerm if needed
+        console.log(`${process.env.API_URL_TESTS}/basketball`)
         return res(ctx.status(200), ctx.json(basketballSearch));
     }),
-    rest.get('http://localhost:8080', (req, res, ctx) => {
+    rest.get(`${process.env.API_URL_TESTS}`, (req, res, ctx) => {
         // You can use req.params.searchTerm to access the searchTerm if needed
         return res(ctx.status(200), ctx.json(products));
     })

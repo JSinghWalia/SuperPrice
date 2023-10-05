@@ -4,13 +4,20 @@ import Link from 'next/link';
 import {Navbar} from '../components/navbar';
 import * as React from "react";
 export const dynamic = 'force-dynamic'
-
+interface Product {
+    id: number; // Add id property with the correct type
+    name: string;
+    imageURL: string;
+    price: number;
+    store: string;
+    // Add other properties if needed
+}
 //function to fetch products, with optional search term.
-export async function fetchProducts(searchTerm = '') {
+ async function fetchProducts(searchTerm = '') {
     try {
         //fetches from backend
         const url = `${process.env.NEXT_PUBLIC_API_URL}/${searchTerm}`;
-        const res = await fetch(url);
+        const res = await fetch(url as string);
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
         }
@@ -23,7 +30,7 @@ export async function fetchProducts(searchTerm = '') {
 
 
 export default function Products() {
-    const [productsData, setProductsData] = React.useState([]);
+    const [productsData, setProductsData] = React.useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = React.useState('');
 
     async function loadProducts(searchTerm = '') {
@@ -35,7 +42,7 @@ export default function Products() {
         loadProducts(); // Fetch products when the component mounts
     }, []);
 
-    const handleSearchSubmit = async (e) => {
+    const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await loadProducts(searchTerm); // Fetch products when the form is submitted
     }

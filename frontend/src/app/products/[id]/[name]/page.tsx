@@ -15,12 +15,23 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 export const dynamic = 'force-dynamic'
 
+interface Product {
+    id: number; // Add id property with the correct type
+    name: string;
+    imageURL: string;
+    price: number;
+    description: string;
+    store: string;
+    // Add other properties if needed
+}
+
+
 export default function ProductDetail() {
     const pathname = usePathname();
     const pathParts = pathname.split('/');
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
-    const [productsData, setProductData] = React.useState([]);
+    const [productsData, setProductData] = React.useState<Product[]>([]);
     const urlAPI = process.env.NEXT_PUBLIC_API_URL + "/" + productName;
 
     const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);

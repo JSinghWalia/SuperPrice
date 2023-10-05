@@ -5,11 +5,13 @@ import Image from 'next/image';
 import * as React from 'react';
 import Link from 'next/link';
 export const dynamic = 'force-dynamic'
-console.log("API_URL:", process.env.NEXT_PUBLIC_API_URL);
 //fetches all products
-export async function fetchRandomProductImages() {
+
+
+async function fetchRandomProductImages() {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
+        const url = process.env.NEXT_PUBLIC_API_URL;
+        const res = await fetch(url as string);
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
         }
@@ -22,8 +24,8 @@ export async function fetchRandomProductImages() {
 
 
 export default function Home() {
-    const [randomProductImages, setRandomProductImages] = React.useState([]);
-    const [randomIndexes, setRandomIndexes] = React.useState([]);
+    const [randomProductImages, setRandomProductImages] = React.useState<{ id: string; name: string; imageURL: string }[]>([]);
+    const [randomIndexes, setRandomIndexes] = React.useState<number[]>([]);
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
     React.useEffect(() => {
@@ -33,7 +35,7 @@ export default function Home() {
 
             // randomly selects three images from all products to display
             const maxIndex = images.length - 1;
-            const randomIndexes = [];
+            const randomIndexes: number[] = [];
             while (randomIndexes.length < 3) {
                 const randomIndex = Math.floor(Math.random() * maxIndex);
                 if (!randomIndexes.includes(randomIndex)) {
@@ -83,9 +85,9 @@ export default function Home() {
                         {randomIndexes.map((index, i) => (
                             <Link
                                 key={i}
-                                href={`/products/${randomProductImages[index].id}/${encodeURIComponent(randomProductImages[index].name)}`}
+                                href={`/products/${(randomProductImages[index] as { id: string; name: string }).id}/${encodeURIComponent((randomProductImages[index] as { id: string; name: string }).name)}`}
                             >
-                                {/* Use a custom component (e.g., <div>) as the Link child */}
+                            {/* Use a custom component (e.g., <div>) as the Link child */}
                                 <div className={`product-image ${i === currentIndex ? 'big-image' : ''}`}>
                                     <Image
                                         src={randomProductImages[index].imageURL}
