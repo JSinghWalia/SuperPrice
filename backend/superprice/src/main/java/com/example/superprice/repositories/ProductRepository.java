@@ -16,8 +16,4 @@ public interface ProductRepository {
     Optional<Product> findById(int id);
 
     void toggleNotification(int id, String command) throws SQLException;
-
-    void turnOnNotification(int id) throws SQLException;
-
-    void turnOffNotification(int id) throws SQLException;
 }

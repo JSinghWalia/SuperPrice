@@ -7,6 +7,7 @@ import com.example.superprice.repositories.NotiRepository;
 import com.example.superprice.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -65,5 +66,10 @@ public class SuperpriceServiceImpl implements SuperpriceService {
     @Override
     public List<Product> findByKeywordPromo(String keyword) {
         return notiRepository.findByKeyword(keyword);
+    }
+
+    @Override
+    public void toggleNotification(int id, String command) throws SQLException {
+        productRepository.toggleNotification(id, command);
     }
 }

@@ -10,14 +10,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class SuperpriceControllerTest {
@@ -160,5 +161,42 @@ public class SuperpriceControllerTest {
         Collection<Product> p = this.controller.getPromoProducts();
         assertNotNull(p);
         assertEquals(3, p.size());
+    }
+
+    @Test
+    public void testUpdateProductNotification_WhenProductExists() throws SQLException {
+        // Mock data
+        int productId = 1;
+        String command = "ON";
+        Product mockProduct = new Product(productId, "Test Product", "Description", "Store", "image.png", 100.0, 10, 0.0, false, "currDate", "promoStartDate", "promoEndDate");
+
+        // Mock service.findById
+        when(service.findById(productId)).thenReturn(Optional.of(mockProduct));
+
+        // Call the method
+        ResponseEntity<Product> responseEntity = controller.updateProductNotification(productId, command, mockProduct);
+
+        // Verify the response
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(mockProduct, responseEntity.getBody());
+
+        // Verify that toggleNotification was called with correct parameters
+        verify(service).toggleNotification(productId, command);
+    }
+
+    @Test
+    public void testUpdateProductNotification_WhenProductDoesNotExist() throws SQLException {
+        // Mock data
+        int productId = 1;
+        String command = "ON";
+
+        // Mock service.findById to return empty Optional
+        when(service.findById(productId)).thenReturn(Optional.empty());
+
+        // Call the method
+        ResponseEntity<Product> responseEntity = controller.updateProductNotification(productId, command, null);
+
+        // Verify the response
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 }

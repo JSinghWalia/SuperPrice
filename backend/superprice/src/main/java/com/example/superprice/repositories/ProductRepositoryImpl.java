@@ -99,8 +99,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
-    @Override
-    public void turnOnNotification(int id) throws SQLException {
+    private void turnOnNotification(int id) throws SQLException {
         try {
             String query = "UPDATE products SET notification = TRUE WHERE productId = ?";
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);
@@ -117,9 +116,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             throw new SQLException("Error in turning on notifications", e);
         }
     }
-
-    @Override
-    public void turnOffNotification(int id) throws SQLException {
+    private void turnOffNotification(int id) throws SQLException {
         try {
             String query = "UPDATE products SET notification = FALSE WHERE productId = ?";
             PreparedStatement stm = this.dataSource.getConnection().prepareStatement(query);

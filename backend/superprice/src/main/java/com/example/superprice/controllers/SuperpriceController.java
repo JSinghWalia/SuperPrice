@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -59,4 +61,20 @@ public class SuperpriceController {
     public Collection<Product> getPromoProducts(@PathVariable String keyword) {
         return this.service.findByKeywordPromo(keyword);
     }
+
+    @PutMapping("/update_notification/{id}/{command}") // Commands: "ON"/"OFF"
+    public ResponseEntity<Product> updateProductNotification(
+            @PathVariable int id,
+            @PathVariable String command,
+            @RequestBody Product updatedProduct
+    ) throws SQLException {
+        service.toggleNotification(id, command);
+        Optional<Product> product = service.findById(id);
+        if (product.isPresent()) {
+            return new ResponseEntity<>(product.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
