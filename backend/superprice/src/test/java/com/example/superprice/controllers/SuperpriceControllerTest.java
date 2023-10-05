@@ -34,31 +34,43 @@ public class SuperpriceControllerTest {
     // Search keyword tests
     @Test
     void should_returnEmpty_When_noRelatedProducts() {
+        // Mocking the service to return an empty list when searching for a completely unrelated keyword
         when(this.service.findByKeyword("completelyunrelatedword")).thenReturn(new ArrayList<>());
+
+        // Calling the controller to search for a product with a completely unrelated keyword
+        // and asserting that the result is an empty list
         assertEquals(0, this.controller.searchForProduct("completelyunrelatedword").size());
     }
 
     @Test
     void should_returnProduct_When_relatedProducts() {
+        // Mocking the service to return one product when searching for "Coke"
         Product p1 = new Product(4, "Coke",
                 "A totally healthy beverage that is very tasty.", "Woolworths",
                 "/cokeBottle.png", 69, 6, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
+        // Mocking the service to return a list with one product (similar to p1) when searching for "Coke"
         when(this.service.findByKeyword("Coke")).thenReturn(
                 List.of(new Product(4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
                         "/cokeBottle.png", 69, 6, 0.5, true,
                         "currDate", "promoStartDate", "promoEndDate")));
 
+        // Calling the controller to search for a product with the keyword "Coke"
         Collection<Product> p = this.controller.searchForProduct("Coke");
+
+        // Check if the product is not null
         assertNotNull(p);
+
+        // Check if result contains one product
         assertEquals(1, p.size());
     }
 
     // Get all tests
     @Test
     void should_returnCollection_When_getProducts() {
+        // Create sample product instances
         Product p1 = new Product(1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
                 "/tshirt.png", 19.99, 20, 0, false,
@@ -84,61 +96,83 @@ public class SuperpriceControllerTest {
                 "/cokeBottle.png", 3.99, 18, 0, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
+        // Mocking the service to return a list of products when requested
         when(this.service.getProducts()).thenReturn(
                 List.of(p1, p2, p3, p4, p5));
 
+        // Calling controller to get list of products
         Collection<Product> p = this.controller.getProducts();
+
+        // Checking results are not null
         assertNotNull(p);
+
+        // Checking the result contains 5 products
         assertEquals(5, p.size());
     }
 
     @Test
-    void should_returnEmpty_When_datbaseEmpty() {
+    void emptyDatabase_DisplayBlankResults() {
+        // Mocking the service to return an empty list when getting all products
         when(this.service.getProducts()).thenReturn(new ArrayList<>());
+        // Calling controller to get list of products
         Collection<Product> p = this.controller.getProducts();
+        // Check if the result is empty
         assertEquals(0, p.size());
     }
 
     // Get cart products
     @Test
-    void should_returnEmpty_When_cartEmpty() {
+    void emptyCart_DisplayBlankResults() {
+        // Mocking the service to return an empty list when getting cart products
         when(this.service.getCartProducts(1)).thenReturn(new ArrayList<>());
+        // Calling controller to get cart products
         Collection<Product> p = this.controller.getCartProducts(1);
+        // Check if result is empty
         assertEquals(0, p.size());
     }
 
     @Test
     void should_returnProducts_When_cartNonEmpty() {
+        // Mocking the service to return a list with one product when
+        // getting cart products
         when(this.service.getCartProducts(1)).thenReturn(
                 List.of(new Product(4, "Coke",
                         "A totally healthy beverage that is very tasty.", "Woolworths",
                         "/cokeBottle.png", 69, 6, 0.2, true,
                         "currDate", "promoStartDate", "promoEndDate")));
+        // Calling controller to get cart products
         Collection<Product> p = this.controller.getCartProducts(1);
+        // Check if result has one item
         assertEquals(1, p.size());
     }
 
-    // addProductToCart test
+    // addToCart Tests
     @Test
     void should_returnResponseEntity_addProductToCart() {
+        // Create a CartItem instance
         CartItem ci = new CartItem(1, 1, 1);
+        // Mocking service to return 'ci' when adding it to the cart.
         when(this.service.addToCart(ci)).thenReturn(ci);
+        // Calling the controller to add the CartItem to the cart
         ResponseEntity response = this.controller.addToCart(ci);
-
+        // Asserting that the response body is equal to the CartItem 'ci'
         assertEquals(ci, response.getBody());
     }
 
-    // remove test
+    // removeFromCart Tests
     @Test
     void should_return_ACCEPTEDHttpStatus() {
+        // Creating a ResponseEntity with HttpStatus ACCEPTED
         ResponseEntity<HttpStatus> response = new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
+        // Checking that the response matches the expected response with HttpStatus ACCEPTED
         assertEquals(response, this.controller.removeFromCart(1, 1));
     }
 
-    // notifications tests
+    // Notification tests
 
     @Test
     void getPromoProducts_Success() {
+        // Creating sample Product instances
         Product p1 = new Product(1, "T-Shirt",
                 "This is a pretty cool shirt.", "Coles",
                 "/tshirt.png", 19.99, 20, 0, true,
@@ -154,11 +188,14 @@ public class SuperpriceControllerTest {
                 "/basketball.png", 69, 6, 0.2, true,
                 "currDate", "promoStartDate", "promoEndDate");
 
-
+        // Mocking the service to return a list of products when requested
         when(this.service.getPromoProducts()).thenReturn(
                 List.of(p1, p2, p3));
 
+        // Calling the controller to get the list of products on promotion
         Collection<Product> p = this.controller.getPromoProducts();
+
+        // Check if the result is not null AND the there are 3 items in the list
         assertNotNull(p);
         assertEquals(3, p.size());
     }
