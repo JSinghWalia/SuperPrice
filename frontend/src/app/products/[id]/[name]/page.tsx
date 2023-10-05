@@ -2,7 +2,6 @@
 import { usePathname } from 'next/navigation'
 import React from "react"
 import Image from 'next/image';
-// import { productsData } from '../productData'; // Make sure this path is correct
 import { Navbar } from '../../../components/navbar';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -63,6 +62,17 @@ export default function ProductDetail() {
 
     const { addToCart } = useCart();
 
+    const checkForItemStock = (product:any, quantity:any) => {
+        for(let i=0;i<productsData.length;i++){
+            if(productsData[i].id===product.id){
+                if(productsData[i].quantity>=quantity){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     const handleAddToCart = () => {
         const quantityInput = document.getElementById('quantity') as HTMLInputElement;
         const quantity = quantityInput ? parseInt(quantityInput.value) : 0;
@@ -71,17 +81,20 @@ export default function ProductDetail() {
             // Show error alert for invalid quantity
             setIsErrorAlertOpen(true);
             setAlertMessage('Please enter a valid quantity');
-        } else if (product) {
+        } else if (product && checkForItemStock(product, quantity)) {
             addToCart(product, quantity);
 
             // Show success alert for item added to cart
             setIsSuccessAlertOpen(true);
             setAlertMessage('Item added to cart');
             setQuantity(0);
-        } else {
-            // Handle the case when the product is not found
-            console.error('Product not found');
+        } else if(!checkForItemStock(product, quantity)){
+            setIsErrorAlertOpen(true);
+            setAlertMessage('Item has only ' + product.quantity + ' in stock');
+        }else{
+            console.log('Something went wrong');
         }
+
     };
 
 
@@ -90,13 +103,6 @@ export default function ProductDetail() {
         return <div>Product not found</div>;
     }
 
-    // // State to track the selected image
-    // const [selectedImage, setSelectedImage] = useState(product.imageURL);
-
-    // // Function to handle image selection
-    // const handleImageClick = (imageSrc: string) => {
-    //     setSelectedImage(imageSrc);
-    // };
     return (
         <>
         {
@@ -108,19 +114,6 @@ export default function ProductDetail() {
                         <div className="mb-4">
                             <Image src={product.imageURL} alt={product.name} width={400} height={400} />
                         </div>
-                        {/* Image Picker */}
-                        {/* <div className="flex space-x-4">
-                            {product.images.map((image: string, index: any) => (
-                            <div
-                            key={index}
-                            onClick={() => handleImageClick(image)}
-                            className={`cursor-pointer border ${selectedImage === image ? 'border-blue-500' : 'border-gray-200'
-                            } p-2 rounded-md hover:border-blue-500`}
-                            >
-                            <Image src={image} alt={product.name} width={100} height={100} />
-                            </div>
-                            ))}
-                            </div> */}
                     </div>
                     {/* Right Section */}
                     <div className="lg:w-1/2 lg:pl-4">

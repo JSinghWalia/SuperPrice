@@ -65,44 +65,44 @@ export default function Home() {
     }, [currentIndex])
 
     return (
-        <CartProvider>
-            <main className="flex min-h-screen flex-col">
-                <Navbar activePath="Home" />
-                <div className="welcome-text">
-                    <h1>Welcome to SuperPrice</h1>
-                </div>
-                <div className="random-products">
-                    <button className="nav-arrow prev" onClick={cyclePrevImage}>
-                        &lt; Prev
-                    </button>
-                    <button className="nav-arrow next" onClick={cycleNextImage}>
-                        Next &gt;
-                    </button>
-                    <div className="random-product-images">
-                        {randomIndexes.map((index, i) => (
-                            <Link
-                                key={i}
-                                href={`/products/${randomProductImages[index].id}/${encodeURIComponent(randomProductImages[index].name)}`}
-                            >
-                                {/* Use a custom component (e.g., <div>) as the Link child */}
-                                <div className={`product-image ${i === currentIndex ? 'big-image' : ''}`}>
-                                    <Image
-                                        src={randomProductImages[index].imageURL}
-                                        alt={`Product ${index + 1}`}
-                                        width={i === currentIndex ? 300 : 200}
-                                        height={i === currentIndex ? 300 : 200}
-                                    />
-                                </div>
+            <CartProvider>
+                <main className="flex min-h-screen flex-col">
+                    <Navbar activePath="Home" />
+                    <div className="welcome-text">
+                        <h1>Welcome to SuperPrice</h1>
+                    </div>
+                    <div className="random-products">
+                        <button className="nav-arrow prev" onClick={cyclePrevImage}>
+                            &lt; Prev
+                        </button>
+                        <button className="nav-arrow next" onClick={cycleNextImage}>
+                            Next &gt;
+                        </button>
+                        <div className="random-product-images">
+                            {randomIndexes.map((index, i) => (
+                                <Link
+                                    key={i}
+                                    href={`/products/${randomProductImages[index].id}/${encodeURIComponent(randomProductImages[index].name)}`}
+                                >
+                                    {/* Use a custom component (e.g., <div>) as the Link child */}
+                                    <div className={`product-image ${i === currentIndex ? 'big-image' : ''}`}>
+                                        <Image
+                                            src={randomProductImages[index].imageURL}
+                                            alt={`Product ${index + 1}`}
+                                            width={i === currentIndex ? 300 : 200}
+                                            height={i === currentIndex ? 300 : 200}
+                                        />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="shop-now-button">
+                            <Link href="/products">
+                                Shop Now
                             </Link>
-                        ))}
+                        </div>
                     </div>
-                    <div className="shop-now-button">
-                        <Link href="/products">
-                            Shop Now
-                        </Link>
-                    </div>
-                </div>
-            </main>
-        </CartProvider>
+                </main>
+            </CartProvider>
     )
 }

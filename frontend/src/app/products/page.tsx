@@ -9,6 +9,7 @@ export default function Products() {
     const [productsData, setProductsData] = React.useState([]);
     const [searchTerm, setSearchTerm] = React.useState('');
 
+
     async function fetchProducts(searchTerm = '') {
         try {
             const url = `http://localhost:8080/${searchTerm}`;
