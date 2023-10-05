@@ -9,7 +9,10 @@ CREATE TABLE products
     price              FLOAT           NOT NULL,
     productQuantity    INT             NOT NULL,
     promotion          FLOAT           NOT NULL,
-    notification       BOOL            NOT NULL
+    notification       BOOL            NOT NULL,
+    currDate           VARCHAR(255)    NOT NULL,
+    promoStartDate     VARCHAR(255)    NOT NULL,
+    promoEndDate       VARCHAR(255)    NOT NULL -- DD-MM-YYYY
 );
 
 CREATE TABLE cart (
