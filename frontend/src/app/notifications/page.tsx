@@ -48,6 +48,34 @@ export default function NotificationProducts() {
         e.preventDefault();
         await loadProducts(searchTerm); // Fetch products when the form is submitted
     }
+    async function handleToggleNotification(productId, currentNotification) {
+        try {
+            const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ notification: !currentNotification }), // Toggle the notification
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response was not ok (${response.status} - ${response.statusText})`);
+            }
+
+            // Update the product list to reflect the new notification status
+            const updatedProductsData = productsData.map(product => {
+                if (product.id === productId) {
+                    return { ...product, notification: !currentNotification };
+                }
+                return product;
+            });
+
+            setProductsData(updatedProductsData);
+        } catch (error) {
+            console.error("Error toggling notification:", error);
+        }
+    }
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -73,8 +101,8 @@ export default function NotificationProducts() {
                     const newPrice = product.price * (1 - product.discount);
 
                     return (
-                        <Link key={product.id} href={`/notifications/${product.id}/${product.name}`}>
-                            <div className="product-card">
+                        <div key={product.id} className="product-card">
+                                <Link key={product.id} href={`/notifications/${product.id}/${product.name}`}>
                                 <Image src={product.imageURL} alt={product.name} width={200} height={200} />
                                 <h2>{product.name}</h2>
                                 <h3>From: {product.store}</h3>
@@ -82,8 +110,15 @@ export default function NotificationProducts() {
                                 {product.discount && (
                                     <p className="text-red-500">Now: ${(product.price - (product.price * product.discount)).toFixed(2)}</p>
                                 )}
+                                </Link>
+                            <button
+                                className="notification-toggle-button"
+                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                            >
+                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            </button>
                             </div>
-                        </Link>
+
 
                     );
                 })}

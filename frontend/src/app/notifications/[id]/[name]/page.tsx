@@ -89,6 +89,32 @@ export default function ProductDetail() {
         // Handle the case when the product is not found
         return <div>Product not found</div>;
     }
+    async function handleToggleNotification(productId, currentNotification) {
+        try {
+            const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ notification: !currentNotification }), // Toggle the notification
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response was not ok (${response.status} - ${response.statusText})`);
+            }
+
+            // Update the product list to reflect the new notification status
+            const updatedProductsData = productsData.map(product => {
+                if (product.id === productId) {
+                    return { ...product, notification: !currentNotification };
+                }
+                return product;
+            });
+        } catch (error) {
+            console.error("Error toggling notification:", error);
+        }
+    }
 
     // // State to track the selected image
     // const [selectedImage, setSelectedImage] = useState(product.imageURL);
@@ -149,6 +175,12 @@ export default function ProductDetail() {
                                         {alertMessage}
                                     </Alert>
                                 </Snackbar>
+                            <button
+                                className="notification-toggle-button"
+                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                            >
+                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            </button>
                                 <Snackbar open={isErrorAlertOpen} autoHideDuration={3000} onClose={handleErrorAlertClose}>
                                     <Alert onClose={handleErrorAlertClose} severity="error">
                                         {alertMessage}
