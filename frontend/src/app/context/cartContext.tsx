@@ -5,11 +5,30 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 interface CartContextType {
     cart: CartItem[];
+    form: FormData;
     addToCart: (product: Product, quantity: number) => void;
     increaseQuantity: (productId: number) => void;
     decreaseQuantity: (productId: number) => void;
     removeFromCart: (productId: number) => void;
     clearCart: () => void;
+    clearFormData: ()=> void;
+    updateFormData: (newData: FormData) => void;
+}
+
+interface FormData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    address1: string;
+    address2: string;
+    postalCode: string;
+    country: string;
+    phoneNumber: string;
+    cardholderName: string;
+    cardNumber: string;
+    selectedDate: string;
+    cvv: string;
+    shippingOption: string;
 }
 
 interface CartItem {
@@ -27,6 +46,7 @@ interface Product {
 
 export const useCart = () => {
     const context = useContext(CartContext);
+    console.log("cart context", context)
     if (context === undefined) {
         throw new Error('useCart must be used within a CartProvider');
     }
@@ -40,6 +60,21 @@ interface CartProviderProps {
 
 export const CartProvider = ({ children }: CartProviderProps) => {
     const [cart, setCart] = useState<CartItem[]>([]);
+    const [form, setFormData] = useState<FormData>({
+        firstName: '',
+        lastName: '',
+        email: '',
+        address1: '',
+        address2: '',
+        postalCode: '',
+        country: '',
+        phoneNumber: '',
+        cardholderName: '',
+        cardNumber: '',
+        selectedDate: '',
+        cvv: '',
+        shippingOption: '5',
+    });
 
     // Load cart data from localStorage when the component is mounted
     useEffect(() => {
@@ -47,12 +82,22 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         if (storedCart) {
             setCart(JSON.parse(storedCart));
         }
+
+        const storedFormData = localStorage.getItem('formData');
+        if (storedFormData) {
+            setFormData(JSON.parse(storedFormData));
+        }
     }, []);
 
     // Save cart data to localStorage whenever it changes
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
+
+    useEffect(() => {
+        localStorage.setItem('formData', JSON.stringify(form));
+    },);
+
 
     const addToCart = (product: Product, quantity: number) => {
         // Find the index of the product in the cart
@@ -100,13 +145,41 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         setCart(updatedCart);
     }
 
+    const clearFormData = () => {
+        setFormData({
+            // Initialize with empty values
+            firstName: '',
+            lastName: '',
+            email: '',
+            address1: '',
+            address2: '',
+            postalCode: '',
+            country: '',
+            phoneNumber: '',
+            cardholderName: '',
+            cardNumber: '',
+            cvv: '',
+            selectedDate: '',
+            shippingOption: '',
+        });
+        // Clear the stored form data from local storage
+        localStorage.removeItem('formData');
+    };
+
+    const updateFormData = (newData: FormData) => {
+        setFormData(newData);
+    };
+
     const contextValue: CartContextType = {
         cart,
+        form,
         addToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
         clearCart,
+        updateFormData,
+        clearFormData
     };
 
     return (

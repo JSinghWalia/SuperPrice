@@ -5,14 +5,30 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// Function to fetch notification products count
+async function fetchNotificationProductCount() {
+    try {
+        const baseUrl = 'http://localhost:8080/notifications'; // Define the base URL
 
-//function to help with conditional styling by taking a list of attributes and returning a string of the ones that are true
+        const res = await fetch(baseUrl);
+
+        if (!res.ok) {
+            throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
+        }
+
+        const data = await res.json();
+        return data.length; // Return the count of notification products
+    } catch (error) {
+        console.error("Error fetching notification product count:", error);
+        return 0; // Return 0 if there's an error
+    }
+}
+
+
 function classNames(...classes: string[]): string {
     return classes.filter(Boolean).join(' ');
 }
 
-//set the type of the prop to string
 interface NavbarProps {
     activePath: string;
 }
@@ -20,16 +36,26 @@ interface NavbarProps {
 export const Navbar = ({ activePath }: NavbarProps) => {
 
     const [activeNavItem, setActiveNavItem] = React.useState(activePath);
+    const [notificationCount, setNotificationCount] = React.useState(0); // State for notification count
 
     const navigation = [
         { name: 'Home', href: '/', current: activeNavItem === 'Home' },
         { name: 'Products', href: '/products', current: activeNavItem === 'Products' },
     ];
 
+    React.useEffect(() => {
+        // Fetch notification count when the component mounts
+        async function fetchCount() {
+            const count = await fetchNotificationProductCount();
+            setNotificationCount(count);
+        }
+        fetchCount();
+    }, []);
+
     function handleNavItemClick(name: string) {
         setActiveNavItem(name);
     }
-    
+
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -51,11 +77,11 @@ export const Navbar = ({ activePath }: NavbarProps) => {
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
                                     <Link href="/">
-                                    <img
-                                        className="h-8 w-auto"
-                                        src="/logo.png"
-                                        alt="Logo"
-                                    />
+                                        <img
+                                            className="h-8 w-auto"
+                                            src="/logo.png"
+                                            alt="Logo"
+                                        />
                                     </Link>
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
@@ -78,14 +104,21 @@ export const Navbar = ({ activePath }: NavbarProps) => {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <button
-                                    type="button"
-                                    className="relative rounded-full bg-gray-800 p-1 ml-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                    <span className="absolute -inset-1.5" />
-                                    <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
+                                <Link href="/notifications">
+                                    <button
+                                        type="button"
+                                        className="relative rounded-full bg-gray-800 p-1 ml-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    >
+                                        <span className="absolute -inset-1.5" />
+                                        <span className="sr-only">View notifications</span>
+                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                        {notificationCount > 0 && (
+                                            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                                            {notificationCount}
+                                        </span>
+                                        )}
+                                    </button>
+                                </Link>
                                 <Link href="/shoppingcart">
                                     <button
                                         type="button"
@@ -93,14 +126,11 @@ export const Navbar = ({ activePath }: NavbarProps) => {
                                     >
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">Shopping Cart</span>
-                                        
-                                            <ShoppingCartIcon className="h-6 w-6" />
+
+                                        <ShoppingCartIcon className="h-6 w-6" />
 
                                     </button>
                                 </Link>
-
-                                {/* Profile dropdown */}
-                                
                             </div>
                         </div>
                     </div>

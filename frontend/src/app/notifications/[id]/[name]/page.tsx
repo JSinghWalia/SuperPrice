@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation'
 import React from "react"
 import Image from 'next/image';
+// import { productsData } from '../productData'; // Make sure this path is correct
 import { Navbar } from '../../../components/navbar';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -12,26 +13,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic'
-
-interface Product {
-    id: number; // Add id property with the correct type
-    name: string;
-    imageURL: string;
-    price: number;
-    description: string;
-    store: string;
-    // Add other properties if needed
-}
-
 
 export default function ProductDetail() {
     const pathname = usePathname();
     const pathParts = pathname.split('/');
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
-    const [productsData, setProductData] = React.useState<Product[]>([]);
-    const urlAPI = process.env.NEXT_PUBLIC_API_URL + "/" + productName;
+    const [productsData, setProductData] = React.useState([]);
+    const urlAPI = 'http://localhost:8080' + "/" + productName;
 
     const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
     const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -74,17 +63,6 @@ export default function ProductDetail() {
 
     const { addToCart } = useCart();
 
-    const checkForItemStock = (product:any, quantity:any) => {
-        for(let i=0;i<productsData.length;i++){
-            if(productsData[i].id===product.id){
-                if(productsData[i].quantity>=quantity){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     const handleAddToCart = () => {
         const quantityInput = document.getElementById('quantity') as HTMLInputElement;
         const quantity = quantityInput ? parseInt(quantityInput.value) : 0;
@@ -93,21 +71,24 @@ export default function ProductDetail() {
             // Show error alert for invalid quantity
             setIsErrorAlertOpen(true);
             setAlertMessage('Please enter a valid quantity');
-        } else if (product && checkForItemStock(product, quantity)) {
+        } else if (product) {
             addToCart(product, quantity);
 
             // Show success alert for item added to cart
             setIsSuccessAlertOpen(true);
             setAlertMessage('Item added to cart');
             setQuantity(0);
-        } else if(!checkForItemStock(product, quantity)){
-            setIsErrorAlertOpen(true);
-            setAlertMessage('Item has only ' + product.quantity + ' in stock');
-        }else{
-            console.log('Something went wrong');
+        } else {
+            // Handle the case when the product is not found
+            console.error('Product not found');
         }
-
     };
+
+
+    if (!product) {
+        // Handle the case when the product is not found
+        return <div>Product not found</div>;
+    }
     async function handleToggleNotification(productId, currentNotification) {
         try {
             const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
@@ -135,12 +116,13 @@ export default function ProductDetail() {
         }
     }
 
+    // // State to track the selected image
+    // const [selectedImage, setSelectedImage] = useState(product.imageURL);
 
-    if (!product) {
-        // Handle the case when the product is not found
-        return <div>Product not found</div>;
-    }
-
+    // // Function to handle image selection
+    // const handleImageClick = (imageSrc: string) => {
+    //     setSelectedImage(imageSrc);
+    // };
     return (
         <>
         {
@@ -152,12 +134,29 @@ export default function ProductDetail() {
                         <div className="mb-4">
                             <Image src={product.imageURL} alt={product.name} width={400} height={400} />
                         </div>
+                        {/* Image Picker */}
+                        {/* <div className="flex space-x-4">
+                            {product.images.map((image: string, index: any) => (
+                            <div
+                            key={index}
+                            onClick={() => handleImageClick(image)}
+                            className={`cursor-pointer border ${selectedImage === image ? 'border-blue-500' : 'border-gray-200'
+                            } p-2 rounded-md hover:border-blue-500`}
+                            >
+                            <Image src={image} alt={product.name} width={100} height={100} />
+                            </div>
+                            ))}
+                            </div> */}
                     </div>
                     {/* Right Section */}
                     <div className="lg:w-1/2 lg:pl-4">
                         <div className="mb-4">
-                            <span className="text-2xl font-semibold">${product.price}</span>
+                            {product.discount && (
+                                <div className="text-red-600 text-2xl font-semibold">Now: ${(product.price - (product.price * product.discount)).toFixed(2)}</div>
+                            )}
+                            <div className="text-600 font-semibold">Originally: ${product.price}</div>
                         </div>
+
                         <div className="mb-4">
                         <p className="text-xl mb-4">{product.description}</p>
                         </div>
@@ -196,25 +195,29 @@ export default function ProductDetail() {
                     </Typography>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {productsData.map((product) => (
-                            <Link key={product.id} href={`/products/${product.id}/${product.name}` }>
-                            <Card key={product.id} style={{ width: '300px', margin: '16px' }}>
-                                {/* You can replace 'product.image' with the actual image source */}
-                                <img src={product.imageURL} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                                <CardContent>
-                                    <Typography variant="h5" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {product.description}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Price: ${product.price}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Store: {product.store}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                            <Link key={product.id} href={`/products/${product.id}/${product.name}`}>
+                                <Card key={product.id} style={{ width: '300px', margin: '16px' }}>
+                                    <img src={product.imageURL} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                                    <CardContent>
+                                        <Typography variant="h5" component="div">
+                                            {product.name}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {product.description}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Price: ${product.price}
+                                        </Typography>
+                                        {product.discount && (
+                                            <Typography variant="body2" color="error" style={{ fontWeight: 'bold' }}>
+                                                New Price: ${(product.price - (product.price * product.discount)).toFixed(2)}
+                                            </Typography>
+                                        )}
+                                        <Typography variant="body2" color="text.secondary">
+                                            Store: {product.store}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
                             </Link>
                         ))}
                     </div>

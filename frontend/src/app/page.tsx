@@ -87,7 +87,6 @@ export default function Home() {
                                 key={i}
                                 href={`/products/${(randomProductImages[index] as { id: string; name: string }).id}/${encodeURIComponent((randomProductImages[index] as { id: string; name: string }).name)}`}
                             >
-                            {/* Use a custom component (e.g., <div>) as the Link child */}
                                 <div className={`product-image ${i === currentIndex ? 'big-image' : ''}`}>
                                     <Image
                                         src={randomProductImages[index].imageURL}
@@ -96,16 +95,16 @@ export default function Home() {
                                         height={i === currentIndex ? 300 : 200}
                                     />
                                 </div>
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="shop-now-button">
+                            <Link href="/products">
+                                Shop Now
                             </Link>
-                        ))}
+                        </div>
                     </div>
-                    <div className="shop-now-button">
-                        <Link href="/products">
-                            Shop Now
-                        </Link>
-                    </div>
-                </div>
-            </main>
-        </CartProvider>
+                </main>
+            </CartProvider>
     )
 }

@@ -1,23 +1,25 @@
-"use client";
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import {Navbar} from '../components/navbar';
 import * as React from "react";
-export const dynamic = 'force-dynamic'
-interface Product {
-    id: number; // Add id property with the correct type
-    name: string;
-    imageURL: string;
-    price: number;
-    store: string;
-    // Add other properties if needed
-}
+
 //function to fetch products, with optional search term.
- async function fetchProducts(searchTerm = '') {
+export async function fetchNotificationProducts(searchTerm = '') {
     try {
         //fetches from backend
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/${searchTerm}`;
-        const res = await fetch(url as string);
+        const baseUrl = 'http://localhost:8080/notifications'; // Define the base URL
+
+        let url; // Declare a variable for the URL outside of the if-else blocks
+
+        if (searchTerm === '') {
+            url = baseUrl; // Assign the base URL when searchTerm is empty
+        } else {
+            url = `${baseUrl}/${searchTerm}`; // Assign the URL with searchTerm
+        }
+
+        const res = await fetch(url); // Use the correct variable name 'url'
+
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
         }
@@ -29,12 +31,12 @@ interface Product {
 }
 
 
-export default function Products() {
-    const [productsData, setProductsData] = React.useState<Product[]>([]);
+export default function NotificationProducts() {
+    const [productsData, setProductsData] = React.useState([]);
     const [searchTerm, setSearchTerm] = React.useState('');
 
     async function loadProducts(searchTerm = '') {
-        const data = await fetchProducts(searchTerm);
+        const data = await fetchNotificationProducts(searchTerm);
         setProductsData(data);
     }
 
@@ -42,11 +44,10 @@ export default function Products() {
         loadProducts(); // Fetch products when the component mounts
     }, []);
 
-    const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSearchSubmit = async (e) => {
         e.preventDefault();
         await loadProducts(searchTerm); // Fetch products when the form is submitted
     }
-
     async function handleToggleNotification(productId, currentNotification) {
         try {
             const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
@@ -75,11 +76,12 @@ export default function Products() {
             console.error("Error toggling notification:", error);
         }
     }
+
     return (
         <main className="flex min-h-screen flex-col">
-            <Navbar activePath="Products" />
+            <Navbar activePath="Notifications" />
             <div className="welcome-text">
-                <h1>Products</h1>
+                <h1>Notifications</h1>
             </div>
             <div className="search-container">
                 <form onSubmit={handleSearchSubmit}>
@@ -94,23 +96,34 @@ export default function Products() {
                 </form>
             </div>
             <section className="product-section">
-                {productsData.map(product => (
-                    <div key={product.id} className="product-card">
-                        <Link href={`/products/${product.id}/${product.name}`}>
+                {productsData.map(product => {
+                    // Calculate the new price after applying the discount
+                    const newPrice = product.price * (1 - product.discount);
+
+                    return (
+                        <div key={product.id} className="product-card">
+                                <Link key={product.id} href={`/notifications/${product.id}/${product.name}`}>
                                 <Image src={product.imageURL} alt={product.name} width={200} height={200} />
                                 <h2>{product.name}</h2>
                                 <h3>From: {product.store}</h3>
-                                <p>${product.price}</p>
-                        </Link>
-                        <button
-                            className="notification-toggle-button"
-                            onClick={() => handleToggleNotification(product.id, product.notification)}
-                        >
-                            {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
-                        </button>
-                    </div>
-                ))}
+                                <p>Originally: ${product.price}</p>
+                                {product.discount && (
+                                    <p className="text-red-500">Now: ${(product.price - (product.price * product.discount)).toFixed(2)}</p>
+                                )}
+                                </Link>
+                            <button
+                                className="notification-toggle-button"
+                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                            >
+                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            </button>
+                            </div>
+
+
+                    );
+                })}
             </section>
         </main>
     );
 }
+``

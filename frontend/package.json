@@ -28,6 +28,7 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "mdb-react-ui-kit": "^6.3.0",
+    "mdbreact": "^5.2.0",
     "next": "^13.4.19",
     "postcss": "8.4.27",
     "react": "18.2.0",
