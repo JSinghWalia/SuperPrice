@@ -146,8 +146,8 @@ export default function ProductDetail() {
 
     return (
         <>
-        {
-            <main className="container mx-auto p-4"><Navbar activePath="Products" />
+            <Navbar activePath="Products" />
+            <main className="container mx-auto">
                 <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2>
                 <div className="flex flex-col lg:flex-row">
                     {/* Left Section */}
@@ -224,8 +224,6 @@ export default function ProductDetail() {
 
             </main>
                 
-        
-        }
         </>
     );
 }

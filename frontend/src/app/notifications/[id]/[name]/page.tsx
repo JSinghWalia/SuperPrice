@@ -71,6 +71,7 @@ export default function ProductDetail() {
     }, []);
 
     let product = productsData.find(product => productId===product.id);
+    console.log("product: ", product);
 
 
     const { addToCart } = useCart();
@@ -95,8 +96,17 @@ export default function ProductDetail() {
             setIsErrorAlertOpen(true);
             setAlertMessage('Please enter a valid quantity');
         } else if (product && checkForItemStock(product, quantity)) {
-            addToCart(product, quantity);
-
+            if(product.notification){
+                let newPrice = product.price - (product.price * product.discount);
+                product.price=newPrice;
+                console.log("new price", product);
+                addToCart(product, quantity);
+            }
+            else{
+                console.log("running with no notifications on")
+                addToCart(product, quantity);
+            }
+            
             // Show success alert for item added to cart
             setIsSuccessAlertOpen(true);
             setAlertMessage('Item added to cart');
@@ -152,8 +162,9 @@ export default function ProductDetail() {
     // };
     return (
         <>
-        {
-            <main className="container mx-auto p-4"><Navbar activePath="Products" />
+
+            <Navbar activePath="Products" />
+            <main className="container ">
                 <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2>
                 <div className="flex flex-col lg:flex-row">
                     {/* Left Section */}
@@ -248,11 +259,8 @@ export default function ProductDetail() {
                             </Link>
                         ))}
                     </div>
-
             </main>
-                
-        
-        }
+
         </>
     );
 }

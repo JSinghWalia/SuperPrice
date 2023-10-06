@@ -101,14 +101,14 @@ export default function CheckOut(){
                 const productId=shoppingCart[i].product.id;
                 try {
                     const response = await fetch(`http://localhost:8080/${cartId}/${productId}`, {
-                        method: 'DELETE',
                         headers: {
-                            'Content-Type': 'application/json', // You can adjust the content type as needed
-                        },
+                            'Content-Type': 'application/json',
+                        },    
+                        method: 'DELETE',
                     });
 
                     if (response.ok) {
-                        // Product removed successfully
+                        router.push("/shoppingcart")
                     } else {
                         // Handle the error, such as showing an error message
                         console.error('Failed to remove product from cart:', response.statusText);
@@ -486,13 +486,11 @@ export default function CheckOut(){
                             <div className="pt-5">
                                 <h6 className="mb-0">
                                     <Link
-                                        href="/shoppingcart"
                                         className="text-blue-500 hover:underline"
                                         onClick={async () => {
-                                            await removeProductFromCart()
-                                        }}
-                                    >
-                                        <i className="fas fa-long-arrow-alt-left me-2"></i> Back to cart
+                                            await removeProductFromCart();
+                                        } } href={""}                                    >
+                                        <i className="fas fa-long-arrow-alt-left me-2">Back to cart</i>
                                     </Link>
                                 </h6>
                             </div>

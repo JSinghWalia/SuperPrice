@@ -2,15 +2,11 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import './shoppingCart.css';
 import { useCart } from '../context/cartContext';
 import { Navbar } from '../components/navbar';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { productsData } from '../products/productData';
-
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Link from 'next/link';
 
 interface Product {
     id: number;
@@ -24,11 +20,17 @@ interface Product {
     notification: boolean;
 }
 
+interface CartItem {
+    product: Product;
+    quantity: number;
+}
+
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
     const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
     const [isQuantityValidAlert, setIsQuantityValidAlert] = useState(false);
     const [productsData, setProductsData] = useState<Product[]>([]);
+    const [shoppingCart, setShoppingCart] = useState<CartItem[]>([]);
 
     const router = useRouter();
 
@@ -46,6 +48,59 @@ export default function ShoppingCart() {
             setProductsData(testData);
         } catch (error) {
             console.error("Error fetching data:", error);
+        }
+    }
+
+    async function getCartItems() {
+        try {
+            const res = await fetch("http://localhost:8080/cart/4");
+            if (!res.ok) {
+                throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
+            }
+            const apiData = await res.json();
+            // Transform the API response into an array of CartItem objects
+            const cartItems: CartItem[] = apiData.map((item: any) => ({
+                product: {
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    description: item.description,
+                    imageURL: item.imageURL,
+                },
+                quantity: item.quantity,
+            }));
+
+            setShoppingCart(cartItems);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    
+
+    async function removeProductFromCart() {
+        if (shoppingCart.length > 0) {
+            const cartId = 4;
+            for (let i = 0; i < shoppingCart.length; i++) {
+                let productId = shoppingCart[i].product.id;
+                try {
+                    const response = await fetch(`http://localhost:8080/${cartId}/${productId}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        method: 'DELETE',
+                    });
+
+                    if (response.ok) {
+                        router.push("/shoppingcart")
+                    } else {
+                        // Handle the error, such as showing an error message
+                        console.error('Failed to remove product from cart:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error while removing product from cart:', error);
+                }
+            }
         }
     }
 
@@ -80,6 +135,7 @@ export default function ShoppingCart() {
 
     React.useEffect(() => {
         getProducts();
+        getCartItems();
     }, []);
 
     const handleRemoveFromCart = (productId: number) => {
@@ -107,13 +163,13 @@ export default function ShoppingCart() {
         }
     };
 
-    const handleCheckout = () => {
+    async function handleCheckout() {
         if (cart.length === 0) {
             // Show alert for an empty cart
             setIsCheckoutAlertOpen(true);
         } else {
-            // Navigate to the checkout page or perform the desired action
-            addAllItemToCartAPI();
+            await removeProductFromCart();
+            await addAllItemToCartAPI();
             router.push('/checkout');
         }
     };
@@ -195,6 +251,16 @@ export default function ShoppingCart() {
                                 </div>
                                 <div className="flex items-center font-bold">
                                     <span className="text-xl">Total Price: ${totalPrice.toFixed(2)}</span>
+                                </div>
+                            </div>
+
+                            <div className="mt-5">
+                                <div className="flex items-center font-bold">
+                                    <Link
+                                        className="text-blue-500 hover:underline"
+                                        href="/products" >
+                                        <i className="fas fa-long-arrow-alt-left me-2"></i>Add more products.
+                                    </Link>
                                 </div>
                             </div>
 

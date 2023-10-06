@@ -46,7 +46,6 @@ interface Product {
 
 export const useCart = () => {
     const context = useContext(CartContext);
-    console.log("cart context", context)
     if (context === undefined) {
         throw new Error('useCart must be used within a CartProvider');
     }
@@ -92,11 +91,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     // Save cart data to localStorage whenever it changes
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem('formData', JSON.stringify(form));
     }, [cart]);
 
-    useEffect(() => {
-        localStorage.setItem('formData', JSON.stringify(form));
-    },);
+    // useEffect(() => {
+    //     localStorage.setItem('formData', JSON.stringify(form));
+    // },);
 
 
     const addToCart = (product: Product, quantity: number) => {

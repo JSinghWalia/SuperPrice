@@ -3,7 +3,6 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Navbar } from '../components/navbar';
 import { useCart } from '../context/cartContext';
-import './receipt.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import Link from 'next/link';
