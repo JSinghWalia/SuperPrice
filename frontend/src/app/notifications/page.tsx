@@ -5,12 +5,12 @@ import {Navbar} from '../components/navbar';
 import * as React from "react";
 
 //function to fetch products, with optional search term.
-export async function fetchNotificationProducts(searchTerm = '') {
+async function fetchNotificationProducts(searchTerm = '') {
     try {
         //fetches from backend
-        const baseUrl = 'http://localhost:8080/notifications'; // Define the base URL
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL + "/notifications";
 
-        let url; // Declare a variable for the URL outside of the if-else blocks
+        let url;
 
         if (searchTerm === '') {
             url = baseUrl; // Assign the base URL when searchTerm is empty
@@ -18,7 +18,7 @@ export async function fetchNotificationProducts(searchTerm = '') {
             url = `${baseUrl}/${searchTerm}`; // Assign the URL with searchTerm
         }
 
-        const res = await fetch(url); // Use the correct variable name 'url'
+        const res = await fetch(url);
 
         if (!res.ok) {
             throw new Error(`Network response was not ok (${res.status} - ${res.statusText})`);
@@ -50,7 +50,7 @@ export default function NotificationProducts() {
     }
     async function handleToggleNotification(productId, currentNotification) {
         try {
-            const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
+            const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {

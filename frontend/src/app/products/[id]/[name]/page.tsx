@@ -110,7 +110,7 @@ export default function ProductDetail() {
     };
     async function handleToggleNotification(productId, currentNotification) {
         try {
-            const url = `http://localhost:8080/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
+            const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {

@@ -8,7 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // Function to fetch notification products count
 async function fetchNotificationProductCount() {
     try {
-        const baseUrl = 'http://localhost:8080/notifications'; // Define the base URL
+        const baseUrl =  process.env.NEXT_PUBLIC_API_URL + "/notifications"; // Define the base URL
 
         const res = await fetch(baseUrl);
 
