@@ -14,12 +14,24 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
+interface Product {
+    id: number;
+    name: string;
+    imageURL: string;
+    price: number;
+    quantity: number;
+    description: string;
+    store: string;
+    discount: number;
+    notification: boolean;
+}
+
 export default function ProductDetail() {
     const pathname = usePathname();
     const pathParts = pathname.split('/');
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
-    const [productsData, setProductData] = React.useState([]);
+    const [productsData, setProductData] = React.useState<Product[]>([]);
     const urlAPI = 'http://localhost:8080' + "/" + productName;
 
     const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
@@ -63,6 +75,17 @@ export default function ProductDetail() {
 
     const { addToCart } = useCart();
 
+    const checkForItemStock = (product:any, quantity:any) => {
+        for(let i=0;i<productsData.length;i++){
+            if(productsData[i].id===product.id){
+                if(productsData[i].quantity>=quantity){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     const handleAddToCart = () => {
         const quantityInput = document.getElementById('quantity') as HTMLInputElement;
         const quantity = quantityInput ? parseInt(quantityInput.value) : 0;
@@ -71,17 +94,21 @@ export default function ProductDetail() {
             // Show error alert for invalid quantity
             setIsErrorAlertOpen(true);
             setAlertMessage('Please enter a valid quantity');
-        } else if (product) {
+        } else if (product && checkForItemStock(product, quantity)) {
             addToCart(product, quantity);
 
             // Show success alert for item added to cart
             setIsSuccessAlertOpen(true);
             setAlertMessage('Item added to cart');
             setQuantity(0);
-        } else {
-            // Handle the case when the product is not found
-            console.error('Product not found');
+        } else if(!checkForItemStock(product, quantity)){
+            setIsErrorAlertOpen(true);
+            setAlertMessage('Item has only ' + (product?.quantity ?? 0) + ' in stock');
+
+        }else{
+            console.log('Something went wrong');
         }
+
     };
 
 
@@ -89,7 +116,7 @@ export default function ProductDetail() {
         // Handle the case when the product is not found
         return <div>Product not found</div>;
     }
-    async function handleToggleNotification(productId, currentNotification) {
+    async function handleToggleNotification(productId: number, currentNotification: boolean) {
         try {
             const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
             const response = await fetch(url, {
@@ -177,9 +204,9 @@ export default function ProductDetail() {
                                 </Snackbar>
                             <button
                                 className="notification-toggle-button"
-                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                                onClick={() => product && handleToggleNotification(product.id, product.notification)}
                             >
-                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
                             </button>
                                 <Snackbar open={isErrorAlertOpen} autoHideDuration={3000} onClose={handleErrorAlertClose}>
                                     <Alert onClose={handleErrorAlertClose} severity="error">

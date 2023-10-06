@@ -12,11 +12,24 @@ import { productsData } from '../products/productData';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
+interface Product {
+    id: number;
+    name: string;
+    imageURL: string;
+    price: number;
+    quantity: number;
+    description: string;
+    store: string;
+    discount: number;
+    notification: boolean;
+}
+
 export default function ShoppingCart() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
     const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
     const [isQuantityValidAlert, setIsQuantityValidAlert] = useState(false);
-    const [productsData, setProductsData] = useState([]);
+    const [productsData, setProductsData] = useState<Product[]>([]);
+
     const router = useRouter();
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);

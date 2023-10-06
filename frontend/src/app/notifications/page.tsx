@@ -4,6 +4,19 @@ import Link from 'next/link';
 import {Navbar} from '../components/navbar';
 import * as React from "react";
 
+interface Product {
+    id: number;
+    name: string;
+    imageURL: string;
+    price: number;
+    quantity: number;
+    description: string;
+    store: string;
+    discount: number;
+    notification: boolean;
+}
+
+
 //function to fetch products, with optional search term.
 async function fetchNotificationProducts(searchTerm = '') {
     try {
@@ -32,7 +45,7 @@ async function fetchNotificationProducts(searchTerm = '') {
 
 
 export default function NotificationProducts() {
-    const [productsData, setProductsData] = React.useState([]);
+    const [productsData, setProductsData] = React.useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = React.useState('');
 
     async function loadProducts(searchTerm = '') {
@@ -44,11 +57,11 @@ export default function NotificationProducts() {
         loadProducts(); // Fetch products when the component mounts
     }, []);
 
-    const handleSearchSubmit = async (e) => {
+    const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await loadProducts(searchTerm); // Fetch products when the form is submitted
     }
-    async function handleToggleNotification(productId, currentNotification) {
+    async function handleToggleNotification(productId: number, currentNotification: boolean) {
         try {
             const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
             const response = await fetch(url, {
@@ -113,7 +126,7 @@ export default function NotificationProducts() {
                                 </Link>
                             <button
                                 className="notification-toggle-button"
-                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                                onClick={() => product && handleToggleNotification(product.id, product.notification)}
                             >
                                 {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
                             </button>

@@ -15,13 +15,15 @@ import Link from 'next/link';
 export const dynamic = 'force-dynamic'
 
 interface Product {
-    id: number; // Add id property with the correct type
+    id: number;
     name: string;
     imageURL: string;
     price: number;
+    quantity: number;
     description: string;
     store: string;
-    // Add other properties if needed
+    discount: number;
+    notification: boolean;
 }
 
 
@@ -102,13 +104,14 @@ export default function ProductDetail() {
             setQuantity(0);
         } else if(!checkForItemStock(product, quantity)){
             setIsErrorAlertOpen(true);
-            setAlertMessage('Item has only ' + product.quantity + ' in stock');
+            setAlertMessage('Item has only ' + (product?.quantity ?? 0) + ' in stock');
+
         }else{
             console.log('Something went wrong');
         }
 
     };
-    async function handleToggleNotification(productId, currentNotification) {
+    async function handleToggleNotification(productId: number, currentNotification: boolean) {
         try {
             const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
             const response = await fetch(url, {
@@ -178,7 +181,7 @@ export default function ProductDetail() {
                                 </Snackbar>
                             <button
                                 className="notification-toggle-button"
-                                onClick={() => handleToggleNotification(product.id, product.notification)}
+                                onClick={() => product && handleToggleNotification(product.id, product.notification)}
                             >
                                 {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
                             </button>
