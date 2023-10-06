@@ -27,6 +27,8 @@ interface Product {
     price: number;
     description: string;
     imageURL: string;
+    discount: number;
+    notification: boolean;
 }
 
 interface FormData {
@@ -83,6 +85,8 @@ export default function CheckOut(){
                     price: item.price,
                     description: item.description,
                     imageURL: item.imageURL,
+                    discount: item.discount,
+                    notification: item.notification,
                 },
                 quantity: item.quantity,
             }));
@@ -200,9 +204,19 @@ export default function CheckOut(){
     };
 
     const totalQuantity = shoppingCart.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = shoppingCart.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    const totalPrice = shoppingCart.reduce((total, item) => {
+        const product = item.product;
+
+        // Check if the product has a notification and a discount
+        if (product.notification && product.discount) {
+            // Calculate the discounted price
+            return total + (product.price - (product.price * product.discount)) * item.quantity;
+        } else {
+            // Use the normal price if no notification or discount
+            return total + product.price * item.quantity;
+        }
+    }, 0);
     const shippingCost = parseFloat(shippingOption);
-    const totalWithShipping = (totalPrice + shippingCost).toFixed(2);
     return(
         <>
         <Navbar activePath="checkout" />
@@ -490,7 +504,7 @@ export default function CheckOut(){
                                         onClick={async () => {
                                             await removeProductFromCart();
                                         } } href={""}                                    >
-                                        <i className="fas fa-long-arrow-alt-left me-2">Back to cart</i>
+                                        <i className="fas fa-long-arrow-alt-left me-2"></i>Back to cart
                                     </Link>
                                 </h6>
                             </div>
@@ -519,7 +533,10 @@ export default function CheckOut(){
                                         <span className="px-3">{quantity}</span>
                                     </div>
                                     <div className="col-span-1 flex items-center justify-end ">
-                                        ${(product.price * quantity).toFixed(2)}
+                                        {product.notification ?
+                                            `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)} (Discounted)` :
+                                            `$${(product.price * quantity).toFixed(2)}`
+                                        }
                                     </div>
                                 </div>
                             ))}

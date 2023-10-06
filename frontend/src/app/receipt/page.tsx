@@ -19,6 +19,8 @@ interface Product {
     price: number;
     description: string;
     imageURL: string;
+    discount: number;
+    notification: boolean;
 }
 
 export default function Receipt(){
@@ -41,6 +43,8 @@ export default function Receipt(){
                     price: item.price,
                     description: item.description,
                     imageURL: item.imageURL,
+                    discount: item.discount,
+                    notification: item.notification
                 },
                 quantity: item.quantity,
             }));
@@ -84,7 +88,18 @@ export default function Receipt(){
     }, []);
 
     const totalQuantity = shoppingCart.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = shoppingCart.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    const totalPrice = shoppingCart.reduce((total, item) => {
+        const product = item.product;
+
+        // Check if the product has a notification and a discount
+        if (product.notification && product.discount) {
+            // Calculate the discounted price
+            return total + (product.price - (product.price * product.discount)) * item.quantity;
+        } else {
+            // Use the normal price if no notification or discount
+            return total + product.price * item.quantity;
+        }
+    }, 0);
 
     return (
         <>
@@ -121,7 +136,10 @@ export default function Receipt(){
                                                     {quantity}
                                                 </div>
                                                 <div className="col-span-1 text-right flex items-center justify-start">
-                                                    ${(product.price * quantity).toFixed(2)}
+                                                    {product.notification ?
+                                                        `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)} (Discounted)` :
+                                                        `$${(product.price * quantity).toFixed(2)}`
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
