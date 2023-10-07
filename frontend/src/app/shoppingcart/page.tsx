@@ -25,7 +25,7 @@ interface CartItem {
 }
 
 export default function ShoppingCart() {
-    const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = useCart();
     const [isCheckoutAlertOpen, setIsCheckoutAlertOpen] = useState(false);
     const [isQuantityValidAlert, setIsQuantityValidAlert] = useState(false);
     const [productsData, setProductsData] = useState<Product[]>([]);
@@ -244,22 +244,29 @@ export default function ShoppingCart() {
                                     </div>
                                 </div>
                             ))}
-                            <div className="mt-5 textBlack">
-                                <div className="flex items-center font-bold">
-                                    <span className="text-xl mr-2">Total Items: {totalQuantity}</span>
+                            <div className="mt-5 textBlack flex justify-between items-center">
+                                <div>
+                                    <div className="flex items-center font-bold">
+                                        <span className="text-xl mr-2">Total Items: {totalQuantity}</span>
+                                    </div>
+                                    <div className="flex items-center font-bold">
+                                        <span className="text-xl">Total Price: ${totalPrice.toFixed(2)}</span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center font-bold">
-                                    <span className="text-xl">Total Price: ${totalPrice.toFixed(2)}</span>
-                                </div>
-                            </div>
+                                <div className="flex items-center justify-center">
+                                    <button 
+                                    className="bg-gray-800 text-white px-2 py-2 rounded-md w-max hover:bg-gray-700 mr-4" 
+                                    style={{ whiteSpace: 'nowrap' }}
+                                    onClick={() => router.push('/products')}
+                                    >
+                                        Add more products
+                                    </button>
 
-                            <div className="mt-5">
-                                <div className="flex items-center font-bold">
-                                    <Link
-                                        className="font-arial text-blue-950 hover:text-blue-500 p-1 rounded-full focus:outline-none"
-                                        href="/products" >
-                                        &larr; Add more products.
-                                    </Link>
+                                    <button 
+                                    className="bg-gray-800 text-white px-2 py-2 rounded-md w-max hover:bg-gray-700"
+                                    onClick={clearCart}>
+                                        Clear cart
+                                    </button>
                                 </div>
                             </div>
 

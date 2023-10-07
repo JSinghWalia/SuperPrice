@@ -56,7 +56,10 @@ export const Navbar = ({ activePath }: NavbarProps) => {
         fetchCount();
         updateCartCount();
     }, []);
-    
+
+    React.useEffect(() => {
+        updateCartCount();
+    });
 
     function handleNavItemClick(name: string) {
         setActiveNavItem(name);
