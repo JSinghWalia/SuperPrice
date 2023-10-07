@@ -1,11 +1,10 @@
 'use client';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Navbar } from '../components/navbar';
 import { useCart } from '../context/cartContext';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import Link from 'next/link';
+import "./receipt.css";
 
 
 interface CartItem {
@@ -104,11 +103,11 @@ export default function Receipt(){
     return (
         <>
         <Navbar activePath='' />
-            <section className="bg-white">
-                <div className="container flex justify-center w-max p-5">
-                    <div className="flex justify-center items-center w-full">
-                        <div className="lg:w-8/12 bg-white p-8 rounded-lg shadow-lg">
-                            <h1 className="text-2xl font-bold mb-5">Order Confirmed</h1>
+            <section className="bg-gray-100 flex justify-center items-center">
+                <div className="flex justify-center items-center w-max p-5 ">
+                    <div className="flex justify-center items-center w-full shadow-lg">
+                        <div className="bg-white p-8 rounded-lg shadow-lg textBlack">
+                            <h1 className="text-2xl font-bold mb-5 ">Order Confirmed</h1>
                             <hr className="my-4" />
                             <div className="mb-5">
                                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -165,7 +164,7 @@ export default function Receipt(){
                                         </div>
                                     </div>
                                     <hr className="my-4" />
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2 gap-4 ">
                                         <div className="col-span-1">
                                             <h1 className="text-xl font-bold">Delivery Details</h1>
                                             <div className="">
@@ -210,7 +209,7 @@ export default function Receipt(){
                                 </div>
                                     <div className="mt-5">
                                         <h6 className="mb-0">
-                                            <a 
+                                            <Link
                                             href="/products" 
                                             className="text-blue-500 hover:underline" 
                                             onClick={(event) => {
@@ -219,7 +218,7 @@ export default function Receipt(){
                                             }}
                                             >
                                                 <i className="fas fa-long-arrow-alt-left me-2"></i> Back to shop
-                                            </a>
+                                            </Link>
                                         </h6>
                                     </div>
                                 </div>

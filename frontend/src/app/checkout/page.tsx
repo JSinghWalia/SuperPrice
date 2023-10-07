@@ -2,8 +2,6 @@
 import "./checkout.css";
 import { Navbar } from "../components/navbar";
 import { useRouter } from 'next/navigation';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState } from "react";
 import { Switch } from '@headlessui/react'
 import Snackbar from "@mui/material/Snackbar";
@@ -220,7 +218,7 @@ export default function CheckOut(){
     return(
         <>
         <Navbar activePath="checkout" />
-            <section className="grid grid-cols-2 flex justify-stretch" style={{ backgroundColor: "#eee" }}>
+            <section className="grid grid-cols-2 flex justify-stretch textBlack" style={{ backgroundColor: "#eee" }}>
                 <div className="col-span-1 bg-white p-6 flex flex-col justify-center items-center mt-2 rounded-lg ml-2">
                     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8 flex flex-col justify-center items-center">
                         <div className="mx-auto max-w-2xl text-center">
@@ -500,11 +498,11 @@ export default function CheckOut(){
                             <div className="pt-5">
                                 <h6 className="mb-0">
                                     <Link
-                                        className="text-blue-500 hover:underline"
+                                        className="text-blue-950 font-semibold hover:underline"
                                         onClick={async () => {
                                             await removeProductFromCart();
                                         } } href={""}                                    >
-                                        <i className="fas fa-long-arrow-alt-left me-2"></i>Back to cart
+                                        &larr; Back to cart
                                     </Link>
                                 </h6>
                             </div>
@@ -534,13 +532,13 @@ export default function CheckOut(){
                                     </div>
                                     <div className="col-span-1 flex items-center justify-end ">
                                         {product.notification ?
-                                            `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)} (Discounted)` :
+                                            `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)}` :
                                             `$${(product.price * quantity).toFixed(2)}`
                                         }
                                     </div>
                                 </div>
                             ))}
-                            <div className="mb-4 pb-2">
+                            <div className="mt-4 mb-4 rounded border-2 broder-gray-300">
                                 <select
                                     className="select p-2 rounded bg-white"
                                     style={{ width: "100%" }}

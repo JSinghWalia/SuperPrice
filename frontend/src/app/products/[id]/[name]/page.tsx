@@ -141,7 +141,7 @@ export default function ProductDetail() {
 
     if (!product) {
         // Handle the case when the product is not found
-        return <div>Product not found</div>;
+        return <div><h1>Loading......</h1></div>;
     }
 
     return (

@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/cartContext';
 import { Navbar } from '../components/navbar';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./shoppingCart.css"
 import Link from 'next/link';
 
 interface Product {
@@ -187,19 +186,19 @@ export default function ShoppingCart() {
         <>
             <Navbar activePath="Shopping Cart" />
             <section className="h-screen bg-gray-100">
-                <div className="container mx-auto p-5">
+                <div className="container mx-auto p-5 ">
                     <div className="flex justify-center items-center h-full">
                         <div className="lg:w-8/12 bg-white p-8 rounded-lg shadow-lg">
-                            <h1 className="text-2xl font-bold mb-5">Shopping Cart</h1>
+                            <h1 className="text-2xl font-bold mb-5 textBlack" >Shopping Cart</h1>
 
-                            <div className="grid grid-cols-3 gap-4 border-b-2 border-gray-300 pb-4 mb-4">
-                                <div className="col-span-1">Product Name:</div>
-                                <div className="col-span-1">Quantity:</div>
-                                <div className="col-span-1">Price:</div>
+                            <div className="grid grid-cols-3 gap-4 border-b-2 border-gray-300 pb-4 mb-4 textBlack">
+                                <div className="col-span-1 ">Product Name:</div>
+                                <div className="col-span-1 ">Quantity:</div>
+                                <div className="col-span-1 ">Price:</div>
                             </div>
 
                             {cart.map(({ product, quantity }) => (
-                                <div key={product.id} className="grid grid-cols-4 gap-4 border-b-2 border-gray-300 py-4 flex">
+                                <div key={product.id} className="grid grid-cols-4 gap-4 border-b-2 border-gray-300 py-4 flex textBlack">
                                     <div className="col-span-1 flex items-center justify-start ">
                                         <img src={product.imageURL} alt={product.name} className="w-20 h-auto" />
                                         <span className="ml-2"><h5 className="text-black">{product.name}</h5></span>
@@ -245,7 +244,7 @@ export default function ShoppingCart() {
                                     </div>
                                 </div>
                             ))}
-                            <div className="mt-5">
+                            <div className="mt-5 textBlack">
                                 <div className="flex items-center font-bold">
                                     <span className="text-xl mr-2">Total Items: {totalQuantity}</span>
                                 </div>
@@ -257,9 +256,9 @@ export default function ShoppingCart() {
                             <div className="mt-5">
                                 <div className="flex items-center font-bold">
                                     <Link
-                                        className="text-blue-500 hover:underline"
+                                        className="font-arial text-blue-950 hover:text-blue-500 p-1 rounded-full focus:outline-none"
                                         href="/products" >
-                                        <i className="fas fa-long-arrow-alt-left me-2"></i>Add more products.
+                                        &larr; Add more products.
                                     </Link>
                                 </div>
                             </div>
