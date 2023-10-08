@@ -1,4 +1,4 @@
 package com.example.superprice.model;
 
-public record CartItem(Long quantity, Long cartId, Long productId) {
+public record CartItem(int quantity, int cartId, int productId) {
 }

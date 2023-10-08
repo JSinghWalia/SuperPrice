@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation'
 import React from "react"
 import Image from 'next/image';
+// import { productsData } from '../productData'; // Make sure this path is correct
 import { Navbar } from '../../../components/navbar';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -12,7 +13,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic'
 
 interface Product {
     id: number;
@@ -26,14 +26,13 @@ interface Product {
     notification: boolean;
 }
 
-
 export default function ProductDetail() {
     const pathname = usePathname();
     const pathParts = pathname.split('/');
     const productName = pathParts[pathParts.length - 1];
     const productId = parseInt(pathParts[pathParts.length -2]);
     const [productsData, setProductData] = React.useState<Product[]>([]);
-    const urlAPI = process.env.NEXT_PUBLIC_API_URL + "/" + productName;
+    const urlAPI = 'http://localhost:8080' + "/" + productName;
 
     const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
     const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -72,6 +71,7 @@ export default function ProductDetail() {
     }, []);
 
     let product = productsData.find(product => productId===product.id);
+    console.log("product: ", product);
 
 
     const { addToCart } = useCart();
@@ -96,8 +96,17 @@ export default function ProductDetail() {
             setIsErrorAlertOpen(true);
             setAlertMessage('Please enter a valid quantity');
         } else if (product && checkForItemStock(product, quantity)) {
-            addToCart(product, quantity);
-
+            if(product.notification){
+                let newPrice = product.price - (product.price * product.discount);
+                product.price=newPrice;
+                console.log("new price", product);
+                addToCart(product, quantity);
+            }
+            else{
+                console.log("running with no notifications on")
+                addToCart(product, quantity);
+            }
+            
             // Show success alert for item added to cart
             setIsSuccessAlertOpen(true);
             setAlertMessage('Item added to cart');
@@ -111,6 +120,12 @@ export default function ProductDetail() {
         }
 
     };
+
+
+    if (!product) {
+        // Handle the case when the product is not found
+        return <div>Product not found</div>;
+    }
     async function handleToggleNotification(productId: number, currentNotification: boolean) {
         try {
             const url = `${process.env.NEXT_PUBLIC_API_URL}/update_notification/${productId}/${currentNotification ? 'OFF' : 'ON'}`;
@@ -138,16 +153,18 @@ export default function ProductDetail() {
         }
     }
 
+    // // State to track the selected image
+    // const [selectedImage, setSelectedImage] = useState(product.imageURL);
 
-    if (!product) {
-        // Handle the case when the product is not found
-        return <div><h1>Loading......</h1></div>;
-    }
-
+    // // Function to handle image selection
+    // const handleImageClick = (imageSrc: string) => {
+    //     setSelectedImage(imageSrc);
+    // };
     return (
         <>
+
             <Navbar activePath="Products" />
-            <main className="container mx-auto">
+            <main className="container ">
                 <h2 className="text-3xl font-semibold mb-4 text-center">{product.name}</h2>
                 <div className="flex flex-col lg:flex-row">
                     {/* Left Section */}
@@ -155,12 +172,29 @@ export default function ProductDetail() {
                         <div className="mb-4">
                             <Image src={product.imageURL} alt={product.name} width={400} height={400} />
                         </div>
+                        {/* Image Picker */}
+                        {/* <div className="flex space-x-4">
+                            {product.images.map((image: string, index: any) => (
+                            <div
+                            key={index}
+                            onClick={() => handleImageClick(image)}
+                            className={`cursor-pointer border ${selectedImage === image ? 'border-blue-500' : 'border-gray-200'
+                            } p-2 rounded-md hover:border-blue-500`}
+                            >
+                            <Image src={image} alt={product.name} width={100} height={100} />
+                            </div>
+                            ))}
+                            </div> */}
                     </div>
                     {/* Right Section */}
                     <div className="lg:w-1/2 lg:pl-4">
                         <div className="mb-4">
-                            <span className="text-2xl font-semibold">${product.price}</span>
+                            {product.discount && (
+                                <div className="text-red-600 text-2xl font-semibold">Now: ${(product.price - (product.price * product.discount)).toFixed(2)}</div>
+                            )}
+                            <div className="text-600 font-semibold">Originally: ${product.price}</div>
                         </div>
+
                         <div className="mb-4">
                         <p className="text-xl mb-4">{product.description}</p>
                         </div>
@@ -183,7 +217,7 @@ export default function ProductDetail() {
                                 className="notification-toggle-button"
                                 onClick={() => product && handleToggleNotification(product.id, product.notification)}
                             >
-                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
                             </button>
                                 <Snackbar open={isErrorAlertOpen} autoHideDuration={3000} onClose={handleErrorAlertClose}>
                                     <Alert onClose={handleErrorAlertClose} severity="error">
@@ -199,31 +233,34 @@ export default function ProductDetail() {
                     </Typography>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {productsData.map((product) => (
-                            <Link key={product.id} href={`/products/${product.id}/${product.name}` }>
-                            <Card key={product.id} style={{ width: '300px', margin: '16px' }}>
-                                {/* You can replace 'product.image' with the actual image source */}
-                                <img src={product.imageURL} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                                <CardContent>
-                                    <Typography variant="h5" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {product.description}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Price: ${product.price}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Store: {product.store}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                            <Link key={product.id} href={`/products/${product.id}/${product.name}`}>
+                                <Card key={product.id} style={{ width: '300px', margin: '16px' }}>
+                                    <img src={product.imageURL} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                                    <CardContent>
+                                        <Typography variant="h5" component="div">
+                                            {product.name}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {product.description}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Price: ${product.price}
+                                        </Typography>
+                                        {product.discount && (
+                                            <Typography variant="body2" color="error" style={{ fontWeight: 'bold' }}>
+                                                New Price: ${(product.price - (product.price * product.discount)).toFixed(2)}
+                                            </Typography>
+                                        )}
+                                        <Typography variant="body2" color="text.secondary">
+                                            Store: {product.store}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
                             </Link>
                         ))}
                     </div>
-
             </main>
-                
+
         </>
     );
 }

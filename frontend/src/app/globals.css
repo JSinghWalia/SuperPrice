@@ -17,13 +17,8 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white ;
+  background: black !important;
 }
 
 .navbar {
@@ -105,6 +100,22 @@ body {
 }
 
 .add-to-cart-button i {
+  margin-left: 8px;
+}
+
+.notification-toggle-button {
+  background-color: #007bff; /*blue colour, change later */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-toggle-button i {
   margin-left: 8px;
 }
 

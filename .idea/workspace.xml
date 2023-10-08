@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="12527c37-3994-44dc-bdba-bb1672f48f2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/SuperpriceRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Milestone 2/Sprint 3 User Stories.docx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Milestone 2/Sprint 3 User Stories.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/controllers/SuperpriceControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/CartRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/CartRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/NotiRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/NotiRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/java/com/example/superprice/repositories/ProductRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/superprice/src/test/resources/db/migration/V2__insert_products.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/superprice/src/test/resources/db/migration/V2__insert_products.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +22,8 @@
       <list>
         <option value="TypeScript JSX File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -63,9 +66,9 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;cf8a4430c484d8ec385e9769f92f9548&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Jassie Singh-Walia\\Documents\\Uni\\Software Engineering\\Year 2 Semester 2\\Software Processes\\Group 7\\team-project-group-p07-07\\team-project-group-p07-07\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;eb7f6a08fe0bb047abfe2284a95c74fb&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -88,23 +91,8 @@
       <recent name="com.example.superprice.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuperpriceRepositoryTest.searchByKeyword_NoResults">
-    <configuration name="SuperpriceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="superprice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.superprice.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.superprice" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.SuperpriceApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SuperpriceRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductRepositoryTest">
+    <configuration name="CartRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -113,13 +101,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.CartRepositoryTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SuperpriceRepositoryTest.searchByKeyword_NoResults" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CartRepositoryTest.addToCart_Fail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="superprice" />
       <extension name="coverage">
         <pattern>
@@ -128,22 +116,56 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
-      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.SuperpriceRepositoryTest" />
-      <option name="METHOD_NAME" value="searchByKeyword_NoResults" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.CartRepositoryTest" />
+      <option name="METHOD_NAME" value="addToCart_Fail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MoviesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="movies" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="au.edu.rmit.sept.cinemas.movies.MoviesApplication" />
+    <configuration name="CartRepositoryTest.addToCart_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="au.edu.rmit.sept.cinemas.movies.*" />
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.CartRepositoryTest" />
+      <option name="METHOD_NAME" value="addToCart_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.ProductRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRepositoryTest.toggleNotification_ON" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="superprice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.superprice.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.superprice.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.superprice.repositories.ProductRepositoryTest" />
+      <option name="METHOD_NAME" value="toggleNotification_ON" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -157,10 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SuperpriceRepositoryTest.searchByKeyword_NoResults" />
-        <item itemvalue="JUnit.SuperpriceRepositoryTest" />
-        <item itemvalue="Spring Boot.MoviesApplication" />
-        <item itemvalue="JUnit.SuperpriceApplicationTests" />
+        <item itemvalue="JUnit.ProductRepositoryTest" />
+        <item itemvalue="JUnit.ProductRepositoryTest.toggleNotification_ON" />
+        <item itemvalue="JUnit.CartRepositoryTest" />
+        <item itemvalue="JUnit.CartRepositoryTest.addToCart_Fail" />
+        <item itemvalue="JUnit.CartRepositoryTest.addToCart_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -192,6 +215,8 @@
       <workItem from="1694753481999" duration="3378000" />
       <workItem from="1694782578340" duration="168000" />
       <workItem from="1694928705839" duration="80000" />
+      <workItem from="1696394940490" duration="4806000" />
+      <workItem from="1696739832738" duration="3953000" />
     </task>
     <servers />
   </component>

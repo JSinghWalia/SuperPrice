@@ -20,10 +20,10 @@ CREATE TABLE cart (
 );
 
 CREATE TABLE cartitem (
-    cartItemId        INT PRIMARY KEY AUTO_INCREMENT,
-    cartItemQuantity  INT NOT NULL,
-    cartId            INT,
-    productId         INT,
-    foreign key (cartId) references cart(cartId),
-    foreign key (productId) references products(productId)
+                          cartItemId        INT PRIMARY KEY AUTO_INCREMENT,
+                          cartItemQuantity  INT NOT NULL,
+                          cartId            INT,
+                          productId         INT,
+                          foreign key (cartId) references cart(cartId),
+                          foreign key (productId) references products(productId)
 );
