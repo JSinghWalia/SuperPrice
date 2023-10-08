@@ -1,6 +1,7 @@
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
+import { CartProvider } from '../context/cartContext';
 import {Navbar} from '../components/navbar';
 import * as React from "react";
 export const dynamic = 'force-dynamic'
@@ -81,41 +82,43 @@ export default function Products() {
         }
     }
     return (
-        <main className="flex min-h-screen flex-col">
-            <Navbar activePath="Products" />
-            <div className="welcome-text">
-                <h1>Products</h1>
-            </div>
-            <div className="search-container">
-                <form onSubmit={handleSearchSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        //sets search term when search bar is changed
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-            <section className="product-section">
-                {productsData.map(product => (
-                    <div key={product.id} className="product-card">
-                        <Link href={`/products/${product.id}/${product.name}`}>
-                                <Image src={product.imageURL} alt={product.name} width={200} height={200} />
-                                <h2>{product.name}</h2>
-                                <h3>From: {product.store}</h3>
-                                <p>${product.price}</p>
-                        </Link>
-                        <button
-                            className="notification-toggle-button"
-                            onClick={() => product && handleToggleNotification(product.id, product.notification)}
-                        >
-                            {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
-                        </button>
-                    </div>
-                ))}
-            </section>
-        </main>
+        <CartProvider>
+            <main className="flex min-h-screen flex-col">
+                <Navbar activePath="Products" />
+                <div className="welcome-text">
+                    <h1>Products</h1>
+                </div>
+                <div className="search-container">
+                    <form onSubmit={handleSearchSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={searchTerm}
+                            //sets search term when search bar is changed
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <section className="product-section">
+                    {productsData.map(product => (
+                        <div key={product.id} className="product-card">
+                            <Link href={`/products/${product.id}/${product.name}`}>
+                                    <Image src={product.imageURL} alt={product.name} width={200} height={200} />
+                                    <h2>{product.name}</h2>
+                                    <h3>From: {product.store}</h3>
+                                    <p>${product.price}</p>
+                            </Link>
+                            <button
+                                className="notification-toggle-button"
+                                onClick={() => product && handleToggleNotification(product.id, product.notification)}
+                            >
+                                {product.notification ? 'Turn Off Notification' : 'Turn On Notification'}
+                            </button>
+                        </div>
+                    ))}
+                </section>
+            </main>
+        </CartProvider>
     );
 }
