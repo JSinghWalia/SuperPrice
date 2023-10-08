@@ -136,7 +136,7 @@ export default function Receipt(){
                                                 </div>
                                                 <div className="col-span-1 text-right flex items-center justify-start">
                                                     {product.notification ?
-                                                        `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)} (Discounted)` :
+                                                        `$${((product.price - (product.price * product.discount)) * quantity).toFixed(2)}` :
                                                         `$${(product.price * quantity).toFixed(2)}`
                                                     }
                                                 </div>
