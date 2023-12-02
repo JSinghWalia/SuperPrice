@@ -1,2 +1,0 @@
-# SuperPrice
-University SuperPrice project
